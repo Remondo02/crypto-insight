@@ -1,8 +1,15 @@
+import { ColorModeContext, useMode } from "./theme.js"
+import { CssBaseline, ThemeProvider } from "@mui/material"
+
 function App() {
+  const [theme, colorMode] = useMode()
   return (
-    <>
-      <div>Crypto Insight</div>
-    </>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div>Crypto Insight</div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   )
 }
 
