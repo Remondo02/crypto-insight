@@ -2,7 +2,12 @@ import { ColorModeContext, useMode } from "./theme.js"
 import { CssBaseline, ThemeProvider } from "@mui/material"
 import { Routes, Route } from "react-router-dom"
 import { Topbar } from "./global/Topbar.jsx"
+import { Sidebar } from "./global/Sidebar.jsx"
 import { Dashboard } from "./pages/Dashboard.jsx"
+import { CryptoCurrencies } from "./pages/CryptoCurrencies.jsx"
+// import { CryptoDetails } from "./pages/CryptoDetails.jsx"
+import { CryptoNews } from "./pages/CryptoNews.jsx"
+import { Exchanges } from "./pages/Exchanges.jsx"
 
 function App() {
   const [theme, colorMode] = useMode()
@@ -10,12 +15,20 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <main>
-          <Topbar />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
-        </main>
+        <div className="app">
+          <Sidebar />
+          <main className="content">
+            <Topbar />
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/cryptocurrencies" element={<CryptoCurrencies />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route path="/news" element={<CryptoNews />} />
+              {/* <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} /> */}
+            </Routes>
+          </main>
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   )
