@@ -8,7 +8,6 @@ import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutl
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
-import { Home } from "@mui/icons-material"
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -36,9 +35,11 @@ export function Sidebar() {
     <ProSideBar
       rootStyles={{
         borderRightStyle: "none",
+        flexShrink: 0,
       }}
       backgroundColor={`${colors.primary[400]}`}
-      width={"328.9px"}
+      // width={"313.9px"}
+      width={"290px"}
       collapsed={isCollapsed}
     >
       <Menu
@@ -114,6 +115,5 @@ export function Sidebar() {
         </Box>
       </Menu>
     </ProSideBar>
-    // </Box>
   )
 }
