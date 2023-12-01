@@ -6,16 +6,16 @@ export function StatBox({ title, value, icon }) {
   const colors = tokens(theme.palette.mode)
 
   return (
-    <Box width="100%" m="30px">
-      <Box mb="10px">{icon}</Box>
-      <Box display="flex" justifyContent="space-between">
-        <Box>
-          <Typography variant="h5" sx={{ color: colors.greenAccent[500] }}>
-            {title}
-          </Typography>
-        </Box>
+    <Box backgroundColor={colors.primary[400]} padding={2}>
+      <Box display="flex" justifyContent="flex-start" mb={1}>
+        {icon}
+      </Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h5" sx={{ color: colors.greenAccent[500] }}>
+          {title}
+        </Typography>
         <Typography
-          variant="h4"
+          variant="cardStat"
           fontWeight="bold"
           sx={{ color: colors.grey[100] }}
         >

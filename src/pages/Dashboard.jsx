@@ -33,96 +33,59 @@ export function Dashboard() {
   const globalStats = data?.data?.stats
 
   return (
-    <Box m="20px">
-      <Box>
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-        <Box
-          display="grid"
-          gridTemplateColumns="repeat(auto-fit, minmax(290px, 1fr));"
-          // gridAutoRows="140px"
-          gap="20px"
-        >
-          <Box
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={"Total Cryptocurrencies"}
-              value={globalStats.total}
-              icon={
-                <CurrencyBitcoinIcon
-                  sx={{ color: colors.grey[100], fontSize: "26px" }}
-                />
-              }
+    <Box m={3}>
+      <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(auto-fit, minmax(290px, 1fr));"
+        // gridAutoRows="140px"
+        gap={2}
+      >
+        <StatBox
+          title={"Total Cryptocurrencies"}
+          value={globalStats.total}
+          icon={
+            <CurrencyBitcoinIcon
+              sx={{ color: colors.grey[100], fontSize: "26px" }}
             />
-          </Box>
-          <Box
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={"Total Exchanges"}
-              value={millify(globalStats.totalExchanges)}
-              icon={
-                <CurrencyExchangeOutlinedIcon
-                  sx={{ color: colors.grey[100], fontSize: "26px" }}
-                />
-              }
+          }
+        />
+        <StatBox
+          title={"Total Exchanges"}
+          value={millify(globalStats.totalExchanges)}
+          icon={
+            <CurrencyExchangeOutlinedIcon
+              sx={{ color: colors.grey[100], fontSize: "26px" }}
             />
-          </Box>
-          <Box
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={"Total Market Cap"}
-              value={millify(globalStats.totalMarketCap)}
-              icon={
-                <QueryStatsOutlinedIcon
-                  sx={{ color: colors.grey[100], fontSize: "26px" }}
-                />
-              }
+          }
+        />
+        <StatBox
+          title={"Total Market Cap"}
+          value={millify(globalStats.totalMarketCap)}
+          icon={
+            <QueryStatsOutlinedIcon
+              sx={{ color: colors.grey[100], fontSize: "26px" }}
             />
-          </Box>
-          <Box
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={"Total 24h Volume"}
-              value={millify(globalStats.total24hVolume)}
-              icon={
-                <UpdateOutlinedIcon
-                  sx={{ color: colors.grey[100], fontSize: "26px" }}
-                />
-              }
+          }
+        />
+        <StatBox
+          title={"Total 24h Volume"}
+          value={millify(globalStats.total24hVolume)}
+          icon={
+            <UpdateOutlinedIcon
+              sx={{ color: colors.grey[100], fontSize: "26px" }}
             />
-          </Box>
-          <Box
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={"Total Markets"}
-              value={millify(globalStats.totalMarkets)}
-              icon={
-                <PaidOutlinedIcon
-                  sx={{ color: colors.grey[100], fontSize: "26px" }}
-                />
-              }
+          }
+        />
+        <StatBox
+          title={"Total Markets"}
+          value={millify(globalStats.totalMarkets)}
+          icon={
+            <PaidOutlinedIcon
+              sx={{ color: colors.grey[100], fontSize: "26px" }}
             />
-          </Box>
-        </Box>
+          }
+        />
       </Box>
     </Box>
   )
