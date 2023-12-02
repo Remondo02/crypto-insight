@@ -13,11 +13,11 @@ import { Header } from "../components/Header.jsx"
 import millify from "millify"
 import { Link } from "react-router-dom"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { tokens } from "../theme.js"
 
 export function CryptoCurrencies({ simplified }) {
-  const count = simplified ? 10 : 100
+  const count = simplified ? 12 : 100
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const {
@@ -27,25 +27,18 @@ export function CryptoCurrencies({ simplified }) {
     isFetching,
   } = useGetCryptoApiQuery(count)
 
-  // console.log(count)
-
-  // const [cryptos, setCryptos] = useState(cryptosList?.data?.coins)
+  if (isLoading || isFetching) {
+    return "...loading"
+  }
 
   if (error) {
-    return "Error"
+    return "...error"
   }
 
-  if (isFetching) {
-    return "...loading"
-  }
-  if (isLoading) {
-    return "...loading"
-  }
-  // const [cryptos, setCryptos] = useState(cryptosList?.data?.coins)
-  const cryptos = cryptosList.data.coins
+  const cryptos = cryptosList.data?.coins
 
   return (
-    <Box sx={!simplified ? { margin: 3 } : ""}>
+    <Box sx={!simplified ? { margin: 3 } : {}}>
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
@@ -63,7 +56,7 @@ export function CryptoCurrencies({ simplified }) {
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
-              {cryptos.map((currency) => (
+              {cryptos?.map((currency) => (
                 <Grid
                   item
                   xs={4}
