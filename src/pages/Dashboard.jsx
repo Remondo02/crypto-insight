@@ -42,8 +42,6 @@ export function Dashboard() {
       <Box mb={7}>
         <SectionHeader
           title="Global Crypto Stats"
-          to="/cryptocurrencies"
-          buttonLabel="Show More"
         />
         <Box
           display="grid"

@@ -7,8 +7,6 @@ export function SectionHeader({ title, to, buttonLabel }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  console.log(showButton)
-
   return (
     <Box mb={3} display="flex" justifyContent="space-between">
       {title && (
