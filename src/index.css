@@ -22,12 +22,6 @@ html {
   height: 100%;
 }
 
-body,
-#root,
-.app {
-  height: inherit;
-}
-
 .app {
   display: flex;
 }

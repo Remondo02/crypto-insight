@@ -27,7 +27,7 @@ export function CryptoCurrencies({ simplified }) {
     isFetching,
   } = useGetCryptoApiQuery(count)
 
-  console.log(count)
+  // console.log(count)
 
   // const [cryptos, setCryptos] = useState(cryptosList?.data?.coins)
 
@@ -41,13 +41,11 @@ export function CryptoCurrencies({ simplified }) {
   if (isLoading) {
     return "...loading"
   }
-
+  // const [cryptos, setCryptos] = useState(cryptosList?.data?.coins)
   const cryptos = cryptosList.data.coins
 
-  console.log(simplified)
-
   return (
-    <Box sx={!simplified ? {margin: 3} : ""}>
+    <Box sx={!simplified ? { margin: 3 } : ""}>
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
