@@ -177,7 +177,7 @@ export function themeSettings(mode) {
         fontSize: 40,
       },
       h2: {
-        fontSize: 32,
+        fontSize: 28,
       },
       h3: {
         fontSize: 24,

@@ -11,11 +11,12 @@ export function StatBox({ title, value, icon }) {
         {icon}
       </Box>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h5" sx={{ color: colors.greenAccent[500] }}>
+        <Typography variant="body1" sx={{ color: colors.greenAccent[500] }}>
           {title}
         </Typography>
         <Typography
-          variant="cardStat"
+          variant="h4"
+          component="div"
           fontWeight="bold"
           sx={{ color: colors.grey[100] }}
         >

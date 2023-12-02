@@ -5,7 +5,6 @@ import { Topbar } from "./global/Topbar.jsx"
 import { Sidebar } from "./global/Sidebar.jsx"
 import { Dashboard } from "./pages/Dashboard.jsx"
 import { CryptoCurrencies } from "./pages/CryptoCurrencies.jsx"
-// import { CryptoDetails } from "./pages/CryptoDetails.jsx"
 import { CryptoNews } from "./pages/CryptoNews.jsx"
 import { Exchanges } from "./pages/Exchanges.jsx"
 
@@ -24,8 +23,6 @@ function App() {
               <Route path="/cryptocurrencies" element={<CryptoCurrencies />} />
               <Route path="/exchanges" element={<Exchanges />} />
               <Route path="/news" element={<CryptoNews />} />
-              {/* <Route path="/" element={<Dashboard />} />
-            <Route path="/" element={<Dashboard />} /> */}
             </Routes>
           </main>
         </div>
