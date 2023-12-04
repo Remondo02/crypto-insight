@@ -15,6 +15,7 @@ import { Link } from "react-router-dom"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { useEffect, useState } from "react"
 import { tokens } from "../theme.js"
+import { Search } from "../components/Search.jsx"
 
 export function CryptoCurrencies({ simplified }) {
   const count = simplified ? 12 : 100
@@ -27,6 +28,8 @@ export function CryptoCurrencies({ simplified }) {
     isFetching,
   } = useGetCryptoApiQuery(count)
 
+  const [search, setSearch] = useState("")
+
   if (isLoading || isFetching) {
     return "...loading"
   }
@@ -35,7 +38,14 @@ export function CryptoCurrencies({ simplified }) {
     return "...error"
   }
 
-  const cryptos = cryptosList.data?.coins
+  const cryptos = cryptosList?.data?.coins
+
+  const visibleItems = cryptos.filter((coin) => {
+    if (search && !coin.name.includes(search)) {
+      return false
+    }
+    return true
+  })
 
   return (
     <Box sx={!simplified ? { margin: 3 } : {}}>
@@ -47,16 +57,17 @@ export function CryptoCurrencies({ simplified }) {
           />
         </Box>
       )}
-
-      {cryptos && (
+      {visibleItems && (
         <Box>
+          {!simplified && <Search search={search} onSearchChange={setSearch} />}
+
           <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
-              {cryptos?.map((currency) => (
+              {visibleItems.map((currency) => (
                 <Grid
                   item
                   xs={4}

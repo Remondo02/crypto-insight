@@ -54,7 +54,7 @@ export function CryptoNews({ simplified }) {
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
-              {cryptoNews?.articles?.map((news) => (
+              {cryptoNews.articles.map((news) => (
                 <Grid
                   item
                   xs={4}
@@ -62,7 +62,7 @@ export function CryptoNews({ simplified }) {
                   md={4}
                   lg={4}
                   xl={4}
-                  key={news.source.title}
+                  key={news.title}
                 >
                   <Link
                     to={news.url}

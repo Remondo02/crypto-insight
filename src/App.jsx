@@ -1,7 +1,7 @@
 import { ColorModeContext, useMode } from "./theme.js"
 import { CssBaseline, ThemeProvider } from "@mui/material"
 import { Routes, Route } from "react-router-dom"
-import { Topbar } from "./global/Topbar.jsx"
+import { ThemeButton } from "./global/ThemeButton.jsx"
 import { Sidebar } from "./global/Sidebar.jsx"
 import { Dashboard } from "./pages/Dashboard.jsx"
 import { CryptoCurrencies } from "./pages/CryptoCurrencies.jsx"
@@ -18,7 +18,7 @@ function App() {
         <div className="app">
           <Sidebar />
           <main className="content">
-            <Topbar />
+            <ThemeButton />
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/cryptocurrencies" element={<CryptoCurrencies />} />
