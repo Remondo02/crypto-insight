@@ -13,9 +13,10 @@ import { Header } from "../components/Header.jsx"
 import millify from "millify"
 import { Link } from "react-router-dom"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { tokens } from "../theme.js"
 import { Search } from "../components/Search.jsx"
+import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
 
 export function CryptoCurrencies({ simplified }) {
   const count = simplified ? 12 : 100
@@ -35,13 +36,13 @@ export function CryptoCurrencies({ simplified }) {
   }
 
   if (error) {
-    return "...error"
+    return <DescriptionAlerts type="error" error={error}></DescriptionAlerts>
   }
 
   const cryptos = cryptosList?.data?.coins
 
   const visibleItems = cryptos.filter((coin) => {
-    if (search && !coin.name.includes(search)) {
+    if (search && !coin.name.toLowerCase().includes(search.toLowerCase())) {
       return false
     }
     return true
