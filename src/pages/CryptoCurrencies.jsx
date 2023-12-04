@@ -70,20 +70,23 @@ export function CryptoCurrencies({ simplified }) {
                     to={`crypto/${currency.uuid}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <CardActionArea>
-                      <Card
-                        sx={{
-                          backgroundColor: colors.primary[400],
-                          backgroundImage: "unset",
-                          padding: 2,
-                        }}
-                      >
+                    <Card
+                      sx={{
+                        backgroundColor: colors.primary[400],
+                      }}
+                    >
+                      <CardActionArea>
                         <Box
                           display="flex"
                           justifyContent="space-between"
                           mb={2}
+                          p={2}
                         >
-                          <Typography variant="h5" component="div">
+                          <Typography
+                            variant="h5"
+                            component="div"
+                            color={colors.grey[100]}
+                          >
                             {currency.rank}. {currency.name}
                           </Typography>
                           <Avatar
@@ -103,8 +106,8 @@ export function CryptoCurrencies({ simplified }) {
                             Daily Change: {currency.change}%
                           </Typography>
                         </CardContent>
-                      </Card>
-                    </CardActionArea>
+                      </CardActionArea>
+                    </Card>
                   </Link>
                 </Grid>
               ))}

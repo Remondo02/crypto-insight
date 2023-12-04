@@ -8,6 +8,7 @@ import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutl
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
@@ -109,6 +110,13 @@ export function Sidebar() {
             title="News"
             to="/news"
             icon={<FeedOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Item
+            title="Events"
+            to="/events"
+            icon={<CalendarMonthOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
