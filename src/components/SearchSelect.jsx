@@ -9,14 +9,14 @@ export function SearchSelect({ search, optionValue, onSearchChange }) {
   const id = useId()
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120, width: 'max-content' }}>
       <FormControl fullWidth>
-        <InputLabel id={id}>Coin</InputLabel>
+        <InputLabel id={id}>Cryptocurrency</InputLabel>
         <Select
           labelId={id}
           id="demo-simple-select"
           value={search}
-          label="Coin"
+          label="Cryptocurrency"
           onChange={(e) => onSearchChange(e.target.value)}
         >
           {optionValue.map((option) => (
