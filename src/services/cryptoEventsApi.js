@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 const cryptoHeaders = {
-  "X-RapidAPI-Key'": import.meta.env.VITE_RAPID_API_KEY,
+  "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
   "X-RapidAPI-Host": "coinpaprika1.p.rapidapi.com",
 }
 
