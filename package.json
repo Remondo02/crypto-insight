@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "@reduxjs/toolkit": "^1.9.7",
-    "@syncfusion/ej2-base": "23.2.6",
+    "@syncfusion/ej2-base": "^23.2.6",
     "@syncfusion/ej2-buttons": "23.2.4",
     "@syncfusion/ej2-data": "23.2.4",
     "@syncfusion/ej2-documenteditor": "23.2.6",

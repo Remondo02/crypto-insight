@@ -11,8 +11,11 @@ import "./../calendar.css"
 
 import { useGetCryptoEventsApiQuery } from "../services/cryptoEventsApi.js"
 import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { Box, useTheme } from "@mui/material"
+import { Header } from "../components/Header.jsx"
 
 export function CryptoEvents() {
+  const theme = useTheme()
   const {
     data: cryptoEvents,
     error,
@@ -30,7 +33,7 @@ export function CryptoEvents() {
     return <DescriptionAlerts type="error" error={error} />
   }
 
-  let convertedData = []
+  const convertedData = []
 
   cryptoEvents.map((event) => {
     convertedData.push({
@@ -47,22 +50,35 @@ export function CryptoEvents() {
     acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime
   )
 
+  const schedulerTheme = theme.palette.mode === "dark" ? "e-dark-mode" : ""
+
   return (
-    <div className="schedule-control-section">
-      <div className="control-section">
-        <div className="control-wrapper">
-          <ScheduleComponent
-            width="100%"
-            height="650px"
-            currentView="Month"
-            selectedDate={new Date(latestEvent)}
-            eventSettings={{ dataSource: convertedData }}
-            readonly={true}
-          >
-            <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-          </ScheduleComponent>
+    <div className={schedulerTheme}>
+      <Box m={3}>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Header
+            title="CRYPTO CURRENCIES"
+            subtitle="All informations related to currencies"
+          />
+        </Box>
+
+        <div className="schedule-control-section">
+          <div className="control-section">
+            <div className="control-wrapper">
+              <ScheduleComponent
+                width="100%"
+                height="650px"
+                currentView="Month"
+                selectedDate={new Date(latestEvent)}
+                eventSettings={{ dataSource: convertedData }}
+                readonly={true}
+              >
+                <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
+              </ScheduleComponent>
+            </div>
+          </div>
         </div>
-      </div>
+      </Box>
     </div>
   )
 }
