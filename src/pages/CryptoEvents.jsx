@@ -9,53 +9,58 @@ import {
 } from "@syncfusion/ej2-react-schedule"
 import "./../calendar.css"
 
-import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data"
-
+import { useGetCryptoEventsApiQuery } from "../services/cryptoEventsApi.js"
+import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
 
 export function CryptoEvents() {
+  const {
+    data: cryptoEvents,
+    error,
+    isLoading,
+    isFetching,
+  } = useGetCryptoEventsApiQuery({
+    coinId: "btc-bitcoin",
+  })
 
-  const data = [
-    // {
-    //     Id: 2,
-    //     Subject: 'Meeting',
-    //     StartTime: new Date(2018, 1, 15, 10, 0),
-    //     EndTime: new Date(2018, 1, 15, 12, 30),
-    //     IsAllDay: false,
-    //     Status: 'Completed',
-    //     Priority: 'High'
-    // },
-];
+  if (isLoading || isFetching) {
+    return "...loading"
+  }
 
-// const fieldsData = {
-//     id: 'Id',
-//     subject: { name: 'Subject' },
-//     isAllDay: { name: 'IsAllDay' },
-//     startTime: { name: 'StartTime' },
-//     endTime: { name: 'EndTime' }
-// }
+  if (error) {
+    return <DescriptionAlerts type="error" error={error} />
+  }
 
-//   const dataManager = new DataManager({
-//     url: "https://services.syncfusion.com/react/production/api/schedule",
-//     adaptor: new WebApiAdaptor(),
-//     crossDomain: true,
-//   })
+  let convertedData = []
 
-//   console.log(typeof dataManager, typeof data)
-//   console.log(dataManager)
+  cryptoEvents.map((event) => {
+    convertedData.push({
+      id: event.id,
+      Subject: event.name ?? event.description,
+      StartTime: event.date,
+      formatTime: new Date(event.date).getTime(),
+      EndTime: event.date_to ?? event.date,
+      IsAllDay: false,
+    })
+  })
+
+  const latestEvent = convertedData.reduce((acc, val) =>
+    acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime
+  )
 
   return (
     <div className="schedule-control-section">
       <div className="control-section">
         <div className="control-wrapper">
-          {/* <ScheduleComponent
+          <ScheduleComponent
             width="100%"
             height="650px"
             currentView="Month"
-            eventSettings={{ dataSource: dataManager }}
+            selectedDate={new Date(latestEvent)}
+            eventSettings={{ dataSource: convertedData }}
             readonly={true}
           >
             <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-          </ScheduleComponent> */}
+          </ScheduleComponent>
         </div>
       </div>
     </div>

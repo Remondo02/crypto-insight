@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 const cryptoHeaders = {
-  "X-Api-Key": import.meta.env.VITE_CRYPTO_NEWS_API_KEY,
+  "X-Api-Key": import.meta.env.VITE_NEWS_API_KEY,
 }
 
 const baseUrl = "https://newsapi.org/v2/"
