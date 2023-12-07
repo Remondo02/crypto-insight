@@ -4,7 +4,7 @@ const cryptoHeaders = {
   "X-Api-Key": import.meta.env.VITE_NEWS_API_KEY,
 }
 
-const baseUrl = "https://newsapi.org/v2/"
+const baseUrl = "https://newsapi.org/v2"
 
 const createRequest = (url) => ({
   url,
@@ -18,7 +18,7 @@ export const cryptoNewsApi = createApi({
     getCryptoNewsApi: builder.query({
       query: ({ newsCategory, count }) =>
         createRequest(
-          `everything?domains=coindesk.com,u.today,decrypt.co&q=${newsCategory}&sortBy=publishedAt&pageSize=${count}`
+          `/everything?domains=coindesk.com,u.today,decrypt.co&q=${newsCategory}&sortBy=publishedAt&pageSize=${count}`
         ),
     }),
   }),

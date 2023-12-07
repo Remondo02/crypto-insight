@@ -1,4 +1,4 @@
-// Lighter version for the input to work properly
+// Lighter version of first 1000 entries for the input to work properly
 export const coins = [
   { id: "btc-bitcoin", name: "Bitcoin" },
   { id: "eth-ethereum", name: "Ethereum" },

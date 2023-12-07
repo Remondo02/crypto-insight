@@ -5,7 +5,7 @@ const cryptoHeaders = {
   "X-RapidAPI-Host": "coinpaprika1.p.rapidapi.com",
 }
 
-const baseUrl = "https://coinpaprika1.p.rapidapi.com/coins/"
+const baseUrl = "https://coinpaprika1.p.rapidapi.com/coins"
 
 const createRequest = (url) => ({
   url,
@@ -17,7 +17,7 @@ export const cryptoEventsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getCryptoEventsApi: builder.query({
-      query: ({ coinId }) => createRequest(`${coinId}/events`),
+      query: ({ coinId }) => createRequest(`/${coinId}/events`),
     }),
   }),
 })

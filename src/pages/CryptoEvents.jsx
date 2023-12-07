@@ -16,7 +16,7 @@ import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
 import { Box, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { SearchSelect } from "../components/SearchSelect.jsx"
-import { coins } from "../data/coinsLight.js"
+import { coins } from "../data/coins.js"
 import { useState } from "react"
 
 export function CryptoEvents() {
