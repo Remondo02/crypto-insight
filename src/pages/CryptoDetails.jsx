@@ -6,6 +6,10 @@ import {
   Divider,
   Avatar,
   Link,
+  List,
+  ListItemButton,
+  ListItemText,
+  ListItem,
 } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import HTMLReactParser from "html-react-parser"
@@ -120,6 +124,14 @@ export function CryptoDetails() {
     },
   ]
 
+  const toto = {
+    color: "#6870fa",
+    textDecoration: "none",
+    "&:hover": {
+      color: "#868dfb",
+    },
+  }
+
   return (
     <Box m={3}>
       <Box>
@@ -140,12 +152,8 @@ export function CryptoDetails() {
       {/* Line Charts */}
       <Box>
         <Box sx={{ flexGrow: 1 }}>
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 4, md: 8, lg: 12 }}
-          >
-            <Grid item xs={4} sm={4} md={4} lg={4}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            <Grid item sm={12} md={6} lg={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -193,7 +201,7 @@ export function CryptoDetails() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={4} sm={4} md={4} lg={4}>
+            <Grid item sm={12} md={6} lg={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -241,24 +249,7 @@ export function CryptoDetails() {
                 </Box>
               </Box>
             </Grid>
-            {/* <Grid item xs={4} sm={4} md={4}>
-              <Box>
-                <Box marginBottom={2}>
-                  <Typography
-                    sx={{ fontWeight: "bold" }}
-                    variant="h4"
-                    color={colors.greenAccent[500]}
-                    mb={1}
-                  >
-                    What is {cryptoDetails.name}
-                  </Typography>
-                  <Typography variant="body1" color={colors.grey[100]}>
-                    {HTMLReactParser(cryptoDetails.description)}
-                  </Typography>
-                </Box>
-              </Box>
-            </Grid> */}
-            <Grid item xs={4} sm={4} md={4} lg={4}>
+            <Grid item sm={12} md={12} lg={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -274,36 +265,35 @@ export function CryptoDetails() {
                   </Typography>
                 </Box>
                 <Box backgroundColor={colors.primary[400]}>
-                  {cryptoDetails.links.map(({ name, url }) => (
-                    <Box key={name}>
-                      <Box
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        p={2}
+                  {cryptoDetails.links.map(({ name, type, url }) => (
+                    <Link
+                      href={url}
+                      underline="none"
+                      target="_blank"
+                      rel="noreferrer"
+                      sx={{
+                        color: colors.grey[100],
+                        ".MuiListItemText-root": {
+                          display: "flex",
+                          justifyContent: "space-between",
+                        },
+                        ".MuiListItemText-secondary": {
+                          fontSize: theme.typography.body1,
+                          color: colors.greenAccent[500],
+                        },
+                      }}
+                    >
+                      <ListItem
+                        key={name}
+                        component="div"
+                        disablePadding
+                        divider={true}
                       >
-                        <Typography variant="body1" color={colors.grey[100]}>
-                          {name}
-                        </Typography>
-                        <Link
-                          href={url}
-                          underline="none"
-                          target="_blank"
-                          rel="noreferrer"
-                          sx={{
-                            color: "#6870fa",
-                            textDecoration: "none",
-                            "&:hover": {
-                              color: "#868dfb !important",
-                              backgroundColor: "transparent",
-                            },
-                          }}
-                        >
-                          {url}
-                        </Link>
-                      </Box>
-                      <Divider />
-                    </Box>
+                        <ListItemButton>
+                          <ListItemText primary={type} secondary={name} />
+                        </ListItemButton>
+                      </ListItem>
+                    </Link>
                   ))}
                 </Box>
               </Box>
