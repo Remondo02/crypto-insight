@@ -27,7 +27,7 @@
     "@syncfusion/ej2-schedule": "23.2.4",
     "@syncfusion/ej2-splitbuttons": "23.2.4",
     "axios": "^1.6.2",
-    "chart.js": "^4.4.0",
+    "chart.js": "^4.4.1",
     "dotenv": "^16.3.1",
     "html-react-parser": "^5.0.6",
     "install": "^0.13.0",

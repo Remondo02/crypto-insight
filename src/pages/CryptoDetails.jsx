@@ -3,12 +3,18 @@ import { Header } from "../components/Header.jsx"
 import HTMLReactParser from "html-react-parser"
 import { useParams } from "react-router-dom"
 import { useState } from "react"
-import { useGetCryptoDetailsApiQuery } from "../services/cryptoApi.js"
+import {
+  useGetCryptoDetailsApiQuery,
+  useGetCryptoHistoryApiQuery,
+} from "../services/cryptoApi.js"
 
 import { getGenericStats, getStats } from "../utils/singleUtils.jsx"
 
 import { SearchSelect } from "../components/SearchSelect.jsx"
 import { SingleList } from "../components/SingleList.jsx"
+
+import { LineChart } from "../components/LineChart.jsx"
+import millify from "millify"
 
 export function CryptoDetails() {
   const { coinId } = useParams()
@@ -16,6 +22,12 @@ export function CryptoDetails() {
   const [timePeriod, setTimePeriod] = useState("7d")
   const { data, error, isLoading, isFetching } =
     useGetCryptoDetailsApiQuery(coinId)
+  const {
+    data: coinHistory,
+    error: errorHistory,
+    isLoading: isLoadingHistory,
+    isFetching: isFetchingHistory,
+  } = useGetCryptoHistoryApiQuery({ coinId, timePeriod })
 
   if (isLoading || isFetching) {
     return "...loading"
@@ -27,7 +39,7 @@ export function CryptoDetails() {
 
   const cryptoDetails = data?.data?.coin
 
-  const time = ["24h", "7d", "30d"]
+  const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"]
 
   const stats = getStats(cryptoDetails)
   const genericStats = getGenericStats(cryptoDetails)
@@ -49,7 +61,11 @@ export function CryptoDetails() {
           onSearchChange={setTimePeriod}
         />
       </Box>
-      {/* Line Charts */}
+      <LineChart
+        coinHistory={coinHistory}
+        currentPrice={millify(cryptoDetails.price)}
+        coinName={cryptoDetails.name}
+      />
       <Box>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -64,7 +80,7 @@ export function CryptoDetails() {
               title="Other Statistics"
               subtitle="An overview showing the stats of all cryptocurrencies"
               name={cryptoDetails.name}
-              genericStats={genericStats}
+              stats={genericStats}
             />
 
             <SingleList
