@@ -79,7 +79,7 @@ export function CryptoCurrencies({ simplified }) {
                   key={currency.uuid}
                 >
                   <Link
-                    to={`crypto/${currency.uuid}`}
+                    to={`/crypto/${currency.uuid}`}
                     style={{ textDecoration: "none" }}
                   >
                     <Card

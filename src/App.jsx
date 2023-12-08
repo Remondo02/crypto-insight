@@ -8,6 +8,7 @@ import { CryptoCurrencies } from "./pages/CryptoCurrencies.jsx"
 import { CryptoNews } from "./pages/CryptoNews.jsx"
 import { Exchanges } from "./pages/Exchanges.jsx"
 import { CryptoEvents } from "./pages/CryptoEvents.jsx"
+import { CryptoDetails } from "./pages/CryptoDetails.jsx"
 
 function App() {
   const [theme, colorMode] = useMode()
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/cryptocurrencies" element={<CryptoCurrencies />} />
+              <Route path="/crypto/:coinId" element={<CryptoDetails />} />
               <Route path="/exchanges" element={<Exchanges />} />
               <Route path="/news" element={<CryptoNews />} />
               <Route path="/events" element={<CryptoEvents />} />
