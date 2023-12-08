@@ -122,11 +122,10 @@ export function CryptoDetails() {
 
   return (
     <Box m={3}>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box>
         <Header
           title={`${cryptoDetails.name}  (${cryptoDetails.symbol})`}
-          subtitle="Live price in US dollars. View value statistics, market cap and
-          supply."
+          subtitle={HTMLReactParser(cryptoDetails.description)}
         />
       </Box>
 
@@ -144,9 +143,9 @@ export function CryptoDetails() {
           <Grid
             container
             spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
+            columns={{ xs: 4, sm: 4, md: 8, lg: 12 }}
           >
-            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <Grid item xs={4} sm={4} md={4} lg={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -194,7 +193,7 @@ export function CryptoDetails() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            <Grid item xs={4} sm={4} md={4} lg={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -242,7 +241,7 @@ export function CryptoDetails() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            {/* <Grid item xs={4} sm={4} md={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -258,8 +257,8 @@ export function CryptoDetails() {
                   </Typography>
                 </Box>
               </Box>
-            </Grid>
-            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+            </Grid> */}
+            <Grid item xs={4} sm={4} md={4} lg={4}>
               <Box>
                 <Box marginBottom={2}>
                   <Typography
@@ -269,6 +268,9 @@ export function CryptoDetails() {
                     mb={1}
                   >
                     {cryptoDetails.name} Links
+                  </Typography>
+                  <Typography variant="h5" color={colors.grey[100]}>
+                    Various links related to {cryptoDetails.name}
                   </Typography>
                 </Box>
                 <Box backgroundColor={colors.primary[400]}>
