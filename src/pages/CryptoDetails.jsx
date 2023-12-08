@@ -1,16 +1,11 @@
 import {
   Box,
   Typography,
-  Select,
   useTheme,
   Grid,
   Divider,
   Avatar,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListItemAvatar,
+  Link,
 } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import HTMLReactParser from "html-react-parser"
@@ -22,14 +17,13 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined"
 import BoltOutlinedIcon from "@mui/icons-material/BoltOutlined"
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined"
 import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined"
-import PriceChangeOutlinedIcon from "@mui/icons-material/PriceChangeOutlined"
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined"
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined"
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined"
-import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
+import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined"
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined"
+
 import { tokens } from "../theme.js"
 import { SearchSelect } from "../components/SearchSelect.jsx"
 
@@ -51,12 +45,6 @@ export function CryptoDetails() {
   }
 
   const cryptoDetails = data?.data?.coin
-
-  console.log(cryptoDetails["24hVolume"])
-
-  //numberOfMarkets, numberOfExchanges, supply.confirmed, supply.total, supply.circulating
-  // links (map dessus, name, type, url)
-  //
 
   const time = ["24h", "7d", "30d"]
 
@@ -132,14 +120,6 @@ export function CryptoDetails() {
     },
   ]
 
-  const style = {
-    width: "100%",
-    maxWidth: 360,
-    bgcolor: colors.primary[400],
-    display: "flex",
-    justifyContent: "space-between",
-  }
-
   return (
     <Box m={3}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -183,7 +163,7 @@ export function CryptoDetails() {
                 </Box>
                 <Box backgroundColor={colors.primary[400]}>
                   {stats.map(({ icon, title, value }) => (
-                    <>
+                    <Box key={title}>
                       <Box
                         display="flex"
                         justifyContent="space-between"
@@ -209,7 +189,7 @@ export function CryptoDetails() {
                         </Typography>
                       </Box>
                       <Divider />
-                    </>
+                    </Box>
                   ))}
                 </Box>
               </Box>
@@ -231,7 +211,7 @@ export function CryptoDetails() {
                 </Box>
                 <Box backgroundColor={colors.primary[400]}>
                   {genericStats.map(({ icon, title, value }) => (
-                    <>
+                    <Box key={title}>
                       <Box
                         display="flex"
                         justifyContent="space-between"
@@ -257,7 +237,71 @@ export function CryptoDetails() {
                         </Typography>
                       </Box>
                       <Divider />
-                    </>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+              <Box>
+                <Box marginBottom={2}>
+                  <Typography
+                    sx={{ fontWeight: "bold" }}
+                    variant="h4"
+                    color={colors.greenAccent[500]}
+                    mb={1}
+                  >
+                    What is {cryptoDetails.name}
+                  </Typography>
+                  <Typography variant="body1" color={colors.grey[100]}>
+                    {HTMLReactParser(cryptoDetails.description)}
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+              <Box>
+                <Box marginBottom={2}>
+                  <Typography
+                    sx={{ fontWeight: "bold" }}
+                    variant="h4"
+                    color={colors.greenAccent[500]}
+                    mb={1}
+                  >
+                    {cryptoDetails.name} Links
+                  </Typography>
+                </Box>
+                <Box backgroundColor={colors.primary[400]}>
+                  {cryptoDetails.links.map(({ name, url }) => (
+                    <Box key={name}>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        p={2}
+                      >
+                        <Typography variant="body1" color={colors.grey[100]}>
+                          {name}
+                        </Typography>
+                        <Link
+                          href={url}
+                          underline="none"
+                          target="_blank"
+                          rel="noreferrer"
+                          sx={{
+                            color: "#6870fa",
+                            textDecoration: "none",
+                            "&:hover": {
+                              color: "#868dfb !important",
+                              backgroundColor: "transparent",
+                            },
+                          }}
+                        >
+                          {url}
+                        </Link>
+                      </Box>
+                      <Divider />
+                    </Box>
                   ))}
                 </Box>
               </Box>
@@ -268,5 +312,3 @@ export function CryptoDetails() {
     </Box>
   )
 }
-
-//numberOfMarkets, numberOfExchanges, supply.confirmed, supply.total, supply.circulating
