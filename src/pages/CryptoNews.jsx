@@ -13,7 +13,7 @@ import { useGetCryptoNewsApiQuery } from "../services/cryptoNewsApi.js"
 import { Link } from "react-router-dom"
 import { tokens } from "../theme.js"
 import moment from "moment"
-import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { AlertMessage } from "../components/AlertMessage.jsx"
 import { Loader } from "../components/Loader.jsx"
 
 export function CryptoNews({ simplified }) {
@@ -35,7 +35,7 @@ export function CryptoNews({ simplified }) {
   }
 
   if (error) {
-    return <DescriptionAlerts type="error" error={error} />
+    return <AlertMessage type="error" errorMessage={error} />
   }
 
   return (

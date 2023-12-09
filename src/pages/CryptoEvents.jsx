@@ -12,7 +12,7 @@ import "./../calendar.css"
 import {
   useGetCryptoEventsApiQuery,
 } from "../services/cryptoEventsApi.js"
-import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { AlertMessage } from "../components/AlertMessage.jsx"
 import { Box, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { SearchSelect } from "../components/SearchSelect.jsx"
@@ -39,7 +39,7 @@ export function CryptoEvents() {
   }
 
   if (error) {
-    return <DescriptionAlerts type="error" error={error} />
+    return <AlertMessage type="error" errorMessage={error} />
   }
 
   const convertedData = []

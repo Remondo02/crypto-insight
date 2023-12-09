@@ -16,7 +16,7 @@ import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { useState } from "react"
 import { tokens } from "../theme.js"
 import { Search } from "../components/Search.jsx"
-import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { AlertMessage } from "../components/AlertMessage.jsx"
 import { Loader } from "../components/Loader.jsx"
 
 export function CryptoCurrencies({ simplified }) {
@@ -37,7 +37,7 @@ export function CryptoCurrencies({ simplified }) {
   }
 
   if (error) {
-    return <DescriptionAlerts type="error" error={error}></DescriptionAlerts>
+    return <AlertMessage type="error" errorMessage={error} />
   }
 
   const cryptos = cryptosList?.data?.coins

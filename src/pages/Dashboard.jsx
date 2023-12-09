@@ -1,7 +1,4 @@
-import {
-  Box,
-  useTheme,
-} from "@mui/material"
+import { Box, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { tokens } from "../theme.js"
@@ -17,7 +14,7 @@ import { Loader } from "../components/Loader.jsx"
 
 import { CryptoCurrencies } from "./CryptoCurrencies.jsx"
 import { CryptoNews } from "./CryptoNews.jsx"
-import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { AlertMessage } from "../components/AlertMessage.jsx"
 
 export function Dashboard() {
   const theme = useTheme()
@@ -29,7 +26,7 @@ export function Dashboard() {
   }
 
   if (error) {
-    return <DescriptionAlerts type="error" error={error} />
+    return <AlertMessage type="error" errorMessage={error} />
   }
 
   const globalStats = data?.data?.stats

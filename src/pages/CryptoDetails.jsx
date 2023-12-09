@@ -16,6 +16,7 @@ import { Loader } from "../components/Loader.jsx"
 
 import { LineChart } from "../components/LineChart.jsx"
 import millify from "millify"
+import { AlertMessage } from "../components/AlertMessage.jsx"
 
 export function CryptoDetails() {
   const { coinId } = useParams()
@@ -35,7 +36,7 @@ export function CryptoDetails() {
   }
 
   if (error) {
-    return <DescriptionAlerts type="error" error={error}></DescriptionAlerts>
+    return <AlertMessage type="error" errorMessage={error} />
   }
 
   const cryptoDetails = data?.data?.coin
