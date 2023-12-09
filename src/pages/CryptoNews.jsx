@@ -15,28 +15,43 @@ import { tokens } from "../theme.js"
 import moment from "moment"
 import { AlertMessage } from "../components/AlertMessage.jsx"
 import { Loader } from "../components/Loader.jsx"
+import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
+import { useState } from "react"
+import { SearchSelect } from "../components/SearchSelect.jsx"
 
 export function CryptoNews({ simplified }) {
   const count = simplified ? 8 : 100
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const {
+    data: cryptos,
+    error: errorCrypto,
+    isLoading: isLoadingCrypto,
+    isFetching: isFetchingCrypto,
+  } = useGetCryptoApiQuery(100)
+
+  const [search, setSearch] = useState("Cryptocurrency")
+
+  const {
     data: cryptoNews,
-    error,
-    isLoading,
-    isFetching,
+    error: errorNews,
+    isLoading: isLoadingNews,
+    isFetching: isFetchingNews,
   } = useGetCryptoNewsApiQuery({
-    newsCategory: "Cryptocurrency",
+    newsCategory: search,
     count: count,
   })
 
-  if (isLoading || isFetching) {
+  if (isFetchingNews || isFetchingCrypto) {
     return <Loader />
   }
 
-  if (error) {
+  if (errorNews || errorCrypto) {
+    const error = { ...errorNews, ...errorCrypto }
     return <AlertMessage type="error" errorMessage={error} />
   }
+
+  const coins = cryptos?.data?.coins
 
   return (
     <Box sx={!simplified ? { margin: 3 } : {}}>
@@ -50,6 +65,17 @@ export function CryptoNews({ simplified }) {
       )}
       {cryptoNews && (
         <Box>
+          {!simplified && (
+            <Box mb={3}>
+              <SearchSelect
+                search={search}
+                optionValue={coins}
+                onSearchChange={setSearch}
+                defaultOption={search}
+              />
+            </Box>
+          )}
+
           <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
@@ -57,15 +83,7 @@ export function CryptoNews({ simplified }) {
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
               {cryptoNews.articles.map((news) => (
-                <Grid
-                  item
-                  xs={4}
-                  sm={4}
-                  md={4}
-                  lg={4}
-                  xl={4}
-                  key={news.title}
-                >
+                <Grid item xs={4} sm={4} md={4} lg={4} xl={4} key={news.title}>
                   <Link
                     to={news.url}
                     target="_blank"

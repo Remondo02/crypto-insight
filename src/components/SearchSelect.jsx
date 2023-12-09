@@ -5,27 +5,54 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import { useId } from "react"
 
-export function SearchSelect({ inputLabel, search, optionValue, onSearchChange }) {
+export function SearchSelect({
+  inputLabel,
+  search,
+  optionValue,
+  onSearchChange,
+  defaultOption,
+}) {
   const id = useId()
 
   return (
-    <Box sx={{ minWidth: 120, width: 'max-content' }}>
+    <Box sx={{ minWidth: 120, width: "max-content" }}>
       <FormControl fullWidth>
         <InputLabel id={id}>{inputLabel}</InputLabel>
         <Select
           labelId={id}
-          id="demo-simple-select"
           value={search}
           label={inputLabel}
           onChange={(e) => onSearchChange(e.target.value)}
         >
-          {optionValue.map((option) => (
+          {/* {optionValue.map((option) => (
             <MenuItem key={option.id ?? option} value={option.id ?? option}>
               {option.name ?? option}
             </MenuItem>
-          ))}
+          ))} */}
+          <MenuItem key={defaultOption} value={defaultOption}>
+            {defaultOption}
+          </MenuItem>
+          {optionValue.map((option) => {
+            if (typeof option === "string") {
+              return MenuItemType(option, option)
+            }
+            if (option.hasOwnProperty("id")) {
+              return MenuItemType(option.id, option.name)
+            }
+            if (option.hasOwnProperty("uuid")) {
+              return MenuItemType(option.name, option.name)
+            }
+          })}
         </Select>
       </FormControl>
     </Box>
+  )
+}
+
+function MenuItemType(optionKeyValue, optionName) {
+  return (
+    <MenuItem key={optionKeyValue} value={optionKeyValue}>
+      {optionName}
+    </MenuItem>
   )
 }
