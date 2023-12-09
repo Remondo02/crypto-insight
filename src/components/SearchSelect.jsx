@@ -10,7 +10,6 @@ export function SearchSelect({
   search,
   optionValue,
   onSearchChange,
-  defaultOption,
 }) {
   const id = useId()
 
@@ -24,14 +23,6 @@ export function SearchSelect({
           label={inputLabel}
           onChange={(e) => onSearchChange(e.target.value)}
         >
-          {/* {optionValue.map((option) => (
-            <MenuItem key={option.id ?? option} value={option.id ?? option}>
-              {option.name ?? option}
-            </MenuItem>
-          ))} */}
-          <MenuItem key={defaultOption} value={defaultOption}>
-            {defaultOption}
-          </MenuItem>
           {optionValue.map((option) => {
             if (typeof option === "string") {
               return MenuItemType(option, option)

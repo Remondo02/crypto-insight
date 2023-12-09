@@ -53,6 +53,9 @@ export function CryptoNews({ simplified }) {
 
   const coins = cryptos?.data?.coins
 
+  const coinsWithInitialValue = JSON.parse(JSON.stringify(coins));
+  coinsWithInitialValue.unshift({uuid: '', symbol: '', name: "Cryptocurrency"})
+
   return (
     <Box sx={!simplified ? { margin: 3 } : {}}>
       {!simplified && (
@@ -69,9 +72,9 @@ export function CryptoNews({ simplified }) {
             <Box mb={3}>
               <SearchSelect
                 search={search}
-                optionValue={coins}
+                optionValue={coinsWithInitialValue}
                 onSearchChange={setSearch}
-                defaultOption={search}
+                // defaultOption={search}
               />
             </Box>
           )}
