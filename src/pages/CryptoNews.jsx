@@ -48,13 +48,21 @@ export function CryptoNews({ simplified }) {
 
   if (errorNews || errorCrypto) {
     const error = { ...errorNews, ...errorCrypto }
-    return <AlertMessage type="error" errorMessage={error} />
+    return (
+      <AlertMessage type="error" errorMessage={error}>
+      {error?.data?.message?.toString()}
+      </AlertMessage>
+    )
   }
 
   const coins = cryptos?.data?.coins
 
-  const coinsWithInitialValue = JSON.parse(JSON.stringify(coins));
-  coinsWithInitialValue.unshift({uuid: '', symbol: '', name: "Cryptocurrency"})
+  const coinsWithInitialValue = JSON.parse(JSON.stringify(coins))
+  coinsWithInitialValue.unshift({
+    uuid: "",
+    symbol: "",
+    name: "Cryptocurrency",
+  })
 
   return (
     <Box sx={!simplified ? { margin: 3 } : {}}>

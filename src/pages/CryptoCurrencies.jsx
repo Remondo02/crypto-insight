@@ -37,7 +37,11 @@ export function CryptoCurrencies({ simplified }) {
   }
 
   if (error) {
-    return <AlertMessage type="error" errorMessage={error} />
+    return (
+      <AlertMessage type="error">
+        {error?.data?.message?.toString()}
+      </AlertMessage>
+    )
   }
 
   const cryptos = cryptosList?.data?.coins

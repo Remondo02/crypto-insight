@@ -26,7 +26,11 @@ export function Dashboard() {
   }
 
   if (error) {
-    return <AlertMessage type="error" errorMessage={error} />
+    return (
+      <AlertMessage type="error" errorMessage={error}>
+        {error?.data?.message?.toString()}
+      </AlertMessage>
+    )
   }
 
   const globalStats = data?.data?.stats

@@ -36,7 +36,11 @@ export function CryptoDetails() {
   }
 
   if (error) {
-    return <AlertMessage type="error" errorMessage={error} />
+    return (
+      <AlertMessage type="error" errorMessage={error}>
+       {error?.data?.message?.toString()}
+      </AlertMessage>
+    )
   }
 
   const cryptoDetails = data?.data?.coin

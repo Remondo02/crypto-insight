@@ -11,36 +11,56 @@ import "./../calendar.css"
 
 import {
   useGetCryptoEventsApiQuery,
+  useGetCryptoEventsCoinsApiQuery,
 } from "../services/cryptoEventsApi.js"
 import { AlertMessage } from "../components/AlertMessage.jsx"
 import { Box, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { SearchSelect } from "../components/SearchSelect.jsx"
 import { Loader } from "../components/Loader.jsx"
-import { coins } from "../data/coins.js"
 import { useState } from "react"
 
 export function CryptoEvents() {
-
+  const theme = useTheme()
   const [search, setSearch] = useState("btc-bitcoin")
 
-  const theme = useTheme()
+  const {
+    data: cryptoCoins,
+    error: cryptoCoinsError,
+    isFetching: isFetchingCoins,
+  } = useGetCryptoEventsCoinsApiQuery()
+
   const {
     data: cryptoEvents,
-    error,
-    isLoading,
-    isFetching,
+    error: cryptoEventsError,
+    isFetching: isFetchingEvents,
   } = useGetCryptoEventsApiQuery({
     coinId: search,
   })
 
-  if (isLoading || isFetching) {
+  if (isFetchingEvents || isFetchingCoins) {
     return <Loader />
   }
 
-  if (error) {
-    return <AlertMessage type="error" errorMessage={error} />
+  if (cryptoCoinsError || cryptoEventsError) {
+    const error = { ...cryptoCoinsError, ...cryptoEventsError }
+    return (
+      <AlertMessage type="error" errorMessage={error}>
+       {error?.data?.message?.toString()}
+      </AlertMessage>
+    )
   }
+
+  const coins = []
+
+  cryptoCoins.map((coin, i) => {
+    if (i < 1000) {
+      coins.push({
+        id: coin.id,
+        name: coin.name,
+      })
+    }
+  })
 
   const convertedData = []
 
@@ -55,8 +75,10 @@ export function CryptoEvents() {
     })
   })
 
-  const latestEvent = convertedData.reduce((acc, val) =>
-    acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime, 0
+  const latestEvent = convertedData.reduce(
+    (acc, val) =>
+      acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime,
+    0
   )
 
   const schedulerTheme = theme.palette.mode === "dark" ? "e-dark-mode" : ""
@@ -71,24 +93,32 @@ export function CryptoEvents() {
           />
         </Box>
         <Box mb={3}>
-          <SearchSelect search={search} optionValue={coins} onSearchChange={setSearch} />
+          <SearchSelect
+            search={search}
+            optionValue={coins}
+            onSearchChange={setSearch}
+          />
         </Box>
-        <div className="schedule-control-section">
-          <div className="control-section">
-            <div className="control-wrapper">
-              <ScheduleComponent
-                width="100%"
-                height="650px"
-                currentView="Month"
-                selectedDate={new Date(latestEvent)}
-                eventSettings={{ dataSource: convertedData }}
-                readonly={true}
-              >
-                <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-              </ScheduleComponent>
+        {latestEvent ? (
+          <div className="schedule-control-section">
+            <div className="control-section">
+              <div className="control-wrapper">
+                <ScheduleComponent
+                  width="100%"
+                  height="650px"
+                  currentView="Month"
+                  selectedDate={new Date(latestEvent)}
+                  eventSettings={{ dataSource: convertedData }}
+                  readonly={true}
+                >
+                  <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
+                </ScheduleComponent>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <AlertMessage type="warning">No event found</AlertMessage>
+        )}
       </Box>
     </div>
   )

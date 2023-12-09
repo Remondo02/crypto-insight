@@ -19,7 +19,10 @@ export const cryptoEventsApi = createApi({
     getCryptoEventsApi: builder.query({
       query: ({ coinId }) => createRequest(`/${coinId}/events`),
     }),
+    getCryptoEventsCoinsApi: builder.query({
+      query: () => createRequest(),
+    }),
   }),
 })
 
-export const { useGetCryptoEventsApiQuery } = cryptoEventsApi
+export const { useGetCryptoEventsApiQuery, useGetCryptoEventsCoinsApiQuery } = cryptoEventsApi
