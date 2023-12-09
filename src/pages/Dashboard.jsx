@@ -13,6 +13,7 @@ import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined"
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined"
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined"
 import { SectionHeader } from "../components/SectionHeader.jsx"
+import { Loader } from "../components/Loader.jsx"
 
 import { CryptoCurrencies } from "./CryptoCurrencies.jsx"
 import { CryptoNews } from "./CryptoNews.jsx"
@@ -23,8 +24,8 @@ export function Dashboard() {
   const colors = tokens(theme.palette.mode)
   const { data, error, isLoading, isFetching } = useGetCryptoApiQuery(1)
 
-  if (isLoading) {
-    return "...loading"
+  if (isLoading || isFetching) {
+    return <Loader />
   }
 
   if (error) {

@@ -12,6 +12,7 @@ import { getGenericStats, getStats } from "../utils/singleUtils.jsx"
 
 import { SearchSelect } from "../components/SearchSelect.jsx"
 import { SingleList } from "../components/SingleList.jsx"
+import { Loader } from "../components/Loader.jsx"
 
 import { LineChart } from "../components/LineChart.jsx"
 import millify from "millify"
@@ -30,7 +31,7 @@ export function CryptoDetails() {
   } = useGetCryptoHistoryApiQuery({ coinId, timePeriod })
 
   if (isLoading || isFetching) {
-    return "...loading"
+    return <Loader />
   }
 
   if (error) {

@@ -13,7 +13,6 @@ import {
 } from "chart.js"
 import { Line } from "react-chartjs-2"
 import { tokens } from "../theme.js"
-import { AspectRatio } from "@mui/icons-material"
 
 export function LineChart({ coinHistory, currentPrice, coinName }) {
   const theme = useTheme()
@@ -55,14 +54,31 @@ export function LineChart({ coinHistory, currentPrice, coinName }) {
     ],
   }
 
-  const options = {
-    // responsive: true,
-    interaction: {
-      mode: "index",
-      intersect: false,
+  const plugin = {
+    id: "custom_canvas_background_color",
+    beforeDraw: (chartJS, args, options) => {
+      const { ctx } = chartJS
+      ctx.save()
+      ctx.globalCompositeOperation = "destination-over"
+      ctx.fillStyle = options.color
+      ctx.fillRect(0, 0, chartJS.width, chartJS.height)
+      ctx.restore()
     },
-    stacked: false,
   }
+
+  const options = {
+    responsive: true,
+    layout: {
+      padding: 24,
+    },
+    plugins: {
+      custom_canvas_background_color: {
+        color: colors.primary[400],
+      },
+    },
+  }
+
+  const plugins = [plugin]
 
   return (
     <Box mb={3}>
@@ -94,10 +110,17 @@ export function LineChart({ coinHistory, currentPrice, coinName }) {
           </Box>
         </Box>
       </Box>
-      {/* <Box sx={{aspectRatio: "16/9", maxWidth:"calc(100% - 1px)"}}> */}
-        <Line data={data} options={options} />
-      {/* </Box> */}
+      {/* <Box
+        sx={{
+          padding: 3,
+          backgroundColor: colors.primary[400],
+          aspectRatio: "16/9",
+          maxWidth: "calc(100% - 1px)",
+        }}
+      > */}
+      <Line data={data} options={options} plugins={plugins} />
     </Box>
+    // </Box>
   )
 }
 

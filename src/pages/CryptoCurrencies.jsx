@@ -17,6 +17,7 @@ import { useState } from "react"
 import { tokens } from "../theme.js"
 import { Search } from "../components/Search.jsx"
 import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { Loader } from "../components/Loader.jsx"
 
 export function CryptoCurrencies({ simplified }) {
   const count = simplified ? 12 : 100
@@ -32,7 +33,7 @@ export function CryptoCurrencies({ simplified }) {
   const [search, setSearch] = useState("")
 
   if (isLoading || isFetching) {
-    return "...loading"
+    return <Loader />
   }
 
   if (error) {

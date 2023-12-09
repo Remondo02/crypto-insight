@@ -16,6 +16,7 @@ import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
 import { Box, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { SearchSelect } from "../components/SearchSelect.jsx"
+import { Loader } from "../components/Loader.jsx"
 import { coins } from "../data/coins.js"
 import { useState } from "react"
 
@@ -34,7 +35,7 @@ export function CryptoEvents() {
   })
 
   if (isLoading || isFetching) {
-    return "...loading"
+    return <Loader />
   }
 
   if (error) {

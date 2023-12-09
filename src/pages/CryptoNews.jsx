@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import { tokens } from "../theme.js"
 import moment from "moment"
 import { DescriptionAlerts } from "../components/DescriptionAlerts.jsx"
+import { Loader } from "../components/Loader.jsx"
 
 export function CryptoNews({ simplified }) {
   const count = simplified ? 8 : 100
@@ -30,7 +31,7 @@ export function CryptoNews({ simplified }) {
   })
 
   if (isLoading || isFetching) {
-    return "...loading"
+    return <Loader />
   }
 
   if (error) {
