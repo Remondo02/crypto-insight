@@ -37,7 +37,7 @@ export function CryptoDetails() {
 
   if (error) {
     return (
-      <AlertMessage type="error" errorMessage={error}>
+      <AlertMessage type="error">
        {error?.data?.message?.toString()}
       </AlertMessage>
     )

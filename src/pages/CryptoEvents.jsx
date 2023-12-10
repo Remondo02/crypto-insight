@@ -19,10 +19,13 @@ import { Header } from "../components/Header.jsx"
 import { SearchSelect } from "../components/SearchSelect.jsx"
 import { Loader } from "../components/Loader.jsx"
 import { useState } from "react"
+import { tokens } from "../theme.js"
 
 export function CryptoEvents() {
   const theme = useTheme()
+  const colors = tokens(theme.palette.mode)
   const [search, setSearch] = useState("btc-bitcoin")
+  const schedulerTheme = theme.palette.mode === "dark" ? "e-dark-mode" : ""
 
   const {
     data: cryptoCoins,
@@ -45,8 +48,8 @@ export function CryptoEvents() {
   if (cryptoCoinsError || cryptoEventsError) {
     const error = { ...cryptoCoinsError, ...cryptoEventsError }
     return (
-      <AlertMessage type="error" errorMessage={error}>
-       {error?.data?.message?.toString()}
+      <AlertMessage type="error">
+        {error?.data?.message?.toString()}
       </AlertMessage>
     )
   }
@@ -54,7 +57,7 @@ export function CryptoEvents() {
   const coins = []
 
   cryptoCoins.map((coin, i) => {
-    if (i < 1000) {
+    if (i < 100) {
       coins.push({
         id: coin.id,
         name: coin.name,
@@ -63,14 +66,17 @@ export function CryptoEvents() {
   })
 
   const convertedData = []
-
+  let endDate
   cryptoEvents.map((event) => {
+    if (event.date_to < event.date) {
+      endDate = event.date
+    }
     convertedData.push({
       id: event.id,
       Subject: event.name ?? event.description,
       StartTime: event.date,
       formatTime: new Date(event.date).getTime(),
-      EndTime: event.date_to ?? event.date,
+      EndTime: endDate ?? event.date,
       IsAllDay: false,
     })
   })
@@ -80,8 +86,6 @@ export function CryptoEvents() {
       acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime,
     0
   )
-
-  const schedulerTheme = theme.palette.mode === "dark" ? "e-dark-mode" : ""
 
   return (
     <div className={schedulerTheme}>
@@ -100,7 +104,7 @@ export function CryptoEvents() {
           />
         </Box>
         {latestEvent ? (
-          <div className="schedule-control-section">
+          <Box className="schedule-control-section">
             <div className="control-section">
               <div className="control-wrapper">
                 <ScheduleComponent
@@ -115,9 +119,9 @@ export function CryptoEvents() {
                 </ScheduleComponent>
               </div>
             </div>
-          </div>
+          </Box>
         ) : (
-          <AlertMessage type="warning">No event found</AlertMessage>
+          <AlertMessage type="info">No event found</AlertMessage>
         )}
       </Box>
     </div>

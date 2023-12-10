@@ -8,3 +8,25 @@
 @import "./../node_modules/@syncfusion/ej2-popups/styles/material3.css";
 @import "./../node_modules/@syncfusion/ej2-splitbuttons/styles/material3.css";
 @import "./../node_modules/@syncfusion/ej2-react-schedule/styles/material3.css";
+
+:root {
+  --color-sf-black: 224, 224, 224;
+  --color-sf-white: 20, 20, 20;
+  --color-sf-primary: 61, 165, 138;
+  --color-sf-primary-container: 148, 226, 205;
+  --color-sf-surface: 242, 240, 240;
+  --color-sf-on-surface: 20, 20, 20;
+  --color-sf-on-surface-variant: 41, 41, 41;
+  /* --color-sf-outline-variant: 133, 133, 133; */
+}
+
+.e-dark-mode {
+  --color-sf-black: 20, 20, 20;
+  --color-sf-white: 224, 224, 224;
+  --color-sf-primary: 112, 216, 189;
+  --color-sf-primary-container: 46, 124, 103;
+  --color-sf-surface: 31, 42, 64;
+  --color-sf-on-surface: 224, 224, 224;
+  --color-sf-on-surface-variant: 194, 194, 194;
+  --color-sf-outline-variant: 82, 82, 82;
+}

@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material"
+import { Box, Grid, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { tokens } from "../theme.js"
@@ -27,7 +27,7 @@ export function Dashboard() {
 
   if (error) {
     return (
-      <AlertMessage type="error" errorMessage={error}>
+      <AlertMessage type="error">
         {error?.data?.message?.toString()}
       </AlertMessage>
     )
@@ -35,62 +35,50 @@ export function Dashboard() {
 
   const globalStats = data?.data?.stats
 
+  const styles = { color: colors.grey[100], fontSize: 26 }
+
   return (
     <Box m={3}>
       <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
-        <Box
-          display="grid"
-          gridTemplateColumns="repeat(auto-fit, minmax(290px, 1fr));"
-          gap={3}
-        >
-          <StatBox
-            title={"Total Cryptocurrencies"}
-            value={globalStats.total}
-            icon={
-              <CurrencyBitcoinIcon
-                sx={{ color: colors.grey[100], fontSize: 26 }}
-              />
-            }
-          />
-          <StatBox
-            title={"Total Exchanges"}
-            value={millify(globalStats.totalExchanges)}
-            icon={
-              <CurrencyExchangeOutlinedIcon
-                sx={{ color: colors.grey[100], fontSize: 26 }}
-              />
-            }
-          />
-          <StatBox
-            title={"Total Market Cap"}
-            value={millify(globalStats.totalMarketCap)}
-            icon={
-              <QueryStatsOutlinedIcon
-                sx={{ color: colors.grey[100], fontSize: 26 }}
-              />
-            }
-          />
-          <StatBox
-            title={"Total 24h Volume"}
-            value={millify(globalStats.total24hVolume)}
-            icon={
-              <UpdateOutlinedIcon
-                sx={{ color: colors.grey[100], fontSize: 26 }}
-              />
-            }
-          />
-          <StatBox
-            title={"Total Markets"}
-            value={millify(globalStats.totalMarkets)}
-            icon={
-              <PaidOutlinedIcon
-                sx={{ color: colors.grey[100], fontSize: 26 }}
-              />
-            }
-          />
-        </Box>
+        {globalStats && (
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 3, sm: 6, md: 9, lg: 12, xl: 15 }}
+          >
+            <StatBox
+              title={"Total Cryptocurrencies"}
+              value={globalStats.total}
+              icon={<CurrencyBitcoinIcon style={styles} />}
+            />
+
+            <StatBox
+              title={"Total Exchanges"}
+              value={millify(globalStats.totalExchanges)}
+              icon={<CurrencyExchangeOutlinedIcon style={styles} />}
+            />
+
+            <StatBox
+              title={"Total Market Cap"}
+              value={millify(globalStats.totalMarketCap)}
+              icon={<QueryStatsOutlinedIcon style={styles} />}
+            />
+
+            <StatBox
+              title={"Total 24h Volume"}
+              value={millify(globalStats.total24hVolume)}
+              icon={<UpdateOutlinedIcon style={styles} />}
+            />
+
+            <StatBox
+              title={"Total Markets"}
+              value={millify(globalStats.totalMarkets)}
+              icon={<PaidOutlinedIcon style={styles} />}
+            />
+          </Grid>
+        )}
       </Box>
       <Box mb={7}>
         <SectionHeader

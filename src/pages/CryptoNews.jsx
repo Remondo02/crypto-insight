@@ -49,7 +49,7 @@ export function CryptoNews({ simplified }) {
   if (errorNews || errorCrypto) {
     const error = { ...errorNews, ...errorCrypto }
     return (
-      <AlertMessage type="error" errorMessage={error}>
+      <AlertMessage type="error">
       {error?.data?.message?.toString()}
       </AlertMessage>
     )
