@@ -43,10 +43,10 @@ export function Dashboard() {
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
         {globalStats && (
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 3, sm: 6, md: 9, lg: 12, xl: 15 }}
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(290px, 1fr));"
+            gap={3}
           >
             <StatBox
               title={"Total Cryptocurrencies"}
@@ -77,7 +77,7 @@ export function Dashboard() {
               value={millify(globalStats.totalMarkets)}
               icon={<PaidOutlinedIcon style={styles} />}
             />
-          </Grid>
+          </Box>
         )}
       </Box>
       <Box mb={7}>
