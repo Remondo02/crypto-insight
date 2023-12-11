@@ -1,18 +1,7 @@
-import {
-  Box,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActionArea,
-  Typography,
-  useTheme,
-} from "@mui/material"
+import { Box, Grid, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { useGetCryptoNewsApiQuery } from "../services/cryptoNewsApi.js"
-import { Link } from "react-router-dom"
 import { tokens } from "../theme.js"
-import moment from "moment"
 import { AlertMessage } from "../components/AlertMessage.jsx"
 import { Loader } from "../components/Loader.jsx"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
@@ -49,6 +38,7 @@ export function CryptoNews({ simplified }) {
 
   if (errorNews || errorCrypto) {
     const error = { ...errorNews, ...errorCrypto }
+
     return (
       <AlertMessage type="error">
         {error?.data?.message?.toString()}
@@ -92,17 +82,26 @@ export function CryptoNews({ simplified }) {
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
-              {cryptoNews.articles.map((news) => (
-                <NewsCard
-                  key={news.title}
-                  title={news.title}
-                  url={news.url}
-                  urlToImage={news.urlToImage}
-                  description={news.description}
-                  author={news.author}
-                  publishedAt={news.publishedAt}
-                />
-              ))}
+              {cryptoNews.articles.map(
+                ({
+                  title,
+                  url,
+                  urlToImage,
+                  description,
+                  author,
+                  publishedAt,
+                }) => (
+                  <NewsCard
+                    key={title}
+                    title={title}
+                    url={url}
+                    urlToImage={urlToImage}
+                    description={description}
+                    author={author}
+                    publishedAt={publishedAt}
+                  />
+                )
+              )}
             </Grid>
           </Box>
         </Box>
