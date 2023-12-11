@@ -1,34 +1,34 @@
 import {
-  // Accordion,
-  // AccordionDetails,
-  // AccordionSummary,
-  // Avatar,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
   Box,
-  // Typography,
+  Typography,
   useTheme,
 } from "@mui/material"
 import { Header } from "../components/Header.jsx"
-// import { useGetCryptoExchangesApiQuery } from "../services/cryptoExchangesApi.js"
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-// import { useState } from "react"
-// import HTMLReactParser from "html-react-parser"
-// import millify from "millify"
-// import { tokens } from "../theme.js"
+import { useGetCryptoExchangesApiQuery } from "../services/cryptoExchangesApi.js"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { useState } from "react"
+import HTMLReactParser from "html-react-parser"
+import millify from "millify"
+import { tokens } from "../theme.js"
 
 export function Exchanges() {
   const theme = useTheme()
-  // const colors = tokens(theme.palette.mode)
-  // const {
-  //   data: cryptoExchanges,
-  //   error,
-  //   isLoading,
-  //   isFetching,
-  // } = useGetCryptoExchangesApiQuery()
+  const colors = tokens(theme.palette.mode)
+  const {
+    data: cryptoExchanges,
+    error,
+    isLoading,
+    isFetching,
+  } = useGetCryptoExchangesApiQuery()
 
-  // const [expanded, setExpanded] = useState(false)
-  // const handleChange = (panel) => (event, isExpanded) => {
-  //   setExpanded(isExpanded ? panel : false)
-  // }
+  const [expanded, setExpanded] = useState(false)
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false)
+  }
 
   let disabled
   return (
@@ -36,7 +36,7 @@ export function Exchanges() {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="EXCHANGES" subtitle="Exchanges" />
       </Box>
-      {/* <Box display="flex" ml={7} py={2}>
+      <Box display="flex" ml={7} py={2}>
         <Box width="25%" flexShrink={0}>
           Exchanges
         </Box>
@@ -108,7 +108,7 @@ export function Exchanges() {
               </AccordionDetails>
             )}
           </Accordion>
-        ))} */}
+        ))}
       {/* <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}

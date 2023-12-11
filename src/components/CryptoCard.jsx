@@ -16,20 +16,15 @@ import millify from "millify"
 function CryptoCardWrapper({ url, children }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+  const styles = { backgroundColor: colors.primary[400] }
   return (
     <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
       {url ? (
         <Link to={`/crypto/${url}`} style={{ textDecoration: "none" }}>
-          <Card
-            sx={{
-              backgroundColor: colors.primary[400],
-            }}
-          >
-            { children }
-          </Card>
+          <Card sx={styles}>{children}</Card>
         </Link>
       ) : (
-        { children }
+        <Card sx={styles}>{children}</Card>
       )}
     </Grid>
   )
