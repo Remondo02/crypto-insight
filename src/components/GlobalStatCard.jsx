@@ -1,7 +1,7 @@
-import { Grid, Box, Typography, useTheme } from "@mui/material"
+import { Box, Typography, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
 
-export function StatBox({ title, value, icon }) {
+export function GlobalStatCard({ title, value, icon }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

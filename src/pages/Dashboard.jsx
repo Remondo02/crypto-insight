@@ -2,7 +2,7 @@ import { Box, Grid, useTheme } from "@mui/material"
 import { Header } from "../components/Header.jsx"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { tokens } from "../theme.js"
-import { StatBox } from "../components/StatBox.jsx"
+import { GlobalStatCard } from "../components/GlobalStatCard.jsx"
 import { SectionHeader } from "../components/SectionHeader.jsx"
 import { Loader } from "../components/Loader.jsx"
 import { CryptoCurrencies } from "./CryptoCurrencies.jsx"
@@ -42,7 +42,12 @@ export function Dashboard() {
             gap={3}
           >
             {stats.map(({ title, value, icon }) => (
-              <StatBox key={title} title={title} value={value} icon={icon} />
+              <GlobalStatCard
+                key={title}
+                title={title}
+                value={value}
+                icon={icon}
+              />
             ))}
           </Box>
         )}
