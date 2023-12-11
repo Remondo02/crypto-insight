@@ -18,6 +18,7 @@ import { Loader } from "../components/Loader.jsx"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { useState } from "react"
 import { SearchSelect } from "../components/SearchSelect.jsx"
+import { NewsCard } from "../components/NewsCard.jsx"
 
 export function CryptoNews({ simplified }) {
   const count = simplified ? 8 : 100
@@ -50,7 +51,7 @@ export function CryptoNews({ simplified }) {
     const error = { ...errorNews, ...errorCrypto }
     return (
       <AlertMessage type="error">
-      {error?.data?.message?.toString()}
+        {error?.data?.message?.toString()}
       </AlertMessage>
     )
   }
@@ -82,11 +83,9 @@ export function CryptoNews({ simplified }) {
                 search={search}
                 optionValue={coinsWithInitialValue}
                 onSearchChange={setSearch}
-                // defaultOption={search}
               />
             </Box>
           )}
-
           <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
@@ -94,61 +93,15 @@ export function CryptoNews({ simplified }) {
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
               {cryptoNews.articles.map((news) => (
-                <Grid item xs={4} sm={4} md={4} lg={4} xl={4} key={news.title}>
-                  <Link
-                    to={news.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Card
-                      sx={{
-                        backgroundColor: colors.primary[400],
-                      }}
-                    >
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="140"
-                          image={news.urlToImage}
-                          alt={news.title}
-                        />
-                        <CardContent>
-                          <Typography
-                            gutterBottom
-                            variant="h4"
-                            color={colors.grey[100]}
-                          >
-                            {news.title}
-                          </Typography>
-                          <Typography variant="body1" color="text.secondary">
-                            {news.description.length > 100
-                              ? `${news.description.substring(0, 100)} ...`
-                              : news.description}
-                          </Typography>
-                          <Box
-                            mt={2}
-                            display="flex"
-                            justifyContent="space-between"
-                          >
-                            <Typography
-                              variant="body2"
-                              color={colors.grey[100]}
-                            >
-                              {news.author}
-                            </Typography>
-                            <Typography
-                              variant="body2"
-                              color={colors.grey[100]}
-                            >
-                              {moment(news.publishedAt).startOf("ss").fromNow()}
-                            </Typography>
-                          </Box>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Link>
-                </Grid>
+                <NewsCard
+                  key={news.title}
+                  title={news.title}
+                  url={news.url}
+                  urlToImage={news.urlToImage}
+                  description={news.description}
+                  author={news.author}
+                  publishedAt={news.publishedAt}
+                />
               ))}
             </Grid>
           </Box>

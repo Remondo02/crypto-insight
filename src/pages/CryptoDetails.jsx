@@ -8,7 +8,7 @@ import {
   useGetCryptoHistoryApiQuery,
 } from "../services/cryptoApi.js"
 
-import { getGenericStats, getStats } from "../utils/singleUtils.jsx"
+import { getGenericStats, getStats } from "../utils/statsData.jsx"
 
 import { SearchSelect } from "../components/SearchSelect.jsx"
 import { SingleList } from "../components/SingleList.jsx"

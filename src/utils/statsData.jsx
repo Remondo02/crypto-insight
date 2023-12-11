@@ -15,8 +15,43 @@ import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined"
 import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined"
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined"
+import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined"
+import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined"
+import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin"
+import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined"
 
 import millify from "millify"
+
+export function getGlobalStats(globalStats, colors) {
+  const styles = { color: colors.grey[100], fontSize: 26 }
+  return [
+    {
+      title: "Total Cryptocurrencies",
+      value: globalStats.total,
+      icon: <CurrencyBitcoinIcon style={styles} />,
+    },
+    {
+      title: "Total Exchanges",
+      value: millify(globalStats.totalExchanges),
+      icon: <CurrencyExchangeOutlinedIcon style={styles} />,
+    },
+    {
+      title: "Total Market Cap",
+      value: millify(globalStats.totalMarketCap),
+      icon: <QueryStatsOutlinedIcon style={styles} />,
+    },
+    {
+      title: "Total 24h Volume",
+      value: millify(globalStats.total24hVolume),
+      icon: <UpdateOutlinedIcon style={styles} />,
+    },
+    {
+      title: "Total Markets",
+      value: millify(globalStats.totalMarkets),
+      icon: <PaidOutlinedIcon style={styles} />,
+    },
+  ]
+}
 
 export function getIcon(type) {
   if (type === "github") return <GitHubIcon />

@@ -11,7 +11,7 @@ import {
   List,
 } from "@mui/material"
 import { tokens } from "../theme.js"
-import { getIcon } from "../utils/singleUtils.jsx"
+import { getIcon } from "../utils/statsData.jsx"
 import { Link } from "react-router-dom"
 
 export function SingleList({ title, subtitle, stats, links }) {
