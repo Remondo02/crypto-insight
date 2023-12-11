@@ -16,7 +16,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
     <MenuItem
       component={<Link to={to} />}
-      active={selected === title}
+      active={selected.toLowerCase() === title.toLowerCase()}
       style={{ color: colors.grey[100] }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -26,11 +26,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   )
 }
 
-export function Sidebar() {
+export function Sidebar({page}) {
+  console.log(page)
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const [selected, setSelected] = useState("Dashboard")
+  const [selected, setSelected] = useState(page)
 
   return (
     <ProSideBar

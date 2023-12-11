@@ -9,15 +9,17 @@ import { CryptoNews } from "./pages/CryptoNews.jsx"
 import { Exchanges } from "./pages/Exchanges.jsx"
 import { CryptoEvents } from "./pages/CryptoEvents.jsx"
 import { CryptoDetails } from "./pages/CryptoDetails.jsx"
+import { useCheckNavigation } from "./hooks/useCheckNavigation.js"
 
 function App() {
   const [theme, colorMode] = useMode()
+  const { page } = useCheckNavigation()
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar />
+          <Sidebar page={page} />
           <main className="content">
             <ThemeButton />
             <Routes>
