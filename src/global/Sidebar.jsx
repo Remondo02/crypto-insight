@@ -1,33 +1,16 @@
 import { useState } from "react"
 import { Sidebar as ProSideBar, Menu, MenuItem } from "react-pro-sidebar"
 import { Box, IconButton, Typography, useTheme } from "@mui/material"
-import { Link } from "react-router-dom"
 import { tokens } from "./../theme.js"
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
 import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined"
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined"
+import { SideBarItem } from "../components/SidebarItem.jsx"
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode)
-  return (
-    <MenuItem
-      component={<Link to={to} />}
-      active={selected.toLowerCase() === title.toLowerCase()}
-      style={{ color: colors.grey[100] }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title}</Typography>
-    </MenuItem>
-  )
-}
-
-export function Sidebar({page}) {
-  console.log(page)
+export function Sidebar({ page }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -86,35 +69,35 @@ export function Sidebar({page}) {
         </MenuItem>
 
         <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+          <SideBarItem
             title="Dashboard"
             to="/"
             icon={<HomeOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <Item
+          <SideBarItem
             title="Crypto Currencies"
             to="/cryptocurrencies"
             icon={<CurrencyBitcoinOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <Item
+          <SideBarItem
             title="Exchanges"
             to="/exchanges"
             icon={<CurrencyExchangeOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <Item
+          <SideBarItem
             title="News"
             to="/news"
             icon={<FeedOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
-          <Item
+          <SideBarItem
             title="Events"
             to="/events"
             icon={<CalendarMonthOutlinedIcon />}
