@@ -14,6 +14,53 @@ import { tokens } from "../theme.js"
 import { getIcon } from "../utils/statsData.jsx"
 import { Link } from "react-router-dom"
 
+function BaseListItem({ data, colors }) {
+  return (
+    <List disablePadding sx={{ backgroundColor: colors.primary[400] }}>
+      {data.map((obj, i) => {
+        const hasUrl = obj.hasOwnProperty("url")
+        return hasUrl ? (
+          <ListItem key={i} disablePadding divider={true}>
+            <ListItemButton
+              component={Link}
+              to={obj.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ListItemAvatar>
+                <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
+                  {getIcon(obj.type)}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                sx={{ display: "flex", justifyContent: "space-between" }}
+                primary={obj.name}
+              />
+            </ListItemButton>
+          </ListItem>
+        ) : (
+          <ListItem key={i} divider={true}>
+            <ListItemAvatar>
+              <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
+                {obj.icon}
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              sx={{ display: "flex", justifyContent: "space-between" }}
+              primary={obj.title}
+              secondary={
+                <Typography sx={{ color: colors.grey[100] }} fontWeight="bold">
+                  {obj.value}
+                </Typography>
+              }
+            />
+          </ListItem>
+        )
+      })}
+    </List>
+  )
+}
+
 export function SingleList({ title, subtitle, stats, links }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -36,52 +83,5 @@ export function SingleList({ title, subtitle, stats, links }) {
       {stats && <BaseListItem data={stats} colors={colors} />}
       {links && <BaseListItem data={links} colors={colors} />}
     </Grid>
-  )
-}
-
-function BaseListItem({ data, colors }) {
-  return (
-    <List disablePadding sx={{ backgroundColor: colors.primary[400] }}>
-      {data.map((obj) => {
-        const hasUrl = obj.hasOwnProperty("url")
-        return hasUrl ? (
-          <ListItem key={obj.name} disablePadding divider={true}>
-            <ListItemButton
-              component={Link}
-              to={obj.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ListItemAvatar>
-                <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
-                  {getIcon(obj.type)}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                sx={{ display: "flex", justifyContent: "space-between" }}
-                primary={obj.name}
-              />
-            </ListItemButton>
-          </ListItem>
-        ) : (
-          <ListItem key={obj.title} divider={true}>
-            <ListItemAvatar>
-              <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
-                {obj.icon}
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              sx={{ display: "flex", justifyContent: "space-between" }}
-              primary={obj.title}
-              secondary={
-                <Typography sx={{ color: colors.grey[100] }} fontWeight="bold">
-                  {obj.value}
-                </Typography>
-              }
-            />
-          </ListItem>
-        )
-      })}
-    </List>
   )
 }
