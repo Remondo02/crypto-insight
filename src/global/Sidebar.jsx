@@ -77,7 +77,7 @@ export function Sidebar({ page }) {
             setSelected={setSelected}
           />
           <SideBarItem
-            title="Crypto Currencies"
+            title="Cryptocurrencies"
             to="/cryptocurrencies"
             icon={<CurrencyBitcoinOutlinedIcon />}
             selected={selected}
