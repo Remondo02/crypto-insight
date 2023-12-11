@@ -55,19 +55,14 @@ export function CryptoEvents() {
   }
 
   const coins = []
-
-  cryptoCoins.map((coin, i) => {
-    if (i < 100) {
-      coins.push({
-        id: coin.id,
-        name: coin.name,
-      })
-    }
-  })
-
   const convertedData = []
   let endDate
-  cryptoEvents.map((event) => {
+
+  for (let i = 0; i < 100; i++) {
+    coins.push({ id: cryptoCoins[i].id, name: cryptoCoins[i].name })
+  }
+
+  for (const event of cryptoEvents) {
     if (event.date_to < event.date) {
       endDate = event.date
     }
@@ -79,7 +74,7 @@ export function CryptoEvents() {
       EndTime: endDate ?? event.date,
       IsAllDay: false,
     })
-  })
+  }
 
   const latestEvent = convertedData.reduce(
     (acc, val) =>
@@ -103,7 +98,7 @@ export function CryptoEvents() {
             onSearchChange={setSearch}
           />
         </Box>
-        {latestEvent ? (
+        {!!latestEvent && (
           <Box className="schedule-control-section">
             <div className="control-section">
               <div className="control-wrapper">
@@ -120,8 +115,6 @@ export function CryptoEvents() {
               </div>
             </div>
           </Box>
-        ) : (
-          <AlertMessage type="info">No event found</AlertMessage>
         )}
       </Box>
     </div>
