@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { Sidebar as ProSideBar, Menu, MenuItem } from "react-pro-sidebar"
 import { Box, IconButton, Typography, useTheme } from "@mui/material"
-import { tokens } from "./../theme.js"
+import { tokens } from "../theme.js"
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
 import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined"
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined"
-import { SideBarItem } from "../components/SidebarItem.jsx"
+import { SideBarItem } from "./SidebarItem.jsx"
 
 export function Sidebar({ page }) {
   const theme = useTheme()
