@@ -46,17 +46,17 @@ export function CryptoEvents() {
   }
 
   if (cryptoCoinsError || cryptoEventsError) {
-    const error = { ...cryptoCoinsError, ...cryptoEventsError }
     return (
-      <AlertMessage type="error">
-        {error?.data?.message?.toString()}
-      </AlertMessage>
+      <AlertMessage
+        type="error"
+        errors={[cryptoCoinsError, cryptoEventsError]}
+      />
     )
   }
 
   const coins = []
   const convertedData = []
-  let endDate
+  let endDate = ""
 
   for (let i = 0; i < 100; i++) {
     coins.push({ id: cryptoCoins[i].id, name: cryptoCoins[i].name })
@@ -88,7 +88,7 @@ export function CryptoEvents() {
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
             title="CRYPTO CURRENCIES"
-            subtitle="All informations related to currencies"
+            subtitle="All reccent events related to currencies"
           />
         </Box>
         <Box mb={3}>
@@ -99,21 +99,17 @@ export function CryptoEvents() {
           />
         </Box>
         {!!latestEvent && (
-          <Box className="schedule-control-section">
-            <div className="control-section">
-              <div className="control-wrapper">
-                <ScheduleComponent
-                  width="100%"
-                  height="650px"
-                  currentView="Month"
-                  selectedDate={new Date(latestEvent)}
-                  eventSettings={{ dataSource: convertedData }}
-                  readonly={true}
-                >
-                  <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-                </ScheduleComponent>
-              </div>
-            </div>
+          <Box>
+            <ScheduleComponent
+              width="100%"
+              height="650px"
+              currentView="Month"
+              selectedDate={new Date(latestEvent)}
+              eventSettings={{ dataSource: convertedData }}
+              readonly={true}
+            >
+              <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
+            </ScheduleComponent>
           </Box>
         )}
       </Box>

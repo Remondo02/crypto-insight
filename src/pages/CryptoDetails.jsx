@@ -35,12 +35,8 @@ export function CryptoDetails() {
     return <Loader />
   }
 
-  if (error) {
-    return (
-      <AlertMessage type="error">
-       {error?.data?.message?.toString()}
-      </AlertMessage>
-    )
+  if (error || errorHistory) {
+    return <AlertMessage type="error" errors={[error, errorHistory]} />
   }
 
   const cryptoDetails = data?.data?.coin

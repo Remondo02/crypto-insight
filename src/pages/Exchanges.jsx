@@ -30,6 +30,10 @@ export function Exchanges() {
     setExpanded(isExpanded ? panel : false)
   }
 
+  if (error) {
+    return <AlertMessage type="error" errors={error} />
+  }
+
   let disabled
   return (
     <Box m={3}>

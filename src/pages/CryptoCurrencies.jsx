@@ -24,9 +24,10 @@ export function CryptoCurrencies({ simplified }) {
 
   if (error) {
     return (
-      <AlertMessage type="error">
-        {error?.data?.message?.toString()}
-      </AlertMessage>
+      <AlertMessage
+        type="error"
+        errors={error}
+      />
     )
   }
 

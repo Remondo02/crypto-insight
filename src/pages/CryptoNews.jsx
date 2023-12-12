@@ -37,13 +37,7 @@ export function CryptoNews({ simplified }) {
   }
 
   if (errorNews || errorCrypto) {
-    const error = { ...errorNews, ...errorCrypto }
-
-    return (
-      <AlertMessage type="error">
-        {error?.data?.message?.toString()}
-      </AlertMessage>
-    )
+    return <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
   }
 
   const coins = cryptos?.data?.coins
