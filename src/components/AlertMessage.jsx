@@ -9,14 +9,14 @@ export function AlertMessage({ type = "error", errors }) {
           <Alert severity={type} variant="filled">
             <AlertTitle>{type}</AlertTitle>
             {errors
-              ? errors?.data?.message ?? errors?.data?.error
+              ? errors?.data?.message ?? errors?.error
               : "undefined"}
           </Alert>
         ) : (
           errors.map((error, i) => (
             <Alert key={i} severity={type} variant="filled">
               <AlertTitle>{type}</AlertTitle>
-              {error ? error?.data?.message ?? error?.data?.error : "undefined"}
+              {error ? error?.data?.message ?? error?.error : "undefined"}
             </Alert>
           ))
         )}
