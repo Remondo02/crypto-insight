@@ -56,7 +56,7 @@ export function CryptoEvents() {
 
   const coins = []
   const convertedData = []
-  let endDate = ""
+  let endDate
 
   for (let i = 0; i < 100; i++) {
     coins.push({ id: cryptoCoins[i].id, name: cryptoCoins[i].name })
