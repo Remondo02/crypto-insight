@@ -1,13 +1,8 @@
-import {
-  ScheduleComponent,
-  Day,
-  Week,
-  WorkWeek,
-  Month,
-  Agenda,
-  Inject,
-} from "@syncfusion/ej2-react-schedule"
-import "./../calendar.css"
+import { formatDate } from "@fullcalendar/core"
+import FullCalendar from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
+import timeGridPlugin from "@fullcalendar/timegrid"
+import interactionPlugin from '@fullcalendar/interaction'
 
 import {
   useGetCryptoEventsApiQuery,
@@ -20,6 +15,16 @@ import { SearchSelect } from "../components/SearchSelect.jsx"
 import { Loader } from "../components/Loader.jsx"
 import { useState } from "react"
 import { tokens } from "../theme.js"
+
+
+function renderEventContent(eventInfo) {
+  return (
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  )
+}
 
 export function CryptoEvents() {
   const theme = useTheme()
@@ -68,11 +73,11 @@ export function CryptoEvents() {
     }
     convertedData.push({
       id: event.id,
-      Subject: event.name ?? event.description,
-      StartTime: event.date,
+      title: event.name ?? event.description,
+      start: event.date,
       formatTime: new Date(event.date).getTime(),
-      EndTime: endDate ?? event.date,
-      IsAllDay: false,
+      end: endDate ?? event.date,
+      // allDay: false,
     })
   }
 
@@ -81,6 +86,8 @@ export function CryptoEvents() {
       acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime,
     0
   )
+
+  console.log(convertedData)
 
   return (
     <div className={schedulerTheme}>
@@ -100,16 +107,23 @@ export function CryptoEvents() {
         </Box>
         {!!latestEvent && (
           <Box>
-            <ScheduleComponent
-              width="100%"
-              height="650px"
-              currentView="Month"
-              selectedDate={new Date(latestEvent)}
-              eventSettings={{ dataSource: convertedData }}
-              readonly={true}
-            >
-              <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-            </ScheduleComponent>
+            <div className="demo-app-main">
+              <FullCalendar
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                headerToolbar={{
+                  left: "prev,next,today",
+                  center: "title",
+                  right: "dayGridMonth,timeGridWeek,timeGridDay",
+                }}
+                initialView="dayGridMonth"
+                editable={false}
+                selectable={false}
+                selectMirror={true}
+                dayMaxEvents={true}
+                events={convertedData}
+                // eventContent={renderEventContent}
+              />
+            </div>
           </Box>
         )}
       </Box>
