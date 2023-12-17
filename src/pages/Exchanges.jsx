@@ -1,5 +1,4 @@
 import { useState } from "react"
-import HTMLReactParser from "html-react-parser"
 import millify from "millify"
 import {
   Accordion,
@@ -7,11 +6,15 @@ import {
   AccordionSummary,
   Avatar,
   Box,
+  Link,
   Typography,
   useTheme,
 } from "@mui/material"
 import { useGetCryptoExchangesApiQuery } from "../services/cryptoExchangesApi.js"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import FlagCircleOutlinedIcon from "@mui/icons-material/FlagCircleOutlined"
+import LinkOutlinedIcon from "@mui/icons-material/LinkOutlined"
+import EventIcon from "@mui/icons-material/Event"
 import { tokens } from "../theme.js"
 import { AlertMessage, Header, Loader } from "../components"
 
@@ -22,9 +25,7 @@ export default function Exchanges() {
     data: cryptoExchanges,
     error,
     isLoading,
-    isFetching,
   } = useGetCryptoExchangesApiQuery()
-  let disabled = false
 
   const [expanded, setExpanded] = useState(false)
   const handleChange = (panel) => (event, isExpanded) => {
@@ -39,8 +40,6 @@ export default function Exchanges() {
     return <AlertMessage type="error" errors={error} />
   }
 
-  console.log(cryptoExchanges)
-
   return (
     <Box m={3}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -50,12 +49,8 @@ export default function Exchanges() {
         />
       </Box>
       <Box display="flex" ml={2} py={2}>
-        <Box width="calc(50% - 56px)">
-          Exchanges
-        </Box>
-        <Box width="50%">
-          24h Trade Volumne
-        </Box>
+        <Box width="calc(50% - 56px)">Exchanges</Box>
+        <Box width="50%">24h Trade Volume</Box>
       </Box>
       {cryptoExchanges &&
         cryptoExchanges.map((exchange, i) => (
@@ -64,11 +59,6 @@ export default function Exchanges() {
             sx={{
               backgroundColor: colors.primary[400],
             }}
-            disabled={
-              exchange.description === ""
-                ? (disabled = true)
-                : (disabled = false)
-            }
             key={exchange.id}
             expanded={expanded === `panel${i}`}
             onChange={handleChange(`panel${i}`)}
@@ -102,13 +92,51 @@ export default function Exchanges() {
                 </Typography>
               </Box>
             </AccordionSummary>
-            {exchange.description && (
-              <AccordionDetails>
+            <AccordionDetails>
+              <Box sx={{ mb: 4 }}>
                 <Typography>
-                  {HTMLReactParser(exchange.description || "")}
+                  {exchange.description || (
+                    <AlertMessage
+                      type="info"
+                      errors={`No description available from the API. please visite ${exchange.name} website for more informations.`}
+                    />
+                  )}
                 </Typography>
-              </AccordionDetails>
-            )}
+              </Box>
+              <Box display="flex" justifyContent="space-between">
+                {exchange.country && (
+                  <Box display="flex" gap={1}>
+                    <FlagCircleOutlinedIcon />
+                    <Typography sx={{ color: "text.secondary" }}>
+                      {exchange.country}
+                    </Typography>
+                  </Box>
+                )}
+                {exchange.year_established && (
+                  <Box display="flex" gap={1}>
+                    <EventIcon />
+                    <Typography sx={{ color: "text.secondary" }}>
+                      {exchange.year_established}
+                    </Typography>
+                  </Box>
+                )}
+                {exchange.url && (
+                  <Box display="flex" gap={1}>
+                    <LinkOutlinedIcon />
+                    <Link
+                      variant="body1"
+                      href={exchange.url}
+                      underline="hover"
+                      sx={{ color: "text.secondary" }}
+                      target="_blank"
+                      el="noreferrer"
+                    >
+                      {exchange.url}
+                    </Link>
+                  </Box>
+                )}
+              </Box>
+            </AccordionDetails>
           </Accordion>
         ))}
     </Box>
