@@ -11,7 +11,7 @@ export default function Loader() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        display: "inline",
+        display: "inline-block",
       }}
     >
       <CircularProgress
