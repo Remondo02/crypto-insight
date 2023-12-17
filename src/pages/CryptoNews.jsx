@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { Box, Grid, useTheme } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { useGetCryptoNewsApiQuery } from "../services/cryptoNewsApi.js"
-import { tokens } from "../theme.js"
 import {
   AlertMessage,
   Header,
@@ -13,8 +12,6 @@ import {
 
 export default function CryptoNews({ simplified }) {
   const count = simplified ? 8 : 100
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode)
   const {
     data: cryptos,
     error: errorCrypto,
