@@ -1,16 +1,18 @@
-import { Box, Grid, useTheme } from "@mui/material"
-import { Header } from "../components/Header.jsx"
-import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
+import { Box, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
-import { GlobalStatCard } from "../components/GlobalStatCard.jsx"
-import { SectionHeader } from "../components/SectionHeader.jsx"
-import { Loader } from "../components/Loader.jsx"
-import { CryptoCurrencies } from "./CryptoCurrencies.jsx"
-import { CryptoNews } from "./CryptoNews.jsx"
-import { AlertMessage } from "../components/AlertMessage.jsx"
+import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
+import CryptoCurrencies from "./CryptoCurrencies.jsx"
+import CryptoNews from "./CryptoNews.jsx"
 import { getGlobalStats } from "../utils/statsData.jsx"
+import {
+  AlertMessage,
+  Header,
+  GlobalStatCard,
+  Loader,
+  SectionHeader,
+} from "../components"
 
-export function Dashboard() {
+export default function Dashboard() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const { data, error, isLoading, isFetching } = useGetCryptoApiQuery(1)

@@ -1,13 +1,9 @@
-import { Box, Grid, useTheme } from "@mui/material"
-import { Header } from "../components/Header.jsx"
-import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { useState } from "react"
-import { Search } from "../components/Search.jsx"
-import { AlertMessage } from "../components/AlertMessage.jsx"
-import { Loader } from "../components/Loader.jsx"
-import { CryptoCard } from "../components/CryptoCard.jsx"
+import { Box, Grid } from "@mui/material"
+import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
+import { AlertMessage, Header, Loader, CryptoCard, Search } from "../components"
 
-export function CryptoCurrencies({ simplified }) {
+export default function CryptoCurrencies({ simplified }) {
   const count = simplified ? 12 : 100
   const {
     data: cryptosList,
@@ -23,12 +19,7 @@ export function CryptoCurrencies({ simplified }) {
   }
 
   if (error) {
-    return (
-      <AlertMessage
-        type="error"
-        errors={error}
-      />
-    )
+    return <AlertMessage type="error" errors={error} />
   }
 
   const cryptos = cryptosList?.data?.coins

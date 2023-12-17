@@ -1,12 +1,13 @@
 import { Box, InputBase, IconButton, useTheme } from "@mui/material"
-import { tokens } from "../theme.js"
 import SearchIcon from "@mui/icons-material/Search"
+import { tokens } from "../theme.js"
 
-export function Search({ search, onSearchChange }) {
+export default function Search({ search, onSearchChange }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (
-    <Box marginBottom={3}
+    <Box
+      marginBottom={3}
       display="inline-block"
       backgroundColor={colors.primary[400]}
       borderRadius="3px"

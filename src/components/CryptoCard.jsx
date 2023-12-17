@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+import millify from "millify"
 import {
   Avatar,
   Box,
@@ -10,8 +12,6 @@ import {
   useTheme,
 } from "@mui/material"
 import { tokens } from "../theme.js"
-import { Link } from "react-router-dom"
-import millify from "millify"
 
 function CryptoCardWrapper({ url, children }) {
   const theme = useTheme()
@@ -30,7 +30,7 @@ function CryptoCardWrapper({ url, children }) {
   )
 }
 
-export function CryptoCard({ currency }) {
+export default function CryptoCard({ currency }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (

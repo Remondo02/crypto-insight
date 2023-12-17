@@ -1,9 +1,7 @@
-import CircularProgress from "@mui/material/CircularProgress"
-import Box from "@mui/material/Box"
-import { useTheme } from "@mui/material"
+import { Box, CircularProgress, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
 
-export function Loader() {
+export default function Loader() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (

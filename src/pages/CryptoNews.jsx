@@ -1,15 +1,17 @@
+import { useState } from "react"
 import { Box, Grid, useTheme } from "@mui/material"
-import { Header } from "../components/Header.jsx"
+import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
 import { useGetCryptoNewsApiQuery } from "../services/cryptoNewsApi.js"
 import { tokens } from "../theme.js"
-import { AlertMessage } from "../components/AlertMessage.jsx"
-import { Loader } from "../components/Loader.jsx"
-import { useGetCryptoApiQuery } from "../services/cryptoApi.js"
-import { useState } from "react"
-import { SearchSelect } from "../components/SearchSelect.jsx"
-import { NewsCard } from "../components/NewsCard.jsx"
+import {
+  AlertMessage,
+  Header,
+  Loader,
+  NewsCard,
+  SearchSelect,
+} from "../components"
 
-export function CryptoNews({ simplified }) {
+export default function CryptoNews({ simplified }) {
   const count = simplified ? 8 : 100
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)

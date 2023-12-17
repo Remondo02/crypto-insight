@@ -1,14 +1,11 @@
-import Button from "@mui/material/Button"
-import Menu from "@mui/material/Menu"
-import MenuItem from "@mui/material/MenuItem"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { Button, Menu, MenuItem, useTheme } from "@mui/material"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
-import { Box, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
-import { ThemeButton } from "./ThemeButton.jsx"
+import ThemeButton from "./ThemeButton.jsx"
 
-export function Topbar({ page }) {
+export default function Topbar({ page }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [anchorEl, setAnchorEl] = useState(null)

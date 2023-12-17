@@ -1,24 +1,23 @@
-import { Box, Grid } from "@mui/material"
-import { Header } from "../components/Header.jsx"
-import HTMLReactParser from "html-react-parser"
-import { useParams } from "react-router-dom"
 import { useState } from "react"
+import { useParams } from "react-router-dom"
+import { Box, Grid } from "@mui/material"
+import HTMLReactParser from "html-react-parser"
+import millify from "millify"
 import {
   useGetCryptoDetailsApiQuery,
   useGetCryptoHistoryApiQuery,
 } from "../services/cryptoApi.js"
-
 import { getGenericStats, getStats } from "../utils/statsData.jsx"
+import {
+  AlertMessage,
+  Header,
+  LineChart,
+  Loader,
+  SearchSelect,
+  SingleList,
+} from "../components"
 
-import { SearchSelect } from "../components/SearchSelect.jsx"
-import { SingleList } from "../components/SingleList.jsx"
-import { Loader } from "../components/Loader.jsx"
-
-import { LineChart } from "../components/LineChart.jsx"
-import millify from "millify"
-import { AlertMessage } from "../components/AlertMessage.jsx"
-
-export function CryptoDetails() {
+export default function CryptoDetails() {
   const { coinId } = useParams()
 
   const [timePeriod, setTimePeriod] = useState("7d")

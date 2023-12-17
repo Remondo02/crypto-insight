@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import {
   Box,
   Grid,
@@ -12,7 +13,6 @@ import {
 } from "@mui/material"
 import { tokens } from "../theme.js"
 import { getIcon } from "../utils/statsData.jsx"
-import { Link } from "react-router-dom"
 
 function BaseListItem({ data, colors }) {
   return (
@@ -61,7 +61,7 @@ function BaseListItem({ data, colors }) {
   )
 }
 
-export function SingleList({ title, subtitle, stats, links }) {
+export default function SingleList({ title, subtitle, stats, links }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

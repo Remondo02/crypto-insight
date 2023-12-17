@@ -1,17 +1,17 @@
-import { ColorModeContext, useMode } from "./theme.js"
-import { CssBaseline, ThemeProvider } from "@mui/material"
 import { Routes, Route } from "react-router-dom"
-import { ThemeButton } from "./components/ThemeButton.jsx"
-import { Dashboard } from "./pages/Dashboard.jsx"
-import { CryptoCurrencies } from "./pages/CryptoCurrencies.jsx"
-import { CryptoNews } from "./pages/CryptoNews.jsx"
-import { Exchanges } from "./pages/Exchanges.jsx"
-import { CryptoEvents } from "./pages/CryptoEvents.jsx"
-import { CryptoDetails } from "./pages/CryptoDetails.jsx"
+import { CssBaseline, ThemeProvider } from "@mui/material"
+import { ColorModeContext, useMode } from "./theme.js"
 import { useCheckNavigation } from "./hooks/useCheckNavigation.js"
 import { useMediaQuery } from "./hooks/useMediaQuery.js"
-import { Topbar } from "./components/Topbar.jsx"
-import { Sidebar } from "./components/Sidebar.jsx"
+import {
+  CryptoCurrencies,
+  CryptoDetails,
+  CryptoEvents,
+  CryptoNews,
+  Dashboard,
+  Exchanges,
+} from "./pages"
+import { ThemeButton, Topbar, Sidebar } from "./components"
 
 function App() {
   const [theme, colorMode] = useMode()

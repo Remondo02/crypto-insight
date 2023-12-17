@@ -1,12 +1,11 @@
-import { IconButton, useTheme } from "@mui/material"
-import Box from "@mui/system/Box"
 import { useContext } from "react"
-import { ColorModeContext } from "../theme.js"
+import { Box, IconButton, useTheme } from "@mui/material"
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined"
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined"
+import { ColorModeContext } from "../theme.js"
 import { useMediaQuery } from "../hooks/useMediaQuery.js"
 
-export function ThemeButton() {
+export default function ThemeButton() {
   const isMobile = useMediaQuery()
   const theme = useTheme()
   const colorMode = useContext(ColorModeContext)

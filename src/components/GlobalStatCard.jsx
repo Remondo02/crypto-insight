@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
 
-export function GlobalStatCard({ title, value, icon }) {
+export default function GlobalStatCard({ title, value, icon }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

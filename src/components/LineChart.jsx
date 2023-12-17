@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material"
-import React from "react"
+import { Line } from "react-chartjs-2"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,10 +11,9 @@ import {
   Legend,
   Colors,
 } from "chart.js"
-import { Line } from "react-chartjs-2"
 import { tokens } from "../theme.js"
 
-export function LineChart({ coinHistory, currentPrice, coinName }) {
+export default function LineChart({ coinHistory, currentPrice, coinName }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const coinPrice = []
@@ -123,5 +122,3 @@ export function LineChart({ coinHistory, currentPrice, coinName }) {
     // </Box>
   )
 }
-
-export default LineChart

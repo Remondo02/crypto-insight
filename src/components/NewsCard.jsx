@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+import moment from "moment"
 import {
   Box,
   Grid,
@@ -8,10 +10,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material"
-
-import { Link } from "react-router-dom"
 import { tokens } from "../theme.js"
-import moment from "moment"
 
 function NewsCardWrapper({ url, children }) {
   return (
@@ -32,7 +31,7 @@ function NewsCardWrapper({ url, children }) {
   )
 }
 
-export function NewsCard({
+export default function NewsCard({
   title,
   url,
   urlToImage,

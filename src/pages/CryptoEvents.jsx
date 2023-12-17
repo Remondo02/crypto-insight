@@ -1,17 +1,6 @@
-import { formatDate } from "@fullcalendar/core"
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import timeGridPlugin from "@fullcalendar/timegrid"
-import interactionPlugin from "@fullcalendar/interaction"
-
-import {
-  useGetCryptoEventsApiQuery,
-  useGetCryptoEventsCoinsApiQuery,
-} from "../services/cryptoEventsApi.js"
-import { AlertMessage } from "../components/AlertMessage.jsx"
+import { useState } from "react"
 import {
   Box,
-  Card,
   Grid,
   List,
   ListItem,
@@ -19,13 +8,19 @@ import {
   Typography,
   useTheme,
 } from "@mui/material"
-import { Header } from "../components/Header.jsx"
-import { SearchSelect } from "../components/SearchSelect.jsx"
-import { Loader } from "../components/Loader.jsx"
-import { useState } from "react"
+import { formatDate } from "@fullcalendar/core"
+import FullCalendar from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
+import timeGridPlugin from "@fullcalendar/timegrid"
+import interactionPlugin from "@fullcalendar/interaction"
 import { tokens } from "../theme.js"
+import {
+  useGetCryptoEventsApiQuery,
+  useGetCryptoEventsCoinsApiQuery,
+} from "../services/cryptoEventsApi.js"
+import { AlertMessage, Header, Loader, SearchSelect } from "../components"
 
-export function CryptoEvents() {
+export default function CryptoEvents() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [search, setSearch] = useState("btc-bitcoin")
@@ -78,8 +73,6 @@ export function CryptoEvents() {
       allDay: false,
     })
   }
-
-  console.log(cryptoEvents)
 
   return (
     <Box m={3}>
@@ -157,5 +150,3 @@ export function CryptoEvents() {
     </Box>
   )
 }
-
-export default CryptoEvents

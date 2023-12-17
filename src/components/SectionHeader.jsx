@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom"
 import { Typography, Box, Button, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
-import { Link } from "react-router-dom"
 
-export function SectionHeader({ title, to, buttonLabel }) {
+export default function SectionHeader({ title, to, buttonLabel }) {
   const showButton = !!(to && buttonLabel)
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)

@@ -1,9 +1,9 @@
-import { Typography, useTheme } from "@mui/material"
-import { tokens } from "../theme.js"
 import { Link } from "react-router-dom"
 import { MenuItem } from "react-pro-sidebar"
+import { Typography, useTheme } from "@mui/material"
+import { tokens } from "../theme.js"
 
-export function SideBarItem({ title, to, icon, selected, setSelected }) {
+export default function SideBarItem({ title, to, icon, selected, setSelected }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (

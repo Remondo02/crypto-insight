@@ -1,7 +1,7 @@
 import { Typography, Box, Divider, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
 
-export function Header({ title, subtitle }) {
+export default function Header({ title, subtitle }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
