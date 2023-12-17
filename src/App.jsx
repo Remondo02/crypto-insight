@@ -23,16 +23,21 @@ function App() {
         <CssBaseline />
         <div className="app">
           {isMobile ? <Topbar /> : <Sidebar page={page} />}
-          <main className="content">
+          <main>
             {!isMobile && <ThemeButton />}
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/cryptocurrencies" element={<CryptoCurrencies />} />
-              <Route path="/crypto/:coinId" element={<CryptoDetails />} />
-              <Route path="/exchanges" element={<Exchanges />} />
-              <Route path="/news" element={<CryptoNews />} />
-              <Route path="/events" element={<CryptoEvents />} />
-            </Routes>
+            <div className="content">
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route
+                  path="/cryptocurrencies"
+                  element={<CryptoCurrencies />}
+                />
+                <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+                <Route path="/exchanges" element={<Exchanges />} />
+                <Route path="/news" element={<CryptoNews />} />
+                <Route path="/events" element={<CryptoEvents />} />
+              </Routes>
+            </div>
           </main>
         </div>
       </ThemeProvider>

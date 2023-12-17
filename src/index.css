@@ -34,4 +34,18 @@ html {
 
 main {
   width: 100%;
+  height: auto;
+}
+
+.content {
+  height: auto;
+  margin-inline: auto;
+  max-width: 1300px;
+  height: calc(100% - (68.5667px + 80px));
+}
+
+@media (max-width: 599px) {
+  .content {
+    height: calc(100vh - 68.5667px);
+  }
 }
