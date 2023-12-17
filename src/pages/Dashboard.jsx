@@ -30,7 +30,7 @@ export default function Dashboard() {
 
   return (
     <Box m={3}>
-      <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+      <Header title="DASHBOARD" subtitle="Get general informations about cryptocurrencies" />
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
         {globalStats && (

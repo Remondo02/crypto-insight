@@ -37,7 +37,7 @@ export default function CryptoCurrencies({ simplified }) {
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
             title="CRYPTO CURRENCIES"
-            subtitle="All informations related to currencies"
+            subtitle="Top 100 cryptoccurencies"
           />
         </Box>
       )}

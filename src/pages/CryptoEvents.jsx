@@ -78,8 +78,8 @@ export default function CryptoEvents() {
     <Box m={3}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
-          title="CRYPTO CURRENCIES"
-          subtitle="All informations related to currencies"
+          title="CRYPTO EVENTS"
+          subtitle="List of event related to a specific cryptocurrency"
         />
       </Box>
       {convertedData && (
