@@ -113,7 +113,7 @@ export default function CryptoEvents() {
                         <ListItemText
                           primary={event.title}
                           secondary={
-                            <Typography>
+                            <Typography variant="body2">
                               {formatDate(event.start, {
                                 year: "numeric",
                                 month: "short",

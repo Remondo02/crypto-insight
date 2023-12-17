@@ -1,29 +1,32 @@
-import { Alert, AlertTitle, Stack, Box } from "@mui/material"
-
+import { Box, Alert, AlertTitle, Stack, useTheme } from "@mui/material"
+import { tokens } from "../theme.js"
 // Error, warning, info, success
 export default function AlertMessage({ type = "error", errors }) {
+  const theme = useTheme()
+  const colors = tokens(theme.palette.mode)
+
+  let style = ''
+
+  type === "info"
+    ? (style = { backgroundColor: colors.greenAccent[500] })
+    : style
+
   return (
     <Box m={3}>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        {typeof errors === "string" && (
-          <Alert severity={type} variant="filled">
+        {typeof errors === "string" ? (
+          <Alert sx={style} severity={type} variant="filled">
             <AlertTitle>{type}</AlertTitle>
             {errors}
           </Alert>
-        )}
-        {typeof errors === "object" && (
-          <Alert severity={type} variant="filled">
-            <AlertTitle>{type}</AlertTitle>
-            {errors ? errors?.data?.message ?? errors?.error : "undefined"}
-          </Alert>
-        )}
-        {typeof errors === "array" &&
+        ) : (
           errors.map((error, i) => (
             <Alert key={i} severity={type} variant="filled">
               <AlertTitle>{type}</AlertTitle>
               {error ? error?.data?.message ?? error?.error : "undefined"}
             </Alert>
-          ))}
+          ))
+        )}
       </Stack>
     </Box>
   )
