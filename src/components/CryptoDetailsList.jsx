@@ -11,10 +11,26 @@ import {
   ListItemText,
   List,
 } from "@mui/material"
+import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import RedditIcon from "@mui/icons-material/Reddit"
+import TelegramIcon from "@mui/icons-material/Telegram"
+import TwitterIcon from "@mui/icons-material/Twitter"
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined"
+import YouTubeIcon from "@mui/icons-material/YouTube"
 import { tokens } from "../theme.js"
-import { getIcon } from "../utils/statsData.jsx"
 
-function BaseListItem({ data, colors }) {
+function getIcon(type) {
+  if (type === "github") return <GitHubIcon />
+  if (type === "reddit") return <RedditIcon />
+  if (type === "telegram") return <TelegramIcon />
+  if (type === "twitter") return <TwitterIcon />
+  if (type === "facebook") return <FacebookOutlinedIcon />
+  if (type === "youtube") return <YouTubeIcon />
+  return <LanguageOutlinedIcon />
+}
+
+function CryptoDetailsListItem({ data, colors }) {
   return (
     <List disablePadding sx={{ backgroundColor: colors.primary[400] }}>
       {data.map((obj, i) => {
@@ -80,8 +96,8 @@ export default function CryptoDetailsList({ title, subtitle, stats, links }) {
           {subtitle}
         </Typography>
       </Box>
-      {stats && <BaseListItem data={stats} colors={colors} />}
-      {links && <BaseListItem data={links} colors={colors} />}
+      {stats && <CryptoDetailsListItem data={stats} colors={colors} />}
+      {links && <CryptoDetailsListItem data={links} colors={colors} />}
     </Grid>
   )
 }
