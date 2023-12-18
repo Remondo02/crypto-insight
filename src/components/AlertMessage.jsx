@@ -5,7 +5,7 @@ export default function AlertMessage({ type = "error", errors }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  let style = ''
+  let style = ""
 
   type === "info"
     ? (style = { backgroundColor: colors.greenAccent[500] })
@@ -14,20 +14,32 @@ export default function AlertMessage({ type = "error", errors }) {
   return (
     <Box m={3}>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        {typeof errors === "string" ? (
+        {typeof errors === "string" && (
           <Alert sx={style} severity={type} variant="filled">
             <AlertTitle>{type}</AlertTitle>
             {errors}
           </Alert>
+        )}
+        {Array.isArray(errors) ? (
+          errors.map((error, i) => {
+            return <AlertContent key={i} type={type} errors={error} />
+          })
         ) : (
-          errors.map((error, i) => (
-            <Alert key={i} severity={type} variant="filled">
-              <AlertTitle>{type}</AlertTitle>
-              {error ? error?.data?.message ?? error?.error : "undefined"}
-            </Alert>
-          ))
+          <AlertContent type={type} errors={errors} />
         )}
       </Stack>
     </Box>
+  )
+}
+
+function AlertContent({ type, errors }) {
+  return (
+    <Alert severity={type} variant="filled">
+      <AlertTitle>{type}</AlertTitle>
+      {errors?.data?.message && errors?.data?.message}
+      {errors?.data?.error && errors?.data?.error}
+      {errors?.error && errors?.error}
+      {errors === undefined && "Undefined error"}
+    </Alert>
   )
 }
