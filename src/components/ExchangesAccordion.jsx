@@ -15,10 +15,12 @@ import {
   useTheme,
 } from "@mui/material"
 import { tokens } from "../theme.js"
+import { useMediaQuery } from "../hooks/useMediaQuery.js"
 import { AlertMessage } from "./index.js"
 
 export default function ExchangesAccordion({ exchange }) {
   const theme = useTheme()
+  const isMobile = useMediaQuery()
   const colors = tokens(theme.palette.mode)
 
   const [expanded, setExpanded] = useState(false)
@@ -40,7 +42,11 @@ export default function ExchangesAccordion({ exchange }) {
         aria-controls={`panel${exchange.id}bh-content`}
         id={`panel${exchange.id}bh-header`}
       >
-        <Box display="flex" justifyContent="space-between" width="50%">
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          width={isMobile ? "100%" : "50%"}
+        >
           <Box display="flex" gap={1}>
             <Typography sx={{ color: "text.secondary" }}>
               {exchange.trust_score_rank}
@@ -75,7 +81,12 @@ export default function ExchangesAccordion({ exchange }) {
             />
           )}
         </Box>
-        <Box display="flex" justifyContent="space-between">
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          gap={2}
+          justifyContent="space-between"
+        >
           {exchange.country && (
             <Box display="flex" alignItems="center" gap={1}>
               <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>

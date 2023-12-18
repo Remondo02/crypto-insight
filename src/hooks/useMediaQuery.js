@@ -14,5 +14,5 @@ export function useMediaQuery() {
     }
   }, [isMobile])
 
-  return isMobile < 600 ? true : false
+  return isMobile < 600 
 }

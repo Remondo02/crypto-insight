@@ -131,7 +131,6 @@ export default function CryptoDetails() {
           subtitle={HTMLReactParser(cryptoDetails.description)}
         />
       </Box>
-
       <Box mb={3}>
         <SearchSelect
           inputLabel="Select Time Period"
@@ -145,30 +144,32 @@ export default function CryptoDetails() {
         currentPrice={millify(cryptoDetails.price)}
         coinName={cryptoDetails.name}
       />
-      <Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={{ xs: 2, md: 3 }}>
-            <CryptoDetailsList
-              title={`${cryptoDetails.name} Value Statistics`}
-              subtitle={`An overview showing the stats of ${cryptoDetails.name}`}
-              name={cryptoDetails.name}
-              stats={stats}
-            />
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 1, sm: 1, md: 2, lg: 3 }}
+        >
+          <CryptoDetailsList
+            title={`${cryptoDetails.name} Value Statistics`}
+            subtitle={`An overview showing the stats of ${cryptoDetails.name}`}
+            name={cryptoDetails.name}
+            stats={stats}
+          />
 
-            <CryptoDetailsList
-              title="Other Statistics"
-              subtitle="An overview showing the stats of all cryptocurrencies"
-              name={cryptoDetails.name}
-              stats={genericStats}
-            />
+          <CryptoDetailsList
+            title="Other Statistics"
+            subtitle="An overview showing the stats of all cryptocurrencies"
+            name={cryptoDetails.name}
+            stats={genericStats}
+          />
 
-            <CryptoDetailsList
-              title={`${cryptoDetails.name} Links`}
-              subtitle={` Various links related to ${cryptoDetails.name}`}
-              links={cryptoDetails.links}
-            />
-          </Grid>
-        </Box>
+          <CryptoDetailsList
+            title={`${cryptoDetails.name} Links`}
+            subtitle={` Various links related to ${cryptoDetails.name}`}
+            links={cryptoDetails.links}
+          />
+        </Grid>
       </Box>
     </Box>
   )

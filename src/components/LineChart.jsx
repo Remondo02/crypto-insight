@@ -80,7 +80,7 @@ export default function LineChart({ coinHistory, currentPrice, coinName }) {
   const plugins = [plugin]
 
   return (
-    <Box mb={3}>
+    <Box mb={7}>
       <Box>
         <Box marginBottom={2} alignItems="center">
           <Typography

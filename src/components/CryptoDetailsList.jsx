@@ -82,7 +82,7 @@ export default function CryptoDetailsList({ title, subtitle, stats, links }) {
   const colors = tokens(theme.palette.mode)
 
   return (
-    <Grid item sm={12} md={6} lg={4}>
+    <Grid item xs={1} sm={1} md={1} lg={1}>
       <Box marginBottom={2}>
         <Typography
           sx={{ fontWeight: "bold" }}
