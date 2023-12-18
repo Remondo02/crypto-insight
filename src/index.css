@@ -40,7 +40,7 @@ main {
 .content {
   height: auto;
   margin-inline: auto;
-  max-width: 1300px;
+  max-width: 1400px;
   height: calc(100% - (68.5667px + 80px));
 }
 

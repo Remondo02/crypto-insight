@@ -72,7 +72,7 @@ export default function Dashboard() {
         {globalStats && (
           <Box
             display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(290px, 1fr));"
+            gridTemplateColumns="repeat(auto-fit, minmax(330px, 1fr));"
             gap={3}
           >
             {stats.map(({ title, value, icon }) => (
