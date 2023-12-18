@@ -14,13 +14,12 @@ export default function AlertMessage({ type = "error", errors }) {
   return (
     <Box m={3}>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        {typeof errors === "string" && (
+        {typeof errors === "string" ? (
           <Alert sx={style} severity={type} variant="filled">
             <AlertTitle>{type}</AlertTitle>
             {errors}
           </Alert>
-        )}
-        {Array.isArray(errors) ? (
+        ) : Array.isArray(errors) ? (
           errors.map((error, i) => {
             return <AlertContent key={i} type={type} errors={error} />
           })
