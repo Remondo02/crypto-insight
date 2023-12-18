@@ -61,7 +61,7 @@ function BaseListItem({ data, colors }) {
   )
 }
 
-export default function SingleList({ title, subtitle, stats, links }) {
+export default function CryptoDetailsList({ title, subtitle, stats, links }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

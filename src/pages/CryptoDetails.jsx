@@ -14,7 +14,7 @@ import {
   LineChart,
   Loader,
   SearchSelect,
-  SingleList,
+  CryptoDetailsList,
 } from "../components"
 
 export default function CryptoDetails() {
@@ -70,21 +70,21 @@ export default function CryptoDetails() {
       <Box>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
-            <SingleList
+            <CryptoDetailsList
               title={`${cryptoDetails.name} Value Statistics`}
               subtitle={`An overview showing the stats of ${cryptoDetails.name}`}
               name={cryptoDetails.name}
               stats={stats}
             />
 
-            <SingleList
+            <CryptoDetailsList
               title="Other Statistics"
               subtitle="An overview showing the stats of all cryptocurrencies"
               name={cryptoDetails.name}
               stats={genericStats}
             />
 
-            <SingleList
+            <CryptoDetailsList
               title={`${cryptoDetails.name} Links`}
               subtitle={` Various links related to ${cryptoDetails.name}`}
               links={cryptoDetails.links}
