@@ -85,6 +85,7 @@ export default function CryptoNews({ simplified }) {
                   publishedAt,
                 }) => (
                   <NewsCard
+                    simplified={simplified}
                     key={title}
                     title={title}
                     url={url}

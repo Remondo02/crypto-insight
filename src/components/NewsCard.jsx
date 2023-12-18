@@ -38,6 +38,7 @@ export default function NewsCard({
   description,
   author,
   publishedAt,
+  simplified
 }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -60,7 +61,7 @@ export default function NewsCard({
           )}
           <CardContent>
             {title && (
-              <Typography gutterBottom variant="h4" color={colors.grey[100]}>
+              <Typography gutterBottom variant="h4" component={simplified ? "h4" : "h3"} color={colors.grey[100]}>
                 {title}
               </Typography>
             )}

@@ -86,13 +86,13 @@ export default function CryptoDetailsList({ title, subtitle, stats, links }) {
       <Box marginBottom={2}>
         <Typography
           sx={{ fontWeight: "bold" }}
-          variant="h4"
+          variant="h3"
           color={colors.greenAccent[500]}
           mb={1}
         >
           {title}
         </Typography>
-        <Typography variant="h5" color={colors.grey[100]}>
+        <Typography variant="h5" component="h4" color={colors.grey[100]}>
           {subtitle}
         </Typography>
       </Box>

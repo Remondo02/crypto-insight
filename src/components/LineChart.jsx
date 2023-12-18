@@ -94,6 +94,7 @@ export default function LineChart({ coinHistory, currentPrice, coinName }) {
           <Box display="flex" gap={2}>
             <Typography
               variant="h5"
+              component="h4"
               color={colors.grey[100]}
               sx={{ fontWeight: "bold" }}
             >
@@ -101,6 +102,7 @@ export default function LineChart({ coinHistory, currentPrice, coinName }) {
             </Typography>
             <Typography
               variant="h5"
+              component="h4"
               color={colors.grey[100]}
               sx={{ fontWeight: "bold" }}
             >

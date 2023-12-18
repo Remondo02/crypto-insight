@@ -147,7 +147,7 @@ export default function CryptoDetails() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
-          spacing={{ xs: 7, md: 5 }}
+          spacing={{ xs: 7, md: 3 }}
           columns={{ xs: 1, sm: 1, md: 2, lg: 3 }}
         >
           <CryptoDetailsList
