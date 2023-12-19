@@ -41,7 +41,7 @@ export default function ExchangesAccordion({ exchange }) {
         expandIcon={<ExpandMoreIcon />}
         aria-controls={`panel${exchange.id}bh-content`}
         id={`panel${exchange.id}bh-header`}
-        sx={isMobile ? {py: 1} : ''}
+        sx={isMobile ? {py: "9px"} : ''}
       >
         <Box
           display="flex"
