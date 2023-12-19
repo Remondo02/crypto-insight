@@ -11,7 +11,7 @@ import {
 } from "../components"
 
 export default function CryptoNews({ simplified }) {
-  const count = simplified ? 8 : 100
+  const count = simplified ? 9 : 101
   const {
     data: cryptos,
     error: errorCrypto,
