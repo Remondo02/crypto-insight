@@ -32,6 +32,7 @@ export default function Exchanges() {
       </Box>
       <Box
         display="flex"
+        alignItems="center"
         pl={2}
         py={2}
         backgroundColor={colors.greenAccent[500]}
