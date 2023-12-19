@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import moment from "moment"
+import parse from "html-react-parser"
 import {
+  Avatar,
   Box,
   Grid,
   Card,
@@ -11,6 +13,8 @@ import {
   useTheme,
 } from "@mui/material"
 import { tokens } from "../theme.js"
+
+import placeholderImage from "./../../public/assets/images/cryptonews.jpg"
 
 function NewsCardWrapper({ url, children }) {
   return (
@@ -34,11 +38,11 @@ function NewsCardWrapper({ url, children }) {
 export default function NewsCard({
   title,
   url,
-  urlToImage,
+  image,
   description,
-  author,
-  publishedAt,
-  simplified
+  provider,
+  datePublished,
+  simplified,
 }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -51,36 +55,54 @@ export default function NewsCard({
         }}
       >
         <CardActionArea>
-          {urlToImage && (
-            <CardMedia
-              component="img"
-              height="140"
-              image={urlToImage}
-              alt={title ?? ""}
-            />
-          )}
           <CardContent>
-            {title && (
-              <Typography gutterBottom variant="h4" component={simplified ? "h4" : "h3"} color={colors.grey[100]}>
-                {title}
-              </Typography>
-            )}
+            <Box display="flex" justifyContent="space-between" mb={2}>
+              {title && (
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component={simplified ? "h4" : "h3"}
+                  color={colors.grey[100]}
+                  sx={{ marginRight: 1 }}
+                >
+                  {parse(title)}
+                </Typography>
+              )}
+              <CardMedia
+                component="img"
+                sx={{ width: 100, height: 100, borderRadius: 1 }}
+                image={image?.thumbnail?.contentUrl || placeholderImage}
+              />
+            </Box>
             {description && (
               <Typography variant="body1" color="text.secondary">
                 {description.length > 100
-                  ? `${description.substring(0, 100)} ...`
-                  : description}
+                  ? `${parse(description.substring(0, 100))} ...`
+                  : parse(description)}
               </Typography>
             )}
-            <Box mt={2} display="flex" justifyContent="space-between">
-              {author && (
+            <Box
+              mt={2}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box display="flex" alignItems="center" gap={1}>
+                {provider[0]?.image?.thumbnail?.contentUrl && (
+                  <Avatar
+                    alt={provider[0]?.name}
+                    src={provider[0].image.thumbnail.contentUrl}
+                  />
+                )}
+                {provider[0]?.name && (
+                  <Typography variant="body2" color={colors.grey[100]}>
+                    {provider[0].name}
+                  </Typography>
+                )}
+              </Box>
+              {datePublished && (
                 <Typography variant="body2" color={colors.grey[100]}>
-                  {author}
-                </Typography>
-              )}
-              {publishedAt && (
-                <Typography variant="body2" color={colors.grey[100]}>
-                  {moment(publishedAt).startOf("ss").fromNow()}
+                  {moment(datePublished).startOf("ss").fromNow()}
                 </Typography>
               )}
             </Box>

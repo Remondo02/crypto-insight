@@ -31,6 +31,8 @@ export default function CryptoNews({ simplified }) {
     count: count,
   })
 
+  console.log(cryptoNews)
+
   if (isFetchingNews || isFetchingCrypto) {
     return <Loader />
   }
@@ -75,24 +77,24 @@ export default function CryptoNews({ simplified }) {
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
             >
-              {cryptoNews.articles.map(
+              {cryptoNews.value.map(
                 ({
-                  title,
+                  name,
                   url,
-                  urlToImage,
+                  image,
                   description,
-                  author,
-                  publishedAt,
+                  provider,
+                  datePublished,
                 }) => (
                   <NewsCard
                     simplified={simplified}
-                    key={title}
-                    title={title}
+                    key={name}
+                    title={name}
                     url={url}
-                    urlToImage={urlToImage}
+                    image={image}
                     description={description}
-                    author={author}
-                    publishedAt={publishedAt}
+                    provider={provider}
+                    datePublished={datePublished}
                   />
                 )
               )}
