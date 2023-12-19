@@ -96,7 +96,7 @@ export default function NewsCard({
                 )}
                 {provider[0]?.name && (
                   <Typography variant="body2" color={colors.grey[100]}>
-                    {provider[0].name}
+                    {parse(provider[0].name)}
                   </Typography>
                 )}
               </Box>
