@@ -14,7 +14,7 @@ import {
 } from "@mui/material"
 import { tokens } from "../theme.js"
 
-import placeholderImage from "./../../public/assets/images/cryptonews.jpg"
+import placeholderImage from "./../assets/images/cryptonews.jpg"
 
 function NewsCardWrapper({ url, children }) {
   return (
