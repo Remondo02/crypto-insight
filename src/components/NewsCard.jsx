@@ -55,25 +55,23 @@ export default function NewsCard({
         }}
       >
         <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image={image?.contentUrl || placeholderImage}
+          />
           <CardContent>
-            <Box display="flex" justifyContent="space-between" mb={2}>
-              {title && (
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component={simplified ? "h4" : "h3"}
-                  color={colors.grey[100]}
-                  sx={{ marginRight: 1 }}
-                >
-                  {parse(title)}
-                </Typography>
-              )}
-              <CardMedia
-                component="img"
-                sx={{ width: 100, height: 100, borderRadius: 1 }}
-                image={image?.thumbnail?.contentUrl || placeholderImage}
-              />
-            </Box>
+            {title && (
+              <Typography
+                gutterBottom
+                variant="h4"
+                component={simplified ? "h4" : "h3"}
+                color={colors.grey[100]}
+                sx={{ marginRight: 1 }}
+              >
+                {parse(title)}
+              </Typography>
+            )}
             {description && (
               <Typography variant="body1" color="text.secondary">
                 {description.length > 100
