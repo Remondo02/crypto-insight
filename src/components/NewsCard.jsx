@@ -77,7 +77,7 @@ export default function NewsCard({
             {description && (
               <Typography variant="body1" color="text.secondary">
                 {description.length > 100
-                  ? `${parse(description.substring(0, 100))} ...`
+                  ? parse(`${description.substring(0, 100)} ...`)
                   : parse(description)}
               </Typography>
             )}
