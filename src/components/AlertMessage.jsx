@@ -32,10 +32,12 @@ function AlertContent({ type, error, styles }) {
   return (
     <Alert sx={styles} severity={type} variant="filled">
       <AlertTitle>{type}</AlertTitle>
-      {error?.data?.message && error?.data?.message}
-      {error?.data?.error && error?.data?.error}
-      {error?.error && error?.error}
-      {error?.data?.status?.error_message && error?.data?.status?.error_message}
+      {error?.data?.message && error.data.message}
+      {typeof error?.data?.error === "object"
+        ? error?.data?.error?.message
+        : error?.data?.error}
+      {error?.error && error.error}
+      {error?.data?.status?.error_message && error.data.status.error_message}
       {typeof error === "string" && error}
       {error === undefined && "Undefined error"}
     </Alert>

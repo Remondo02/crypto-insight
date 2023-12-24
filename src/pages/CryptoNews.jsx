@@ -11,7 +11,7 @@ import {
 } from "../components"
 
 export default function CryptoNews({ simplified }) {
-  const count = simplified ? 9 : 101
+  const count = simplified ? 9 : 100
   const {
     data: cryptos,
     error: errorCrypto,
@@ -31,8 +31,6 @@ export default function CryptoNews({ simplified }) {
     count: count,
   })
 
-  console.log(cryptoNews)
-
   if (isFetchingNews || isFetchingCrypto) {
     return <Loader />
   }
@@ -51,7 +49,7 @@ export default function CryptoNews({ simplified }) {
   })
 
   return (
-    <Box sx={!simplified ? { margin: 3 } : {}}>
+    <Box sx={!simplified ? { margin: 3 } : ""}>
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
