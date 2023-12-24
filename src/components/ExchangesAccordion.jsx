@@ -41,7 +41,7 @@ export default function ExchangesAccordion({ exchange }) {
         expandIcon={<ExpandMoreIcon />}
         aria-controls={`panel${exchange.id}bh-content`}
         id={`panel${exchange.id}bh-header`}
-        sx={isMobile ? {py: "9px"} : ''}
+        sx={isMobile ? {minHeight: "57px"} : null}
       >
         <Box
           display="flex"
@@ -49,7 +49,7 @@ export default function ExchangesAccordion({ exchange }) {
           width={isMobile ? "100%" : "50%"}
         >
           <Box display="flex" gap={1}>
-            <Typography sx={{ color: "text.secondary" }}>
+            <Typography sx={{ color: colors.grey[100] }}>
               {exchange.trust_score_rank}
             </Typography>
             {exchange.image && (
@@ -62,11 +62,11 @@ export default function ExchangesAccordion({ exchange }) {
                 />
               </Box>
             )}
-            <Typography sx={{ color: "text.secondary" }}>
+            <Typography sx={{ color: colors.grey[100] }}>
               {exchange.name}
             </Typography>
           </Box>
-          <Typography sx={{ color: "text.secondary" }}>
+          <Typography sx={{ color: colors.grey[100] }}>
             {millify(exchange.trade_volume_24h_btc_normalized)}
           </Typography>
         </Box>

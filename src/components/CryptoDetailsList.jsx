@@ -49,7 +49,11 @@ function CryptoDetailsListItem({ data, colors }) {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                sx={{ display: "flex", justifyContent: "space-between" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  color: colors.grey[100],
+                }}
                 primary={obj.name}
               />
             </ListItemButton>
@@ -62,7 +66,11 @@ function CryptoDetailsListItem({ data, colors }) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              sx={{ display: "flex", justifyContent: "space-between" }}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                color: colors.grey[100],
+              }}
               primary={obj.title}
               secondary={
                 <Typography sx={{ color: colors.grey[100] }} fontWeight="bold">

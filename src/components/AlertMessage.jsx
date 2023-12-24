@@ -1,44 +1,44 @@
-import { Box, Alert, AlertTitle, Stack, useTheme } from "@mui/material"
+import { Alert, Box, AlertTitle, Stack, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
+
 // Error, warning, info, success
 export default function AlertMessage({ type = "error", errors }) {
+  // console.log(errors)
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  let style = ""
-
-  type === "info"
-    ? (style = { backgroundColor: colors.greenAccent[500] })
-    : style
+  const styles =
+    type === "info" ? { backgroundColor: colors.greenAccent[500] } : ""
 
   return (
-    <Box m={3}>
+    <Box>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        {typeof errors === "string" ? (
-          <Alert sx={style} severity={type} variant="filled">
-            <AlertTitle>{type}</AlertTitle>
-            {errors}
-          </Alert>
-        ) : Array.isArray(errors) ? (
-          errors.map((error, i) => {
-            return <AlertContent key={i} type={type} errors={error} />
-          })
+        {typeof errors === "object" ? (
+          Array.isArray(errors) ? (
+            errors.map((error, i) => (
+              <AlertContent key={i} type={type} error={error} />
+            ))
+          ) : (
+            <AlertContent type={type} error={errors} />
+          )
         ) : (
-          <AlertContent type={type} errors={errors} />
+          <AlertContent type={type} error={errors} styles={styles} />
         )}
       </Stack>
     </Box>
   )
 }
 
-function AlertContent({ type, errors }) {
+function AlertContent({ type, error, styles }) {
   return (
-    <Alert severity={type} variant="filled">
+    <Alert sx={styles} severity={type} variant="filled">
       <AlertTitle>{type}</AlertTitle>
-      {errors?.data?.message && errors?.data?.message}
-      {errors?.data?.error && errors?.data?.error}
-      {errors?.error && errors?.error}
-      {errors === undefined && "Undefined error"}
+      {error?.data?.message && error?.data?.message}
+      {error?.data?.error && error?.data?.error}
+      {error?.error && error?.error}
+      {error?.data?.status?.error_message && error?.data?.status?.error_message}
+      {typeof error === "string" && error}
+      {error === undefined && "Undefined error"}
     </Alert>
   )
 }

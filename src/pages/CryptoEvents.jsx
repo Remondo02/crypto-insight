@@ -19,10 +19,12 @@ import {
   useGetCryptoEventsCoinsApiQuery,
 } from "../services/cryptoEventsApi.js"
 import { AlertMessage, Header, Loader, SearchSelect } from "../components"
+import { useMediaQuery } from "../hooks/useMediaQuery.js"
 
 export default function CryptoEvents() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+  const isMobile = useMediaQuery()
   const [search, setSearch] = useState("btc-bitcoin")
 
   const {
@@ -50,6 +52,18 @@ export default function CryptoEvents() {
         errors={[cryptoCoinsError, cryptoEventsError]}
       />
     )
+  }
+
+  const calendarStyles = {
+    ".fc-theme-standard .fc-popover": { backgroundColor: colors.primary[400] },
+    ".fc .fc-daygrid-day.fc-day-today": {
+      backgroundColor: colors.greenAccent[500],
+    },
+  }
+
+  const calendarStylesMobile = {
+    ...calendarStyles,
+    ".fc .fc-toolbar": { flexDirection: "column", gap: 1 },
   }
 
   const coins = []
@@ -82,15 +96,15 @@ export default function CryptoEvents() {
           subtitle="List of events related to a specific cryptocurrency"
         />
       </Box>
-      {convertedData && (
-        <Box>
-          <Box mb={3}>
-            <SearchSelect
-              search={search}
-              optionValue={coins}
-              onSearchChange={setSearch}
-            />
-          </Box>
+      <Box>
+        <Box mb={3}>
+          <SearchSelect
+            search={search}
+            optionValue={coins}
+            onSearchChange={setSearch}
+          />
+        </Box>
+        {convertedData.length > 0 ? (
           <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
@@ -99,7 +113,9 @@ export default function CryptoEvents() {
             >
               <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                 <Box backgroundColor={colors.primary[400]} p={2}>
-                  <Typography variant="h5" component="h3">Events</Typography>
+                  <Typography variant="h5" component="h3">
+                    Events
+                  </Typography>
                   <List>
                     {convertedData.map((event) => (
                       <ListItem
@@ -127,7 +143,15 @@ export default function CryptoEvents() {
                   </List>
                 </Box>
               </Grid>
-              <Grid item xs={4} sm={4} md={4} lg={8} xl={12}>
+              <Grid
+                sx={isMobile ? calendarStylesMobile : calendarStyles}
+                item
+                xs={4}
+                sm={4}
+                md={4}
+                lg={8}
+                xl={12}
+              >
                 <FullCalendar
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                   headerToolbar={{
@@ -145,8 +169,10 @@ export default function CryptoEvents() {
               </Grid>
             </Grid>
           </Box>
-        </Box>
-      )}
+        ) : (
+          <AlertMessage type="info" errors={"No event found"} />
+        )}
+      </Box>
     </Box>
   )
 }
