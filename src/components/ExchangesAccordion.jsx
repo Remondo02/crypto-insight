@@ -41,7 +41,7 @@ export default function ExchangesAccordion({ exchange }) {
         expandIcon={<ExpandMoreIcon />}
         aria-controls={`panel${exchange.id}bh-content`}
         id={`panel${exchange.id}bh-header`}
-        sx={isMobile ? {minHeight: "57px"} : null}
+        sx={isMobile ? { minHeight: "57px" } : null}
       >
         <Box
           display="flex"
@@ -93,7 +93,7 @@ export default function ExchangesAccordion({ exchange }) {
               <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
                 <FlagCircleOutlinedIcon />
               </Avatar>
-              <Typography sx={{ color: "text.secondary" }}>
+              <Typography sx={{ color: colors.grey[100] }}>
                 {exchange.country}
               </Typography>
             </Box>
@@ -103,7 +103,7 @@ export default function ExchangesAccordion({ exchange }) {
               <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
                 <EventIcon />
               </Avatar>
-              <Typography sx={{ color: "text.secondary" }}>
+              <Typography sx={{ color: colors.grey[100] }}>
                 {exchange.year_established}
               </Typography>
             </Box>
@@ -117,7 +117,7 @@ export default function ExchangesAccordion({ exchange }) {
                 variant="body1"
                 href={exchange.url}
                 underline="hover"
-                sx={{ color: "text.secondary" }}
+                sx={{ color: colors.grey[100] }}
                 target="_blank"
                 el="noreferrer"
               >
