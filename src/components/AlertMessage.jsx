@@ -3,7 +3,6 @@ import { tokens } from "../theme.js"
 
 // Error, warning, info, success
 export default function AlertMessage({ type = "error", errors }) {
-  // console.log(errors)
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

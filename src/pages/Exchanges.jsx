@@ -2,12 +2,11 @@ import { Box, Typography, useTheme } from "@mui/material"
 import { useGetCryptoExchangesApiQuery } from "../services/cryptoExchangesApi.js"
 import { AlertMessage, ExchangesAccordion, Header, Loader } from "../components"
 import { tokens } from "../theme.js"
-import { useMediaQuery } from "../hooks/useMediaQuery.js"
 
 export default function Exchanges() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const isMobile = useMediaQuery()
+
   const {
     data: cryptoExchanges,
     error,
@@ -31,13 +30,13 @@ export default function Exchanges() {
             alignItems="center"
             minHeight={"57px"}
             px={2}
-            justifyContent={isMobile ? "space-between" : ""}
+            justifyContent={{ xs: "space-between", sm: "unset" }}
             backgroundColor={colors.greenAccent[500]}
           >
-            <Box width={isMobile ? "initial" : "calc(50% - 56px)"}>
+            <Box width={{ xs: "initial", sm: "calc(50% - 56px)" }}>
               <Typography>Exchanges</Typography>
             </Box>
-            <Box width={!isMobile ? "50%" : "initial"}>
+            <Box width={{ xs: "initial", sm: "50%" }}>
               <Typography>24h Trade Volume</Typography>
             </Box>
           </Box>

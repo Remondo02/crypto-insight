@@ -15,12 +15,10 @@ import {
   useTheme,
 } from "@mui/material"
 import { tokens } from "../theme.js"
-import { useMediaQuery } from "../hooks/useMediaQuery.js"
 import { AlertMessage } from "./index.js"
 
 export default function ExchangesAccordion({ exchange }) {
   const theme = useTheme()
-  const isMobile = useMediaQuery()
   const colors = tokens(theme.palette.mode)
 
   const [expanded, setExpanded] = useState(false)
@@ -41,12 +39,12 @@ export default function ExchangesAccordion({ exchange }) {
         expandIcon={<ExpandMoreIcon />}
         aria-controls={`panel${exchange.id}bh-content`}
         id={`panel${exchange.id}bh-header`}
-        sx={isMobile ? { minHeight: "57px" } : null}
+        sx={{ minHeight: "57px" }}
       >
         <Box
           display="flex"
           justifyContent="space-between"
-          width={isMobile ? "100%" : "50%"}
+          sx={{ width: { xs: "100%", sm: "50%" } }}
         >
           <Box display="flex" gap={1}>
             <Typography sx={{ color: colors.grey[100] }}>

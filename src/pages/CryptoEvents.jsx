@@ -8,6 +8,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material"
+import useMediaQuery from "@mui/material/useMediaQuery"
 import { formatDate } from "@fullcalendar/core"
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
@@ -19,12 +20,11 @@ import {
   useGetCryptoEventsCoinsApiQuery,
 } from "../services/cryptoEventsApi.js"
 import { AlertMessage, Header, Loader, SearchSelect } from "../components"
-import { useMediaQuery } from "../hooks/useMediaQuery.js"
 
 export default function CryptoEvents() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const isMobile = useMediaQuery()
+  const isMobile = !useMediaQuery(theme.breakpoints.up("sm"))
   const [search, setSearch] = useState("btc-bitcoin")
 
   const {

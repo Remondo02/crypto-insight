@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom"
 import { CssBaseline, ThemeProvider } from "@mui/material"
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { ColorModeContext, useMode } from "./theme.js"
 import { useCheckNavigation } from "./hooks/useCheckNavigation.js"
-import { useMediaQuery } from "./hooks/useMediaQuery.js"
 import {
   CryptoCurrencies,
   CryptoDetails,
@@ -15,7 +15,7 @@ import { ThemeButton, Topbar, Sidebar } from "./components"
 
 function App() {
   const [theme, colorMode] = useMode()
-  const isMobile = useMediaQuery()
+  const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
   const { page } = useCheckNavigation()
   return (
     <ColorModeContext.Provider value={colorMode}>
