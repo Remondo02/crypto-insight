@@ -30,13 +30,13 @@ export default function Exchanges() {
             alignItems="center"
             minHeight={"57px"}
             px={2}
-            justifyContent={{ xs: "space-between", sm: "unset" }}
+            justifyContent={{ xs: "space-between", md: "unset" }}
             backgroundColor={colors.greenAccent[500]}
           >
-            <Box width={{ xs: "initial", sm: "calc(50% - 56px)" }}>
+            <Box width={{ xs: "initial", md: "calc(50% - 56px)" }}>
               <Typography>Exchanges</Typography>
             </Box>
-            <Box width={{ xs: "initial", sm: "50%" }}>
+            <Box width={{ xs: "initial", md: "50%" }}>
               <Typography>24h Trade Volume</Typography>
             </Box>
           </Box>

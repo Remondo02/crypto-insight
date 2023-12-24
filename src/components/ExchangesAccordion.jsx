@@ -44,7 +44,7 @@ export default function ExchangesAccordion({ exchange }) {
         <Box
           display="flex"
           justifyContent="space-between"
-          sx={{ width: { xs: "100%", sm: "50%" } }}
+          sx={{ width: { xs: "100%", md: "50%" } }}
         >
           <Box display="flex" gap={1}>
             <Typography sx={{ color: colors.grey[100] }}>
