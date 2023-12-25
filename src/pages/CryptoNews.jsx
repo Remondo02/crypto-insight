@@ -49,7 +49,7 @@ export default function CryptoNews({ simplified }) {
   })
 
   return (
-    <Box sx={!simplified ? { margin: 3 } : ""}>
+    <Box sx={!simplified ? { margin: 3 } : {}}>
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header

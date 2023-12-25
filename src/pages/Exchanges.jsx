@@ -10,18 +10,18 @@ export default function Exchanges() {
   const {
     data: cryptoExchanges,
     error,
-    isFetching,
+    isLoading,
   } = useGetCryptoExchangesApiQuery()
 
   return (
-    <Box m={3}>
+    <Box m={3} height="inherit">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="EXCHANGES"
           subtitle="List of top 100 exchanges plateformes"
         />
       </Box>
-      {isFetching && <Loader />}
+      {isLoading && <Loader />}
       {error && <AlertMessage type="error" errors={error} />}
       {cryptoExchanges && (
         <>
