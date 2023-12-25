@@ -23,43 +23,37 @@ export default function Dashboard() {
 
   const styles = { color: colors.grey[100], fontSize: 26 }
 
-  if (isLoading || isFetching) {
-    return <Loader />
-  }
-
-  if (error) {
-    return <AlertMessage type="error" errors={error} />
-  }
-
   const globalStats = data?.data?.stats
 
-  const stats = [
-    {
-      title: "Total Cryptocurrencies",
-      value: globalStats?.total,
-      icon: <CurrencyBitcoinIcon style={styles} />,
-    },
-    {
-      title: "Total Exchanges",
-      value: millify(globalStats?.totalExchanges),
-      icon: <CurrencyExchangeOutlinedIcon style={styles} />,
-    },
-    {
-      title: "Total Market Cap",
-      value: millify(globalStats?.totalMarketCap),
-      icon: <QueryStatsOutlinedIcon style={styles} />,
-    },
-    {
-      title: "Total 24h Volume",
-      value: millify(globalStats?.total24hVolume),
-      icon: <UpdateOutlinedIcon style={styles} />,
-    },
-    {
-      title: "Total Markets",
-      value: millify(globalStats?.totalMarkets),
-      icon: <PaidOutlinedIcon style={styles} />,
-    },
-  ]
+  function stats({ globalStats }) {
+    return [
+      {
+        title: "Total Cryptocurrencies",
+        value: globalStats?.total,
+        icon: <CurrencyBitcoinIcon style={styles} />,
+      },
+      {
+        title: "Total Exchanges",
+        value: millify(globalStats?.totalExchanges),
+        icon: <CurrencyExchangeOutlinedIcon style={styles} />,
+      },
+      {
+        title: "Total Market Cap",
+        value: millify(globalStats?.totalMarketCap),
+        icon: <QueryStatsOutlinedIcon style={styles} />,
+      },
+      {
+        title: "Total 24h Volume",
+        value: millify(globalStats?.total24hVolume),
+        icon: <UpdateOutlinedIcon style={styles} />,
+      },
+      {
+        title: "Total Markets",
+        value: millify(globalStats?.totalMarkets),
+        icon: <PaidOutlinedIcon style={styles} />,
+      },
+    ]
+  }
 
   return (
     <Box m={3}>
@@ -69,13 +63,15 @@ export default function Dashboard() {
       />
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
+        {error && <AlertMessage type="error" errors={error} />}
+        {isFetching && <Loader />}
         {globalStats && (
           <Box
             display="grid"
             gridTemplateColumns="repeat(auto-fit, minmax(330px, 1fr));"
             gap={3}
           >
-            {stats.map(({ title, value, icon }) => (
+            {stats({ globalStats }).map(({ title, value, icon }) => (
               <GlobalStatCard
                 key={title}
                 title={title}
