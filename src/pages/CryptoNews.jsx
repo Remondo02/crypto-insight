@@ -55,7 +55,7 @@ export default function CryptoNews({ simplified }) {
         (errorNews && (
           <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
         ))}
-      {isLoadingCrypto || isLoadingNews ? (
+      {isLoadingCrypto ? (
         <Loader />
       ) : (
         <Box height={isFetchingNews ? {...styles} : {}}>
