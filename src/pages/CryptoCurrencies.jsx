@@ -38,7 +38,7 @@ export default function CryptoCurrencies({ simplified }) {
       {isFetching ? (
         <Loader />
       ) : (
-        visibleItems && (
+        visibleItems.length > 0 && (
           <>
             {!simplified && (
               <Search search={search} onSearchChange={setSearch} />
