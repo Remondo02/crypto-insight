@@ -24,7 +24,7 @@ import { AlertMessage, Header, Loader, SearchSelect } from "../components"
 export default function CryptoEvents() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const isMobile = !useMediaQuery(theme.breakpoints.up("sm"))
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
   const [search, setSearch] = useState("btc-bitcoin")
 
   const {

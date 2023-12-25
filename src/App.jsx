@@ -15,7 +15,7 @@ import { ThemeButton, Topbar, Sidebar } from "./components"
 
 function App() {
   const [theme, colorMode] = useMode()
-  const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { page } = useCheckNavigation()
   return (
     <ColorModeContext.Provider value={colorMode}>
