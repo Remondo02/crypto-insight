@@ -11,15 +11,16 @@ import {
 } from "../components"
 
 export default function CryptoNews({ simplified }) {
-  const count = simplified ? 9 : 100
+  const count = simplified ? 8 : 100
   const {
     data: cryptos,
     error: errorCrypto,
     isLoading: isLoadingCrypto,
-    isFetching: isFetchingCrypto,
   } = useGetCryptoApiQuery(100)
 
   const [search, setSearch] = useState("Cryptocurrency")
+
+  const styles = { height: "inherit" }
 
   const {
     data: cryptoNews,
@@ -31,15 +32,7 @@ export default function CryptoNews({ simplified }) {
     count: count,
   })
 
-  if (isFetchingNews || isFetchingCrypto) {
-    return <Loader />
-  }
-
-  if (errorNews || errorCrypto) {
-    return <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
-  }
-
-  const coins = cryptos?.data?.coins
+  const coins = cryptos?.data?.coins || []
 
   const coinsWithInitialValue = JSON.parse(JSON.stringify(coins))
   coinsWithInitialValue.unshift({
@@ -49,7 +42,7 @@ export default function CryptoNews({ simplified }) {
   })
 
   return (
-    <Box sx={!simplified ? { margin: 3 } : {}}>
+    <Box sx={!simplified ? { margin: 3, ...styles } : {...styles}}>
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
@@ -58,8 +51,14 @@ export default function CryptoNews({ simplified }) {
           />
         </Box>
       )}
-      {cryptoNews && (
-        <Box>
+      {errorCrypto ||
+        (errorNews && (
+          <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
+        ))}
+      {isLoadingCrypto || isLoadingNews ? (
+        <Loader />
+      ) : (
+        <Box height={isFetchingNews ? {...styles} : {}}>
           {!simplified && (
             <Box mb={3}>
               <SearchSelect
@@ -69,35 +68,41 @@ export default function CryptoNews({ simplified }) {
               />
             </Box>
           )}
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
-            >
-              {cryptoNews.value.map(
-                ({
-                  name,
-                  url,
-                  image,
-                  description,
-                  provider,
-                  datePublished,
-                }) => (
-                  <NewsCard
-                    simplified={simplified}
-                    key={name}
-                    title={name}
-                    url={url}
-                    image={image}
-                    description={description}
-                    provider={provider}
-                    datePublished={datePublished}
-                  />
-                )
-              )}
-            </Grid>
-          </Box>
+          {isFetchingNews ? (
+            <Loader />
+          ) : (
+            cryptoNews && (
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid
+                  container
+                  spacing={{ xs: 2, md: 3 }}
+                  columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
+                >
+                  {cryptoNews.value.map(
+                    ({
+                      name,
+                      url,
+                      image,
+                      description,
+                      provider,
+                      datePublished,
+                    }) => (
+                      <NewsCard
+                        simplified={simplified}
+                        key={name}
+                        title={name}
+                        url={url}
+                        image={image}
+                        description={description}
+                        provider={provider}
+                        datePublished={datePublished}
+                      />
+                    )
+                  )}
+                </Grid>
+              </Box>
+            )
+          )}
         </Box>
       )}
     </Box>
