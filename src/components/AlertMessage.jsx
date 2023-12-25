@@ -33,9 +33,15 @@ function AlertContent({ type, error, styles }) {
     <Alert sx={styles} severity={type} variant="filled">
       <AlertTitle>{type}</AlertTitle>
       {error?.data?.message && error.data.message}
-      {typeof error?.data?.error === "object"
-        ? error?.data?.error?.message
-        : error?.data?.error}
+      {typeof error?.data?.error === "object" && (
+        <>
+          {error?.data?.error?.message
+            ? error?.data?.error?.message
+            : error?.data?.error}
+          {error?.data?.message ? error?.data?.message : null}
+        </>
+      )}
+
       {error?.error && error.error}
       {error?.data?.status?.error_message && error.data.status.error_message}
       {typeof error === "string" && error}

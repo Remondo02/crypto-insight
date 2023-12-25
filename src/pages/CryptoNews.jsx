@@ -25,7 +25,6 @@ export default function CryptoNews({ simplified }) {
   const {
     data: cryptoNews,
     error: errorNews,
-    isLoading: isLoadingNews,
     isFetching: isFetchingNews,
   } = useGetCryptoNewsApiQuery({
     newsCategory: search,
@@ -42,7 +41,7 @@ export default function CryptoNews({ simplified }) {
   })
 
   return (
-    <Box sx={!simplified ? { margin: 3, ...styles } : {...styles}}>
+    <Box sx={!simplified ? { margin: 3, ...styles } : { ...styles }}>
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
@@ -51,27 +50,24 @@ export default function CryptoNews({ simplified }) {
           />
         </Box>
       )}
-      {errorCrypto ||
-        (errorNews && (
-          <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
-        ))}
+      {errorNews && <AlertMessage type="error" errors={errorNews} />}
       {isLoadingCrypto ? (
         <Loader />
       ) : (
-        <Box height={isFetchingNews ? {...styles} : {}}>
-          {!simplified && (
-            <Box mb={3}>
-              <SearchSelect
-                search={search}
-                optionValue={coinsWithInitialValue}
-                onSearchChange={setSearch}
-              />
-            </Box>
-          )}
-          {isFetchingNews ? (
-            <Loader />
-          ) : (
-            cryptoNews && (
+        cryptoNews && (
+          <Box height={isFetchingNews ? { ...styles } : {}}>
+            {!simplified && (
+              <Box mb={3}>
+                <SearchSelect
+                  search={search}
+                  optionValue={coinsWithInitialValue}
+                  onSearchChange={setSearch}
+                />
+              </Box>
+            )}
+            {isFetchingNews ? (
+              <Loader />
+            ) : (
               <Box sx={{ flexGrow: 1 }}>
                 <Grid
                   container
@@ -101,9 +97,9 @@ export default function CryptoNews({ simplified }) {
                   )}
                 </Grid>
               </Box>
-            )
-          )}
-        </Box>
+            )}
+          </Box>
+        )
       )}
     </Box>
   )

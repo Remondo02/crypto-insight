@@ -19,7 +19,7 @@ import {
 export default function Dashboard() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const { data, error, isLoading, isFetching } = useGetCryptoApiQuery(1)
+  const { data, error, isFetching } = useGetCryptoApiQuery(1)
 
   const styles = { color: colors.grey[100], fontSize: 26 }
 
