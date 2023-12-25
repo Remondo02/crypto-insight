@@ -6,7 +6,7 @@ export default function GlobalStatCard({ title, value, icon }) {
   const colors = tokens(theme.palette.mode)
 
   return (
-    <Box backgroundColor={colors.primary[400]} padding={2}>
+    <Box backgroundColor={colors.primary[400]} padding={2} borderRadius={1}>
       {icon && (
         <Box display="flex" justifyContent="flex-start" mb={1}>
           {icon}

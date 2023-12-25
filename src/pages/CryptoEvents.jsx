@@ -99,6 +99,7 @@ export default function CryptoEvents() {
       <Box>
         <Box mb={3}>
           <SearchSelect
+            inputLabel="Select a Crypto"
             search={search}
             optionValue={coins}
             onSearchChange={setSearch}

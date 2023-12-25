@@ -60,6 +60,7 @@ export default function CryptoNews({ simplified }) {
             {!simplified && (
               <Box mb={3}>
                 <SearchSelect
+                  inputLabel="Select a Crypto"
                   search={search}
                   optionValue={coinsWithInitialValue}
                   onSearchChange={setSearch}
