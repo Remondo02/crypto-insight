@@ -10,7 +10,7 @@ export default function Exchanges() {
   const {
     data: cryptoExchanges,
     error,
-    isLoading,
+    isFetching,
   } = useGetCryptoExchangesApiQuery()
 
   return (
@@ -21,29 +21,32 @@ export default function Exchanges() {
           subtitle="List of top 100 exchanges plateformes"
         />
       </Box>
-      {isLoading && <Loader />}
       {error && <AlertMessage type="error" errors={error} />}
-      {cryptoExchanges && (
-        <>
-          <Box
-            display="flex"
-            alignItems="center"
-            minHeight={"57px"}
-            px={2}
-            justifyContent={{ xs: "space-between", md: "unset" }}
-            backgroundColor={colors.greenAccent[500]}
-          >
-            <Box width={{ xs: "initial", md: "calc(50% - 56px)" }}>
-              <Typography>Exchanges</Typography>
+      {isFetching ? (
+        <Loader />
+      ) : (
+        cryptoExchanges && (
+          <>
+            <Box
+              display="flex"
+              alignItems="center"
+              minHeight={"57px"}
+              px={2}
+              justifyContent={{ xs: "space-between", md: "unset" }}
+              backgroundColor={colors.greenAccent[500]}
+            >
+              <Box width={{ xs: "initial", md: "calc(50% - 56px)" }}>
+                <Typography>Exchanges</Typography>
+              </Box>
+              <Box width={{ xs: "initial", md: "50%" }}>
+                <Typography>24h Trade Volume</Typography>
+              </Box>
             </Box>
-            <Box width={{ xs: "initial", md: "50%" }}>
-              <Typography>24h Trade Volume</Typography>
-            </Box>
-          </Box>
-          {cryptoExchanges.map((exchange) => (
-            <ExchangesAccordion key={exchange.id} exchange={exchange} />
-          ))}
-        </>
+            {cryptoExchanges.map((exchange) => (
+              <ExchangesAccordion key={exchange.id} exchange={exchange} />
+            ))}
+          </>
+        )
       )}
     </Box>
   )
