@@ -25,7 +25,8 @@ export default function CryptoNews({ simplified }) {
   const {
     data: cryptoNews,
     error: errorNews,
-    isFetching: isFetchingNews,
+    isLoading: isLoadingNews,
+    isFetching: isFetchingNews
   } = useGetCryptoNewsApiQuery({
     newsCategory: search,
     count: count,
@@ -51,7 +52,7 @@ export default function CryptoNews({ simplified }) {
         </Box>
       )}
       {errorNews && <AlertMessage type="error" errors={errorNews} />}
-      {isLoadingCrypto ? (
+      {isLoadingCrypto || isLoadingNews ? (
         <Loader />
       ) : (
         cryptoNews && (
