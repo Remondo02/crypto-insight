@@ -5,11 +5,7 @@ import { AlertMessage, Header, Loader, CryptoCard, Search } from "../components"
 
 export default function CryptoCurrencies({ simplified }) {
   const count = simplified ? 12 : 100
-  const {
-    data: cryptosList,
-    error,
-    isFetching,
-  } = useGetCryptoApiQuery(count)
+  const { data: cryptosList, error, isFetching } = useGetCryptoApiQuery(count)
 
   const [search, setSearch] = useState("")
 
@@ -35,27 +31,22 @@ export default function CryptoCurrencies({ simplified }) {
         </Box>
       )}
       {error && <AlertMessage type="error" errors={error} />}
-      {isFetching ? (
-        <Loader />
-      ) : (
-        visibleItems.length > 0 && (
-          <>
-            {!simplified && (
-              <Search search={search} onSearchChange={setSearch} />
-            )}
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
-              >
-                {visibleItems.map((currency, i) => (
-                  <CryptoCard key={i} currency={currency} />
-                ))}
-              </Grid>
-            </Box>
-          </>
-        )
+      {isFetching && <Loader />}
+      {visibleItems.length > 0 && (
+        <>
+          {!simplified && <Search search={search} onSearchChange={setSearch} />}
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
+            >
+              {visibleItems.map((currency, i) => (
+                <CryptoCard key={i} currency={currency} />
+              ))}
+            </Grid>
+          </Box>
+        </>
       )}
     </Box>
   )
