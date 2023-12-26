@@ -16,42 +16,44 @@ import {
   SectionHeader,
 } from "../components"
 
-function stats({ globalStats }) {
+export default function Dashboard() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const styles = { color: colors.grey[100], fontSize: 26 }
-  return [
-    {
-      title: "Total Cryptocurrencies",
-      value: globalStats?.total,
-      icon: <CurrencyBitcoinIcon style={styles} />,
-    },
-    {
-      title: "Total Exchanges",
-      value: millify(globalStats?.totalExchanges),
-      icon: <CurrencyExchangeOutlinedIcon style={styles} />,
-    },
-    {
-      title: "Total Market Cap",
-      value: millify(globalStats?.totalMarketCap),
-      icon: <QueryStatsOutlinedIcon style={styles} />,
-    },
-    {
-      title: "Total 24h Volume",
-      value: millify(globalStats?.total24hVolume),
-      icon: <UpdateOutlinedIcon style={styles} />,
-    },
-    {
-      title: "Total Markets",
-      value: millify(globalStats?.totalMarkets),
-      icon: <PaidOutlinedIcon style={styles} />,
-    },
-  ]
-}
-
-export default function Dashboard() {
   const { data, error, isFetching } = useGetCryptoApiQuery(1)
+
+  const styles = { color: colors.grey[100], fontSize: 26 }
+
   const globalStats = data?.data?.stats
+
+  function stats({ globalStats }) {
+    return [
+      {
+        title: "Total Cryptocurrencies",
+        value: globalStats?.total,
+        icon: <CurrencyBitcoinIcon style={styles} />,
+      },
+      {
+        title: "Total Exchanges",
+        value: millify(globalStats?.totalExchanges),
+        icon: <CurrencyExchangeOutlinedIcon style={styles} />,
+      },
+      {
+        title: "Total Market Cap",
+        value: millify(globalStats?.totalMarketCap),
+        icon: <QueryStatsOutlinedIcon style={styles} />,
+      },
+      {
+        title: "Total 24h Volume",
+        value: millify(globalStats?.total24hVolume),
+        icon: <UpdateOutlinedIcon style={styles} />,
+      },
+      {
+        title: "Total Markets",
+        value: millify(globalStats?.totalMarkets),
+        icon: <PaidOutlinedIcon style={styles} />,
+      },
+    ]
+  }
 
   return (
     <Box m={3}>
