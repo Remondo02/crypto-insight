@@ -39,14 +39,12 @@ main {
 
 .content {
   margin-inline: auto;
-  /* margin: 24px 24px 56px; */
   max-width: 1400px;
   height: calc(100% - (68.5667px + 80px));
 }
 
 @media (max-width: 599px) {
   .content {
-    /* margin: 0px 24px 56px; */
     height: calc(100% - 68.5667px);
   }
 }
