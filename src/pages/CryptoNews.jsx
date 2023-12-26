@@ -51,7 +51,7 @@ export default function CryptoNews({ simplified }) {
           />
         </Box>
       )}
-      {errorNews && <AlertMessage type="error" errors={errorNews} />}
+      {errorNews || errorCrypto && <AlertMessage type="error" errors={[errorNews, errorCrypto]} />}
       {isLoadingCrypto || isLoadingNews ? (
         <Loader />
       ) : (
