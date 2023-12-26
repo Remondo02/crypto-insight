@@ -40,7 +40,7 @@ export default function CryptoNews({ simplified }) {
   })
 
   return (
-    <Box height="inherit">
+    <Box marginInline={simplified ? "" : 3} marginBottom={7} height="inherit">
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
