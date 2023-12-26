@@ -120,7 +120,7 @@ export default function CryptoDetails() {
   return (
     <Box
       marginInline={3}
-      marginBottom={7}
+      paddingBottom={7}
       height={isLoading ? "inherit" : ""}
     >
       {error && <AlertMessage type="error" errors={error} />}
