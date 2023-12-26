@@ -49,7 +49,7 @@ function converted({ cryptoEvents }) {
     })
   }
 
-  return convertedData
+  return convertedData.reverse()
 }
 
 export default function CryptoEvents() {
