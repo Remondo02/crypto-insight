@@ -118,7 +118,7 @@ export default function CryptoDetails() {
   const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"]
 
   return (
-    <Box m={3}>
+    <Box height="inherit">
       {error && <AlertMessage type="error" errors={error} />}
       {isLoading ? (
         <Loader />

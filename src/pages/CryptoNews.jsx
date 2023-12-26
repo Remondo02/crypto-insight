@@ -20,8 +20,6 @@ export default function CryptoNews({ simplified }) {
 
   const [search, setSearch] = useState("Cryptocurrency")
 
-  const styles = { height: "inherit" }
-
   const {
     data: cryptoNews,
     error: errorNews,
@@ -42,7 +40,7 @@ export default function CryptoNews({ simplified }) {
   })
 
   return (
-    <Box sx={!simplified ? { margin: 3, ...styles } : { ...styles }}>
+    <Box height="inherit">
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
@@ -51,12 +49,15 @@ export default function CryptoNews({ simplified }) {
           />
         </Box>
       )}
-      {errorNews || errorCrypto && <AlertMessage type="error" errors={[errorNews, errorCrypto]} />}
+      {errorNews ||
+        (errorCrypto && (
+          <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
+        ))}
       {isLoadingCrypto || isLoadingNews ? (
         <Loader />
       ) : (
         cryptoNews && (
-          <Box height={isFetchingNews ? { ...styles } : {}}>
+          <Box height={isFetchingNews ? "inherit" : ""}>
             {!simplified && (
               <Box mb={3}>
                 <SearchSelect

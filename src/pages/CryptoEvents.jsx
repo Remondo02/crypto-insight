@@ -86,7 +86,7 @@ export default function CryptoEvents() {
   }
 
   return (
-    <Box m={3} height="inherit">
+    <Box height="inherit">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="CRYPTO EVENTS"
