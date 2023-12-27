@@ -90,7 +90,7 @@ export default function Dashboard() {
         />
         <CryptoCurrencies simplified />
       </Box>
-      <Box mb={7}>
+      <Box>
         <SectionHeader
           title="Latest Crypto News"
           to="/news"
