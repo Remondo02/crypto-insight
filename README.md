@@ -43,7 +43,6 @@ $PROJECT_ROOT
     ├── pages
     │   # Redux API management
     └── services
-       # Reusable functions across the proj
 ```
 
 ## Potential improvements
