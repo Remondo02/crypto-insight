@@ -14,7 +14,7 @@ export default function Exchanges() {
   } = useGetCryptoExchangesApiQuery()
 
   return (
-    <Box marginInline={3} paddingBottom={7} height="inherit">
+    <Box height="inherit">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="EXCHANGES"

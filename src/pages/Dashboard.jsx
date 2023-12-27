@@ -56,7 +56,7 @@ export default function Dashboard() {
   }
 
   return (
-    <Box marginInline={3} paddingBottom={7}>
+    <Box>
       <Header
         title="DASHBOARD"
         subtitle="Get general informations about cryptocurrencies"

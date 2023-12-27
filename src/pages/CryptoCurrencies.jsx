@@ -19,7 +19,7 @@ export default function CryptoCurrencies({ simplified }) {
   })
 
   return (
-    <Box marginInline={simplified ? "" : 3} paddingBottom={7} height="inherit">
+    <Box height="inherit">
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
