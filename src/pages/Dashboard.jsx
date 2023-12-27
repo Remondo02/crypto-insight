@@ -84,7 +84,7 @@ export default function Dashboard() {
       </Box>
       <Box mb={7}>
         <SectionHeader
-          title="Top 10 Cryptocurrencies in the world"
+          title="Top 12 Cryptocurrencies in the world"
           to="/cryptocurrencies"
           buttonLabel="Show More"
         />
