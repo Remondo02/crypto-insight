@@ -21,6 +21,8 @@ The app features a Dashboard page that shows global statistics, the top 12 curre
 - [Material UI](https://mui.com) - A library of customizable and themable React components that implement Google's Material Design. It offers a suite of 40+ building block components, a custom theme system, and a collection of design kits for different use cases.
 - [FullCalendar](https://fullcalendar.io) - FullCalendar provides a highly performant React component that accepts JSX for rendering nested content.
 - [Chart.js](https://www.chartjs.org) - A Simple yet flexible JavaScript charting library for the modern web. of Chart.js brand colors is available as a built-in time-saving zero-configuration plugin. JavaScript bundle size can be reduced by dozens of kilobytes by registering only. Layout boxes can be stacked and weighted in groups.
+- [Rapid](https://rapidapi.com) - Use Rapid API Hub to Find, Connect, & Share 1000s of APIs using our Multi-cloud platform. Improve Developer Experience with API Design, Testing, Monitoring, & More!
+- [Bing News Search API | Microsoft Bing](https://www.microsoft.com/en-us/bing/apis/bing-news-search-api) - Search the web for news articles with Bing News Search API v7. Results include details like authoritative image of the news article, related news and categories, provider info, article URL, and date added. With the API v7, discover new sorting and filtering options that simplify finding specific results in trending news topics.
 
 
 ## Project structure
