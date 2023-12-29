@@ -21,6 +21,12 @@ export default function Dashboard() {
   const colors = tokens(theme.palette.mode)
   const { data, error, isFetching } = useGetCryptoApiQuery(1)
 
+  let errors = []
+
+  if (error) {
+    errors = [...errors, error]
+  }
+
   const styles = { color: colors.grey[100], fontSize: 26 }
 
   const globalStats = data?.data?.stats
@@ -63,8 +69,13 @@ export default function Dashboard() {
       />
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
-        {error && <AlertMessage type="error" errors={error} />}
         {isFetching && <Loader />}
+        <Box display="flex" flexDirection="column" gap={2}>
+          {errors.length > 0 &&
+            errors.map((error, i) => (
+              <AlertMessage key={i} type="error" error={error} />
+            ))}
+        </Box>
         {globalStats && (
           <Box
             display="grid"

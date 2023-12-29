@@ -21,13 +21,12 @@ import {
 } from "../services/cryptoEventsApi.js"
 import { AlertMessage, Header, Loader, SearchSelect } from "../components"
 
-function coins({ cryptoCoins }) {
+function getCoins({ cryptoCoins }) {
   const coins = []
 
   for (let i = 0; i < 100; i++) {
-    coins.push({ id: cryptoCoins[i].id, name: cryptoCoins[i].name })
+    coins.push({ id: cryptoCoins[i]?.id, name: cryptoCoins[i]?.name })
   }
-
   return coins
 }
 
@@ -73,6 +72,15 @@ export default function CryptoEvents() {
     coinId: search,
   })
 
+  let errors = []
+
+  if (cryptoCoinsError) {
+    errors = [...errors, cryptoCoinsError]
+  }
+  if (cryptoEventsError) {
+    errors = [...errors, cryptoEventsError]
+  }
+
   const calendarStyles = {
     ".fc-theme-standard .fc-popover": { backgroundColor: colors.primary[400] },
     ".fc .fc-daygrid-day.fc-day-today": {
@@ -93,106 +101,102 @@ export default function CryptoEvents() {
           subtitle="List of events related to a specific cryptocurrency"
         />
       </Box>
-      {cryptoCoinsError ||
-        (cryptoEventsError && (
-          <AlertMessage
-            type="error"
-            errors={[cryptoCoinsError, cryptoEventsError]}
-          />
-        ))}
-      {isLoadingCoins || isLoadingEvents ? (
-        <Loader />
-      ) : (
-        cryptoEvents && (
-          <Box height={isFetchingEvents ? "inherit" : ""}>
-            <Box mb={3}>
-              <SearchSelect
-                inputLabel="Select a Crypto"
-                search={search}
-                optionValue={coins({ cryptoCoins })}
-                onSearchChange={setSearch}
-              />
-            </Box>
-            {isFetchingEvents ? (
-              <Loader />
-            ) : (
-              <>
-                {converted({ cryptoEvents }).length > 0 ? (
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Grid
-                      container
-                      spacing={{ xs: 7, md: 3 }}
-                      columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
-                    >
-                      <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                        <Box backgroundColor={colors.primary[400]} p={2}>
-                          <Typography variant="h5" component="h3">
-                            Events
-                          </Typography>
-                          <List>
-                            {converted({ cryptoEvents }).map((event) => (
-                              <ListItem
-                                key={event.id}
-                                sx={{
-                                  backgroundColor: colors.greenAccent[500],
-                                  margin: "10px 0",
-                                  borderRadius: "2px",
-                                }}
-                              >
-                                <ListItemText
-                                  primary={event.title}
-                                  secondary={
-                                    <Typography variant="body2">
-                                      {formatDate(event.start, {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                      })}
-                                    </Typography>
-                                  }
-                                ></ListItemText>
-                              </ListItem>
-                            ))}
-                          </List>
-                        </Box>
-                      </Grid>
-                      <Grid
-                        sx={isMobile ? calendarStylesMobile : calendarStyles}
-                        item
-                        xs={4}
-                        sm={4}
-                        md={4}
-                        lg={8}
-                        xl={12}
-                      >
-                        <FullCalendar
-                          plugins={[
-                            dayGridPlugin,
-                            timeGridPlugin,
-                            interactionPlugin,
-                          ]}
-                          headerToolbar={{
-                            left: "prev,next,today",
-                            center: "title",
-                            right: "dayGridMonth,timeGridWeek,timeGridDay",
-                          }}
-                          initialView="dayGridMonth"
-                          editable={false}
-                          selectable={true}
-                          selectMirror={true}
-                          dayMaxEvents={true}
-                          events={converted({ cryptoEvents })}
-                        />
-                      </Grid>
-                    </Grid>
-                  </Box>
-                ) : (
-                  <AlertMessage type="info" errors={"No event found"} />
-                )}
-              </>
-            )}
+      {(isLoadingCoins || isLoadingEvents) && <Loader />}
+      <Box display="flex" flexDirection="column" gap={2}>
+        {errors.length > 0 &&
+          errors.map((error, i) => (
+            <AlertMessage key={i} type="error" error={error} />
+          ))}
+      </Box>
+      {(cryptoCoins && cryptoEvents) && (
+        <Box height={isFetchingEvents ? "inherit" : ""}>
+          <Box mb={3}>
+            <SearchSelect
+              inputLabel="Select a Crypto"
+              search={search}
+              optionValue={getCoins({ cryptoCoins })}
+              onSearchChange={setSearch}
+            />
           </Box>
-        )
+          {isFetchingEvents ? (
+            <Loader />
+          ) : (
+            <>
+              {converted({ cryptoEvents }).length > 0 ? (
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid
+                    container
+                    spacing={{ xs: 7, md: 3 }}
+                    columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
+                  >
+                    <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                      <Box backgroundColor={colors.primary[400]} p={2}>
+                        <Typography variant="h5" component="h3">
+                          Events
+                        </Typography>
+                        <List>
+                          {converted({ cryptoEvents }).map((event) => (
+                            <ListItem
+                              key={event.id}
+                              sx={{
+                                backgroundColor: colors.greenAccent[500],
+                                margin: "10px 0",
+                                borderRadius: "2px",
+                              }}
+                            >
+                              <ListItemText
+                                primary={event.title}
+                                secondary={
+                                  <Typography variant="body2">
+                                    {formatDate(event.start, {
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    })}
+                                  </Typography>
+                                }
+                              ></ListItemText>
+                            </ListItem>
+                          ))}
+                        </List>
+                      </Box>
+                    </Grid>
+                    <Grid
+                      sx={isMobile ? calendarStylesMobile : calendarStyles}
+                      item
+                      xs={4}
+                      sm={4}
+                      md={4}
+                      lg={8}
+                      xl={12}
+                    >
+                      <FullCalendar
+                        plugins={[
+                          dayGridPlugin,
+                          timeGridPlugin,
+                          interactionPlugin,
+                        ]}
+                        headerToolbar={{
+                          left: "prev,next,today",
+                          center: "title",
+                          right: "dayGridMonth,timeGridWeek,timeGridDay",
+                        }}
+                        initialView="dayGridMonth"
+                        editable={false}
+                        selectable={true}
+                        selectMirror={true}
+                        dayMaxEvents={true}
+                        events={converted({ cryptoEvents })}
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
+              ) : (
+                <AlertMessage type="info" error={"No event found"} />
+              )}
+            </>
+          )}
+        </Box>
       )}
     </Box>
   )

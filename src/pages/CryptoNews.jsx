@@ -30,6 +30,15 @@ export default function CryptoNews({ simplified }) {
     count: count,
   })
 
+  let errors = []
+
+  if (errorCrypto) {
+    errors = [...errors, errorCrypto]
+  }
+  if (errorNews) {
+    errors = [...errors, errorNews]
+  }
+
   const coins = cryptos?.data?.coins || []
 
   const coinsWithInitialValue = JSON.parse(JSON.stringify(coins))
@@ -49,10 +58,12 @@ export default function CryptoNews({ simplified }) {
           />
         </Box>
       )}
-      {errorNews ||
-        (errorCrypto && (
-          <AlertMessage type="error" errors={[errorNews, errorCrypto]} />
-        ))}
+      <Box display="flex" flexDirection="column" gap={2}>
+        {errors.length > 0 &&
+          errors.map((error, i) => (
+            <AlertMessage key={i} type="error" error={error} />
+          ))}
+      </Box>
       {isLoadingCrypto || isLoadingNews ? (
         <Loader />
       ) : (
