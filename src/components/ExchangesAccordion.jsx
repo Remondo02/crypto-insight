@@ -76,7 +76,7 @@ export default function ExchangesAccordion({ exchange }) {
           ) : (
             <AlertMessage
               type="info"
-              errors={`No description available from the API. Please visite ${exchange.name} website for more informations.`}
+              error={`No description available from the API. Please visite ${exchange.name} website for more informations.`}
             />
           )}
         </Box>
