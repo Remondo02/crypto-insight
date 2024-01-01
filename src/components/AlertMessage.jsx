@@ -7,7 +7,7 @@ export default function AlertMessage({ type = "error", error }) {
   const colors = tokens(theme.palette.mode)
 
   const styles =
-    type === "info" ? { backgroundColor: colors.greenAccent[500] } : ""
+    type === "info" ? { backgroundColor: colors.greenAccent[500] } : {}
 
   function errorMessage(error) {
     if (error?.data?.message) {
