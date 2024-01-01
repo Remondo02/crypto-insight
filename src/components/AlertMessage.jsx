@@ -9,7 +9,7 @@ export default function AlertMessage({ type = "error", error }) {
   const styles =
     type === "info" ? { backgroundColor: colors.greenAccent[500] } : ""
 
-  const errorType = (error) => {
+  function errorMessage(error) {
     if (error?.data?.message) {
       return error.data.message
     }
@@ -31,12 +31,14 @@ export default function AlertMessage({ type = "error", error }) {
     return "Undefined error"
   }
 
+  const errorMsg = errorMessage(error)
+
   return (
     <Box>
       <Stack sx={{ width: "100%" }} spacing={2}>
         <Alert sx={styles} severity={type} variant="filled">
           <AlertTitle>{type}</AlertTitle>
-          {errorType(error)}
+          {errorMsg}
         </Alert>
       </Stack>
     </Box>

@@ -13,12 +13,6 @@ export default function Exchanges() {
     isFetching,
   } = useGetCryptoExchangesApiQuery()
 
-  let errors = []
-
-  if (error) {
-    errors = [...errors, error]
-  }
-
   return (
     <Box height="inherit">
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -28,10 +22,7 @@ export default function Exchanges() {
         />
       </Box>
       <Box display="flex" flexDirection="column" gap={2}>
-        {errors.length > 0 &&
-          errors.map((error, i) => (
-            <AlertMessage key={i} type="error" error={error} />
-          ))}
+        {error && <AlertMessage type="error" error={error} />}
       </Box>
       {isFetching && <Loader />}
       {cryptoExchanges && (

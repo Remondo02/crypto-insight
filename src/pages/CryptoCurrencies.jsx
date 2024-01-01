@@ -5,19 +5,9 @@ import { AlertMessage, Header, Loader, CryptoCard, Search } from "../components"
 
 export default function CryptoCurrencies({ simplified }) {
   const count = simplified ? 12 : 100
-  const {
-    data: cryptosList,
-    error,
-    isLoading,
-  } = useGetCryptoApiQuery(count)
+  const { data: cryptosList, error, isLoading } = useGetCryptoApiQuery(count)
 
   const [search, setSearch] = useState("")
-
-  let errors = []
-
-  if (error) {
-    errors = [...errors, error]
-  }
 
   const cryptos = cryptosList?.data?.coins || []
 
@@ -39,15 +29,12 @@ export default function CryptoCurrencies({ simplified }) {
         </Box>
       )}
       {isLoading && <Loader />}
-      <Box display="flex" flexDirection="column" gap={2}>
-        {errors.length > 0 &&
-          errors.map((error, i) => (
-            <AlertMessage key={i} type="error" error={error} />
-          ))}
-      </Box>
+      {error && <AlertMessage type="error" error={error} />}
       {visibleItems && (
         <>
-          {!simplified && cryptos.length > 0 && <Search search={search} onSearchChange={setSearch} />}
+          {!simplified && cryptos.length > 0 && (
+            <Search search={search} onSearchChange={setSearch} />
+          )}
           <Box sx={{ flexGrow: 1 }}>
             <Grid
               container
