@@ -1,17 +1,20 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { MenuItem } from "react-pro-sidebar"
-import { Typography, useTheme } from "@mui/material"
-import { tokens } from "../theme.js"
+import { Typography } from "@mui/material"
 
-export default function SideBarItem({ title, to, icon, selected, setSelected }) {
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode)
+export default function SideBarItem({ title, to, icon }) {
   return (
     <MenuItem
-      component={<Link to={to} />}
-      active={selected.toLowerCase() === title.toLowerCase()}
-      style={{ color: colors.grey[100] }}
-      onClick={() => setSelected(title)}
+      component={
+        <NavLink
+          to={to}
+          style={({ isActive }) => {
+            return {
+              color: isActive ? "#6870fa" : "",
+            }
+          }}
+        />
+      }
       icon={icon}
     >
       <Typography>{title}</Typography>

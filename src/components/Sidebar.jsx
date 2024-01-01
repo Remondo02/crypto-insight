@@ -10,11 +10,10 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import SideBarItem from "./SidebarItem.jsx"
 import { tokens } from "../theme.js"
 
-export default function Sidebar({ page }) {
+export default function Sidebar() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const [selected, setSelected] = useState(page)
 
   return (
     <ProSideBar
@@ -23,14 +22,13 @@ export default function Sidebar({ page }) {
         flexShrink: 0,
       }}
       backgroundColor={`${colors.primary[400]}`}
-      // width={"313.9px"}
       width={"290px"}
       collapsed={isCollapsed}
     >
       <Menu
         iconShape="square"
         menuItemStyles={{
-          button: ({ active }) => {
+          button: () => {
             const baseStyle = {
               padding: "5px 20px",
               "&:hover": {
@@ -38,7 +36,6 @@ export default function Sidebar({ page }) {
                 backgroundColor: "transparent",
               },
             }
-            if (active) return { ...baseStyle, color: "#6870fa !important" }
             return baseStyle
           },
         }}
@@ -73,36 +70,26 @@ export default function Sidebar({ page }) {
             title="Dashboard"
             to="/"
             icon={<HomeOutlinedIcon />}
-            selected={selected}
-            setSelected={setSelected}
           />
           <SideBarItem
             title="Cryptocurrencies"
             to="/cryptocurrencies"
             icon={<CurrencyBitcoinOutlinedIcon />}
-            selected={selected}
-            setSelected={setSelected}
           />
           <SideBarItem
             title="Exchanges"
             to="/exchanges"
             icon={<CurrencyExchangeOutlinedIcon />}
-            selected={selected}
-            setSelected={setSelected}
           />
           <SideBarItem
             title="News"
             to="/news"
             icon={<FeedOutlinedIcon />}
-            selected={selected}
-            setSelected={setSelected}
           />
           <SideBarItem
             title="Events"
             to="/events"
             icon={<CalendarMonthOutlinedIcon />}
-            selected={selected}
-            setSelected={setSelected}
           />
         </Box>
       </Menu>

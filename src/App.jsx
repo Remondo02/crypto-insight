@@ -16,13 +16,12 @@ import { ThemeButton, Topbar, Sidebar } from "./components"
 function App() {
   const [theme, colorMode] = useMode()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { page } = useCheckNavigation()
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {isMobile ? <Topbar /> : <Sidebar page={page} />}
+          {isMobile ? <Topbar /> : <Sidebar />}
           <main>
             {!isMobile && <ThemeButton />}
             <div className="content">
