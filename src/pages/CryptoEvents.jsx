@@ -32,6 +32,7 @@ function getCoins({ cryptoCoins }) {
 
 function converted({ cryptoEvents }) {
   const convertedData = []
+  let latestEvent
   let endDate
 
   for (const event of cryptoEvents) {
@@ -46,9 +47,14 @@ function converted({ cryptoEvents }) {
       end: endDate ?? event.date,
       allDay: false,
     })
-  }
 
-  return convertedData.reverse()
+    latestEvent = convertedData.reduce(
+      (acc, val) =>
+        acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime,
+      0
+    )
+  }
+  return { data: convertedData.reverse(), latestEvent }
 }
 
 export default function CryptoEvents() {
@@ -84,8 +90,15 @@ export default function CryptoEvents() {
   const calendarStyles = {
     ".fc-theme-standard .fc-popover": { backgroundColor: colors.primary[400] },
     ".fc .fc-daygrid-day.fc-day-today": {
+      backgroundColor: colors.primary[400],
+    },
+    ".fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event": {
       backgroundColor: colors.greenAccent[500],
     },
+    ".fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event": {
+      backgroundColor: colors.greenAccent[500],
+
+    }
   }
 
   const calendarStylesMobile = {
@@ -108,7 +121,7 @@ export default function CryptoEvents() {
             <AlertMessage key={i} type="error" error={error} />
           ))}
       </Box>
-      {(cryptoCoins && cryptoEvents) && (
+      {cryptoCoins && cryptoEvents && (
         <Box height={isFetchingEvents ? "inherit" : ""}>
           <Box mb={3}>
             <SearchSelect
@@ -122,7 +135,7 @@ export default function CryptoEvents() {
             <Loader />
           ) : (
             <>
-              {converted({ cryptoEvents }).length > 0 ? (
+              {converted({ cryptoEvents }).data.length > 0 ? (
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid
                     container
@@ -135,29 +148,31 @@ export default function CryptoEvents() {
                           Events
                         </Typography>
                         <List>
-                          {converted({ cryptoEvents }).map((event) => (
-                            <ListItem
-                              key={event.id}
-                              sx={{
-                                backgroundColor: colors.greenAccent[500],
-                                margin: "10px 0",
-                                borderRadius: "2px",
-                              }}
-                            >
-                              <ListItemText
-                                primary={event.title}
-                                secondary={
-                                  <Typography variant="body2">
-                                    {formatDate(event.start, {
-                                      year: "numeric",
-                                      month: "short",
-                                      day: "numeric",
-                                    })}
-                                  </Typography>
-                                }
-                              ></ListItemText>
-                            </ListItem>
-                          ))}
+                          {converted({ cryptoEvents }).data.map(
+                            (event) => (
+                              <ListItem
+                                key={event.id}
+                                sx={{
+                                  backgroundColor: colors.greenAccent[500],
+                                  margin: "10px 0",
+                                  borderRadius: "2px",
+                                }}
+                              >
+                                <ListItemText
+                                  primary={event.title}
+                                  secondary={
+                                    <Typography variant="body2">
+                                      {formatDate(event.start, {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      })}
+                                    </Typography>
+                                  }
+                                ></ListItemText>
+                              </ListItem>
+                            )
+                          )}
                         </List>
                       </Box>
                     </Grid>
@@ -186,7 +201,8 @@ export default function CryptoEvents() {
                         selectable={true}
                         selectMirror={true}
                         dayMaxEvents={true}
-                        events={converted({ cryptoEvents })}
+                        events={converted({ cryptoEvents }).data}
+                        initialDate={converted({ cryptoEvents }).latestEvent}
                       />
                     </Grid>
                   </Grid>
