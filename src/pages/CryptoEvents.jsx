@@ -1,66 +1,25 @@
 import { useState } from "react"
-import {
-  Box,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  useTheme,
-} from "@mui/material"
-import useMediaQuery from "@mui/material/useMediaQuery"
-import { formatDate } from "@fullcalendar/core"
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import timeGridPlugin from "@fullcalendar/timegrid"
-import interactionPlugin from "@fullcalendar/interaction"
+import { Link } from "react-router-dom"
+import { Box, Grid, List, Typography, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
 import {
   useGetCryptoEventsApiQuery,
   useGetCryptoEventsCoinsApiQuery,
 } from "../services/cryptoEventsApi.js"
-import { AlertMessage, Header, Loader, SearchSelect } from "../components"
-
-function getCoins({ cryptoCoins }) {
-  const coins = []
-
-  for (let i = 0; i < 100; i++) {
-    coins.push({ id: cryptoCoins[i]?.id, name: cryptoCoins[i]?.name })
-  }
-  return coins
-}
-
-function converted({ cryptoEvents }) {
-  const convertedData = []
-  let latestEvent
-  let endDate
-
-  for (const event of cryptoEvents) {
-    if (event.date_to < event.date) {
-      endDate = event.date
-    }
-    convertedData.push({
-      id: event.id,
-      title: event.name ?? event.description,
-      start: event.date,
-      formatTime: new Date(event.date).getTime(),
-      end: endDate ?? event.date,
-      allDay: false,
-    })
-
-    latestEvent = convertedData.reduce(
-      (acc, val) =>
-        acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime,
-      0
-    )
-  }
-  return { data: convertedData.reverse(), latestEvent }
-}
+import {
+  AlertMessage,
+  Calendar,
+  Header,
+  Loader,
+  ListEvents,
+  SearchSelect,
+} from "../components"
+import converted from "../utils/conversion.js"
+import getCoins from "../utils/coins.js"
 
 export default function CryptoEvents() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
   const [search, setSearch] = useState("btc-bitcoin")
 
   const {
@@ -85,25 +44,6 @@ export default function CryptoEvents() {
   }
   if (cryptoEventsError) {
     errors = [...errors, cryptoEventsError]
-  }
-
-  const calendarStyles = {
-    ".fc-theme-standard .fc-popover": { backgroundColor: colors.primary[400] },
-    ".fc .fc-daygrid-day.fc-day-today": {
-      backgroundColor: colors.primary[400],
-    },
-    ".fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event": {
-      backgroundColor: colors.greenAccent[500],
-    },
-    ".fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event": {
-      backgroundColor: colors.greenAccent[500],
-
-    }
-  }
-
-  const calendarStylesMobile = {
-    ...calendarStyles,
-    ".fc .fc-toolbar": { flexDirection: "column", gap: 1 },
   }
 
   return (
@@ -148,63 +88,28 @@ export default function CryptoEvents() {
                           Events
                         </Typography>
                         <List>
-                          {converted({ cryptoEvents }).data.map(
-                            (event) => (
-                              <ListItem
+                          {converted({ cryptoEvents }).data.map((event) =>
+                            event.link ? (
+                              <Link
                                 key={event.id}
-                                sx={{
-                                  backgroundColor: colors.greenAccent[500],
-                                  margin: "10px 0",
-                                  borderRadius: "2px",
+                                to={event.link}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{
+                                  textDecoration: "none",
+                                  color: "inherit",
                                 }}
                               >
-                                <ListItemText
-                                  primary={event.title}
-                                  secondary={
-                                    <Typography variant="body2">
-                                      {formatDate(event.start, {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                      })}
-                                    </Typography>
-                                  }
-                                ></ListItemText>
-                              </ListItem>
+                                <ListEvents key={event.id} event={event} />
+                              </Link>
+                            ) : (
+                              <ListEvents key={event.id} event={event} />
                             )
                           )}
                         </List>
                       </Box>
                     </Grid>
-                    <Grid
-                      sx={isMobile ? calendarStylesMobile : calendarStyles}
-                      item
-                      xs={4}
-                      sm={4}
-                      md={4}
-                      lg={8}
-                      xl={12}
-                    >
-                      <FullCalendar
-                        plugins={[
-                          dayGridPlugin,
-                          timeGridPlugin,
-                          interactionPlugin,
-                        ]}
-                        headerToolbar={{
-                          left: "prev,next,today",
-                          center: "title",
-                          right: "dayGridMonth,timeGridWeek,timeGridDay",
-                        }}
-                        initialView="dayGridMonth"
-                        editable={false}
-                        selectable={true}
-                        selectMirror={true}
-                        dayMaxEvents={true}
-                        events={converted({ cryptoEvents }).data}
-                        initialDate={converted({ cryptoEvents }).latestEvent}
-                      />
-                    </Grid>
+                    <Calendar events={converted({ cryptoEvents })} />
                   </Grid>
                 </Box>
               ) : (
