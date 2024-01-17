@@ -5,7 +5,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import { tokens } from "../theme.js"
 import ThemeButton from "./ThemeButton.jsx"
 
-export default function Topbar({ page }) {
+export default function Topbar() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [anchorEl, setAnchorEl] = useState(null)

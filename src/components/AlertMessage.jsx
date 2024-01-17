@@ -1,37 +1,15 @@
 import { Alert, Box, AlertTitle, Stack, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
+import errorMessage from "../utils/errorMessage.js"
 
 // Error, warning, info, success
 export default function AlertMessage({ type = "error", error }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+  const errorMsg = errorMessage(error)
 
   const styles =
     type === "info" ? { backgroundColor: colors.greenAccent[500] } : {}
-
-  function errorMessage(error) {
-    if (error?.data?.message) {
-      return error.data.message
-    }
-    if (error?.data?.error?.message) {
-      return error.data.error.message
-    }
-    if (error?.error) {
-      return error.error
-    }
-    if (error?.data?.status?.error_message) {
-      return error.data.status.error_message
-    }
-    if (error?.data?.error) {
-      return error.data.error
-    }
-    if(typeof error === "string") {
-      return error
-    }
-    return "Undefined error"
-  }
-
-  const errorMsg = errorMessage(error)
 
   return (
     <Box>
