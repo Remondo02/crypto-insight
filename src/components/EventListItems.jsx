@@ -7,7 +7,7 @@ import {
 import { formatDate } from "@fullcalendar/core"
 import { tokens } from "../theme.js"
 
-export default function ListEvents({ event }) {
+export default function EventListItems({ event }) {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     return (
