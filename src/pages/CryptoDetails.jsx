@@ -26,7 +26,7 @@ import {
   CryptoDetailsList,
 } from "../components"
 
-function getStats({ cryptoDetails }) {
+function getStats(cryptoDetails) {
   return [
     {
       title: "Price to USD",
@@ -63,7 +63,7 @@ function getStats({ cryptoDetails }) {
   ]
 }
 
-function getGenericStats({ cryptoDetails }) {
+function getGenericStats(cryptoDetails) {
   return [
     {
       title: "Number Of Markets",
@@ -129,7 +129,7 @@ export default function CryptoDetails() {
 
   return (
     <Box height={isLoading ? "inherit" : ""}>
-      {(isLoading && isLoadingHistory) && <Loader />}
+      {isLoading && isLoadingHistory && <Loader />}
       <Box display="flex" flexDirection="column" gap={2}>
         {errors.length > 0 &&
           errors.map((error, i) => (
@@ -175,14 +175,14 @@ export default function CryptoDetails() {
               title={`${cryptoDetails?.name} Value Statistics`}
               subtitle={`An overview showing the stats of ${cryptoDetails?.name}`}
               name={cryptoDetails?.name}
-              stats={getStats({ cryptoDetails })}
+              stats={getStats(cryptoDetails)}
             />
 
             <CryptoDetailsList
               title="Other Statistics"
               subtitle="An overview showing the stats of all cryptocurrencies"
               name={cryptoDetails?.name}
-              stats={getGenericStats({ cryptoDetails })}
+              stats={getGenericStats(cryptoDetails)}
             />
 
             <CryptoDetailsList

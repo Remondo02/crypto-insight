@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom"
-import {
-  Box,
-  Grid,
-  List,
-  Typography,
-  useTheme,
-} from "@mui/material"
+import { Box, Grid, List, Typography, useTheme } from "@mui/material"
 import { tokens } from "../theme.js"
-import EventListItems from "./EventListItems.jsx"
+import EventsListItem from "./EventsListItem.jsx"
 
 export default function EventsList({ events }) {
   const theme = useTheme()
@@ -31,10 +25,10 @@ export default function EventsList({ events }) {
                   color: "inherit",
                 }}
               >
-                <EventListItems key={event.id} event={event} />
+                <EventsListItem key={event.id} event={event} />
               </Link>
             ) : (
-              <EventListItems key={event.id} event={event} />
+              <EventsListItem key={event.id} event={event} />
             )
           )}
         </List>

@@ -66,11 +66,7 @@ export default function Sidebar() {
         </MenuItem>
 
         <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <SideBarItem
-            title="Dashboard"
-            to="/"
-            icon={<HomeOutlinedIcon />}
-          />
+          <SideBarItem title="Dashboard" to="/" icon={<HomeOutlinedIcon />} />
           <SideBarItem
             title="Cryptocurrencies"
             to="/cryptocurrencies"
@@ -81,11 +77,7 @@ export default function Sidebar() {
             to="/exchanges"
             icon={<CurrencyExchangeOutlinedIcon />}
           />
-          <SideBarItem
-            title="News"
-            to="/news"
-            icon={<FeedOutlinedIcon />}
-          />
+          <SideBarItem title="News" to="/news" icon={<FeedOutlinedIcon />} />
           <SideBarItem
             title="Events"
             to="/events"

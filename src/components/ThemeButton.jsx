@@ -9,7 +9,12 @@ export default function ThemeButton() {
   const colorMode = useContext(ColorModeContext)
 
   return (
-    <Box sx={{py: {xs: 2}, p: {sm: 2}}} display="flex" justifyContent="flex-end" py={2}>
+    <Box
+      sx={{ py: { xs: 2 }, p: { sm: 2 } }}
+      display="flex"
+      justifyContent="flex-end"
+      py={2}
+    >
       <IconButton onClick={colorMode.toggleColorMode}>
         {theme.palette.mode === "dark" ? (
           <LightModeOutlinedIcon />
