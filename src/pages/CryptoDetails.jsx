@@ -139,7 +139,7 @@ export default function CryptoDetails() {
       {cryptoDetails && (
         <Header
           title={`${cryptoDetails?.name}  (${cryptoDetails?.symbol})`}
-          subtitle={HTMLReactParser(cryptoDetails?.description)}
+          subtitle={HTMLReactParser(cryptoDetails?.description || '')}
         />
       )}
       {coinHistory && (
