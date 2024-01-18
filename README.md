@@ -10,7 +10,7 @@ For quite a while I wanted to create a crypto application that would use industr
 The app features a Dashboard page that shows global statistics, the top 12 current cryptocurrencies and the 8 latest news. The cryptocurrencies page displays the top 100 coins with a filtering input. Exchanges also feature the top 100 plateformes with related informations in a form of an accordion. The News page displays up to 100 news related to a specific cryptocurrency. Events has a similar filtering option, which displays a list of events related to a cryptocurrency and an associated calendar. Finally, each coin has a dedicated page offering a broad insight of statistics and links, alongside an history graph with filtering options.
 
 
-<!-- [![Project thumbnail](./public/images/blog.png)](https://remimeullemeestre-crypto-insight.netlify.app/) -->
+[![Project thumbnail](./public/cryptoinsight.png)](https://remimeullemeestre-crypto-insight.netlify.app/)
 
 ## Stack
 
