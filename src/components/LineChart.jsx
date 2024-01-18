@@ -12,7 +12,7 @@ import {
   Colors,
 } from "chart.js"
 import { tokens } from "../theme.js"
-import { charJsData, charJsSettings } from "../utils/charJs.js"
+import { charJsData, charJsSettings } from "../utils/chartJs.js"
 
 export default function LineChart({ coinHistory, currentPrice, coinName }) {
   const theme = useTheme()
