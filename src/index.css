@@ -37,7 +37,8 @@ main {
   height: auto;
 }
 
-.content {
+.content,
+.content-error {
   margin-inline: auto;
   padding-inline: 24px;
   padding-bottom: 56px;
@@ -46,7 +47,13 @@ main {
 }
 
 @media (max-width: 599px) {
-  .content {
+  .content,
+  .content-error {
     height: calc(100% - 68.5667px);
   }
+}
+
+.content-error {
+  display: flex;
+  justify-content: center;
 }
