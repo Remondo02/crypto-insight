@@ -53,7 +53,7 @@ export default function CryptoNews({ simplified }) {
       {!simplified && (
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
-            title="CRYPTO CURRENCIES"
+            title="CRYPTO NEWS"
             subtitle="Latest news related to cryptocurrencies"
           />
         </Box>
