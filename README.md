@@ -43,6 +43,8 @@ $PROJECT_ROOT
     ├── hooks
     │   # Page files
     ├── pages
+    │   # Utils functions
+    ├── utils
     │   # Redux API management
     └── services
 ```
