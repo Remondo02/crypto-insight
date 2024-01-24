@@ -12,8 +12,7 @@ import {
   EventsList,
   SearchSelect,
 } from "../components"
-import converted from "../utils/conversion.js"
-import getCoins from "../utils/coins.js"
+import { eventsData, getCoins } from "../utils"
 
 export default function CryptoEvents() {
   const [search, setSearch] = useState("btc-bitcoin")
@@ -69,15 +68,15 @@ export default function CryptoEvents() {
           </Box>
           {isFetchingEvents ? (
             <Loader />
-          ) : converted({ cryptoEvents }).data.length > 0 ? (
+          ) : eventsData({ cryptoEvents }).data.length > 0 ? (
             <Box sx={{ flexGrow: 1 }}>
               <Grid
                 container
                 spacing={{ xs: 7, md: 3 }}
                 columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
               >
-                <EventsList events={converted({ cryptoEvents })} />
-                <Calendar events={converted({ cryptoEvents })} />
+                <EventsList events={eventsData({ cryptoEvents })} />
+                <Calendar events={eventsData({ cryptoEvents })} />
               </Grid>
             </Box>
           ) : (
