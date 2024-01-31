@@ -52,4 +52,3 @@ $PROJECT_ROOT
 ## Potential improvements
 
 - **Pagination** - Adding a smart pagination or a button to display a certain number of elements instead of 100 items (cryptocurrencies and news).
-- **React Router Dom** - A more advanced implementation of it, including errorElement and ErrorBoundary for instance.

@@ -19,17 +19,12 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <Root children={<ErrorPage />} />,
     children: [
-      {
-        errorElement: <Root children={<ErrorPage />} />,
-        children: [
-          { path: "", element: <Dashboard /> },
-          { path: "/cryptocurrencies", element: <CryptoCurrencies /> },
-          { path: "/crypto/:coinId", element: <CryptoDetails /> },
-          { path: "/exchanges", element: <Exchanges /> },
-          { path: "/news", element: <CryptoNews /> },
-          { path: "/events", element: <CryptoEvents /> },
-        ],
-      },
+      { path: "", element: <Dashboard /> },
+      { path: "/cryptocurrencies", element: <CryptoCurrencies /> },
+      { path: "/crypto/:coinId", element: <CryptoDetails /> },
+      { path: "/exchanges", element: <Exchanges /> },
+      { path: "/news", element: <CryptoNews /> },
+      { path: "/events", element: <CryptoEvents /> },
     ],
   },
 ])
