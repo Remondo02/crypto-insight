@@ -15,7 +15,11 @@ export default function ThemeButton() {
       justifyContent="flex-end"
       py={2}
     >
-      <IconButton onClick={colorMode.toggleColorMode}>
+      <IconButton
+        onClick={colorMode.toggleColorMode}
+        id="themeSwitch"
+        aria-label="Theme Switcher"
+      >
         {theme.palette.mode === "dark" ? (
           <LightModeOutlinedIcon />
         ) : (

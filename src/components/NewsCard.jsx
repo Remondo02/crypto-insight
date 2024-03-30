@@ -59,6 +59,8 @@ export default function NewsCard({
             component="img"
             height="140"
             image={image?.contentUrl || placeholderImage}
+            alt={title ? title.replace(/(<([^>]+)>)/gi, "") : ""}
+            loading="lazy"
           />
           <CardContent>
             {title && (

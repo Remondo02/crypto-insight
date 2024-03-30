@@ -25,12 +25,44 @@ export default function Sidebar() {
       width={"290px"}
       collapsed={isCollapsed}
     >
+      <Box
+        display="flex"
+        margin={"15px 20px 25px"}
+        color={colors.grey[100]}
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
+        {!isCollapsed && (
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            ml="15px"
+            mr="5px"
+          >
+            <Typography
+              variant="h3"
+              whiteSpace="nowrap"
+              color={colors.grey[100]}
+            >
+              CRYPTO INSIGHT
+            </Typography>
+          </Box>
+        )}
+        <IconButton
+          id="sidebarMenuButton"
+          aria-label="Sidebar Menu Button"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          <MenuOutlinedIcon />
+        </IconButton>
+      </Box>
+
       <Menu
         iconShape="square"
         menuItemStyles={{
           button: () => {
             const baseStyle = {
-              padding: "5px 20px",
+              padding: `5px 20px 5px ${isCollapsed ? "20px" : "17%"}`,
               "&:hover": {
                 color: "#868dfb !important",
                 backgroundColor: "transparent",
@@ -40,50 +72,23 @@ export default function Sidebar() {
           },
         }}
       >
-        <MenuItem
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-          style={{
-            margin: "10px 0 20px",
-            color: colors.grey[100],
-          }}
-        >
-          {!isCollapsed && (
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              ml="15px"
-            >
-              <Typography variant="h3" color={colors.grey[100]}>
-                CRYPTO INSIGHT
-              </Typography>
-              <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                <MenuOutlinedIcon />
-              </IconButton>
-            </Box>
-          )}
-        </MenuItem>
-
-        <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <SideBarItem title="Dashboard" to="/" icon={<HomeOutlinedIcon />} />
-          <SideBarItem
-            title="Cryptocurrencies"
-            to="/cryptocurrencies"
-            icon={<CurrencyBitcoinOutlinedIcon />}
-          />
-          <SideBarItem
-            title="Exchanges"
-            to="/exchanges"
-            icon={<CurrencyExchangeOutlinedIcon />}
-          />
-          <SideBarItem title="News" to="/news" icon={<FeedOutlinedIcon />} />
-          <SideBarItem
-            title="Events"
-            to="/events"
-            icon={<CalendarMonthOutlinedIcon />}
-          />
-        </Box>
+        <SideBarItem title="Dashboard" to="/" icon={<HomeOutlinedIcon />} />
+        <SideBarItem
+          title="Cryptocurrencies"
+          to="/cryptocurrencies"
+          icon={<CurrencyBitcoinOutlinedIcon />}
+        />
+        <SideBarItem
+          title="Exchanges"
+          to="/exchanges"
+          icon={<CurrencyExchangeOutlinedIcon />}
+        />
+        <SideBarItem title="News" to="/news" icon={<FeedOutlinedIcon />} />
+        <SideBarItem
+          title="Events"
+          to="/events"
+          icon={<CalendarMonthOutlinedIcon />}
+        />
       </Menu>
     </ProSideBar>
   )

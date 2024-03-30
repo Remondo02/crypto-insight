@@ -28,8 +28,9 @@ export default function Topbar() {
         <ThemeButton />
         <Button
           sx={{ color: buttonColor }}
-          id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
+          id="menu"
+          aria-label="Mobile Navigation Button"
+          aria-controls={open ? "menu-open" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
@@ -43,12 +44,12 @@ export default function Topbar() {
             backgroundColor: colors.primary[400],
           },
         }}
-        id="basic-menu"
+        id="menu-open"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          "aria-labelledby": "menu",
         }}
       >
         <MenuItem sx={menuItemStyles} component={Link} to="/">
