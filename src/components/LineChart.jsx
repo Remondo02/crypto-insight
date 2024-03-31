@@ -12,7 +12,7 @@ import {
   Colors,
 } from "chart.js"
 import { tokens } from "../theme.js"
-import { chartJsData, chartJsSettings } from "../utils/chartJs.js"
+import { ChartJsData, ChartJsSettings } from "../utils"
 
 export default function LineChart({ coinHistory, currentPrice, coinName }) {
   const theme = useTheme()
@@ -30,8 +30,8 @@ export default function LineChart({ coinHistory, currentPrice, coinName }) {
   )
   ChartJS.defaults.color = colors.grey[300]
 
-  const data = chartJsData({ coinHistory })
-  const { options, plugins } = chartJsSettings()
+  const data = ChartJsData({ coinHistory })
+  const { options, plugins } = ChartJsSettings()
 
   return (
     <Box mb={7}>

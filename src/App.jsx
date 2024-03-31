@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <Root children={<ErrorPage />} />,
+    errorElement: <Root><ErrorPage /></Root>,
     children: [
       { path: "", element: <Dashboard /> },
       { path: "/cryptocurrencies", element: <CryptoCurrencies /> },
