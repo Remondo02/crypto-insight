@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-import { TNewsApiResponse } from "@/apis";
+import { INewsApiResponse } from "@/apis";
 
 const cryptoHeaders = {
   "Ocp-Apim-Subscription-Key": import.meta.env.VITE_AZURE_SUBSCRIPTION_KEY,
@@ -17,7 +17,7 @@ export const cryptoNewsApi = createApi({
   reducerPath: "cryptoNewsApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoNewsApi: builder.query<TNewsApiResponse, {newsCategory: string; count: number}>({
+    getCryptoNewsApi: builder.query<INewsApiResponse, {newsCategory: string; count: number}>({
       query: ( {newsCategory, count} ) =>
         createRequest(
           `?q=${

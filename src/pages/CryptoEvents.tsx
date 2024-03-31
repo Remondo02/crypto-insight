@@ -32,6 +32,8 @@ export default function CryptoEvents() {
     coinId: search,
   })
 
+  console.log(cryptoEvents, cryptoCoins)
+
   let errors = []
 
   if (cryptoCoinsError) {
