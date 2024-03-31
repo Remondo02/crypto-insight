@@ -7,7 +7,7 @@ const cryptoHeaders = {
 
 const baseUrl = "https://coinranking1.p.rapidapi.com"
 
-const createRequest = (url) => ({
+const createRequest = (url: string) => ({
   url,
   headers: cryptoHeaders,
 })

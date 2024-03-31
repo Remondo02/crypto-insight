@@ -1,9 +1,14 @@
-import { Alert, Box, AlertTitle, Stack, useTheme } from "@mui/material"
+import { Alert, Box, AlertTitle, Stack, useTheme, type AlertColor } from "@mui/material"
 import { tokens } from "@/theme"
 import { errorMessage } from "@/utils"
 
+type AlertMessageProps = {
+  type: AlertColor
+  error: string | object
+}
+
 // Error, warning, info, success
-export default function AlertMessage({ type = "error", error }) {
+export default function AlertMessage({ type = "error", error }: AlertMessageProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const errorMsg = errorMessage(error)

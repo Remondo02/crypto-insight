@@ -41,6 +41,9 @@ export default function CryptoNews({ simplified }) {
 
   const coins = cryptos?.data?.coins || []
 
+
+  console.log(cryptoNews);
+
   const coinsWithInitialValue = JSON.parse(JSON.stringify(coins))
   coinsWithInitialValue.unshift({
     uuid: "",
