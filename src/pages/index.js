@@ -1,7 +1,0 @@
-export { default as CryptoCurrencies } from "./CryptoCurrencies.jsx"
-export { default as CryptoDetails } from "./CryptoDetails.jsx"
-export { default as CryptoEvents } from "./CryptoEvents.jsx"
-export { default as CryptoNews } from "./CryptoNews.jsx"
-export { default as Dashboard } from "./Dashboard.jsx"
-export { default as ErrorPage } from "./ErrorPage.jsx"
-export { default as Exchanges } from "./Exchanges.jsx"
