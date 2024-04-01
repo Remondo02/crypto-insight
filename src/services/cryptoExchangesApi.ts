@@ -18,7 +18,7 @@ export const cryptoExchangesApi = createApi({
   reducerPath: "cryptoExchangesApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoExchangesApi: builder.query<IExchangesApiResponse, void>({
+    getCryptoExchangesApi: builder.query<IExchangesApiResponse[], void>({
       query: () => createRequest(baseUrl),
     }),
   }),

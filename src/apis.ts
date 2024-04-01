@@ -160,3 +160,20 @@ export interface ICryptoHistoryApiResponse {
     }[]
   }
 }
+
+export interface ICryptoGlobalStatsApiResponse {
+  total: number
+  total24hVolume: number
+  totalCoins: number
+  totalExchanges: number
+  totalMarketCap: number
+  totalMarkets: number
+}
+
+export interface ICryptosFullApiResponse {
+  status: string
+  data: {
+    coins: ICryptosApiResponse[]
+    stats: ICryptoGlobalStatsApiResponse
+  }
+}

@@ -7,11 +7,8 @@ export default function Exchanges() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const {
-    data: cryptoExchanges,
-    error,
-    isFetching,
-  } = useGetCryptoExchangesApiQuery()
+  const { data, isError, error, isLoading, isSuccess } =
+    useGetCryptoExchangesApiQuery()
 
   return (
     <Box height="inherit">
@@ -22,10 +19,10 @@ export default function Exchanges() {
         />
       </Box>
       <Box display="flex" flexDirection="column" gap={2}>
-        {error && <AlertMessage type="error" error={error} />}
+        {isError && <AlertMessage type="error" error={error} />}
       </Box>
-      {isFetching && <Loader />}
-      {cryptoExchanges && (
+      {isLoading && <Loader />}
+      {isSuccess && (
         <>
           <Box
             display="flex"
@@ -33,7 +30,7 @@ export default function Exchanges() {
             minHeight={"57px"}
             px={2}
             justifyContent={{ xs: "space-between", md: "unset" }}
-            backgroundColor={colors.greenAccent[500]}
+            sx={{ backgroundColor: colors.greenAccent[500] }}
           >
             <Box width={{ xs: "initial", md: "calc(50% - 56px)" }}>
               <Typography>Exchanges</Typography>
@@ -42,7 +39,7 @@ export default function Exchanges() {
               <Typography>24h Trade Volume</Typography>
             </Box>
           </Box>
-          {cryptoExchanges.map((exchange) => (
+          {data.map((exchange) => (
             <ExchangesAccordion key={exchange.id} exchange={exchange} />
           ))}
         </>

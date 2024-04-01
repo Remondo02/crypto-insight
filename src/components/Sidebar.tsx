@@ -13,7 +13,7 @@ import { tokens } from "@/theme"
 export default function Sidebar() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
 
   return (
     <ProSideBar

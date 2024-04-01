@@ -12,11 +12,13 @@ import {
   Colors,
 } from "chart.js"
 import { tokens } from "@/theme"
-import { ChartJsData, ChartJsSettings } from "@/utils"
+import { useChartJsData, useChartJsSettings } from "@/utils"
 
 export default function LineChart({ coinHistory, currentPrice, coinName }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+  const { options, plugins } = useChartJsSettings()
+  const data = useChartJsData({ coinHistory })
 
   ChartJS.register(
     CategoryScale,
@@ -29,9 +31,6 @@ export default function LineChart({ coinHistory, currentPrice, coinName }) {
     Colors
   )
   ChartJS.defaults.color = colors.grey[300]
-
-  const data = ChartJsData({ coinHistory })
-  const { options, plugins } = ChartJsSettings()
 
   return (
     <Box mb={7}>

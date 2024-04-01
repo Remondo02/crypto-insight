@@ -3,7 +3,15 @@ import { MenuItem } from "react-pro-sidebar"
 import { Typography, useTheme } from "@mui/material"
 import { tokens } from "@/theme"
 
-export default function SideBarItem({ title, to, icon }) {
+export default function SideBarItem({
+  title,
+  to,
+  icon,
+}: {
+  title: string
+  to: string
+  icon: React.ReactNode
+}) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

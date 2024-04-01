@@ -17,8 +17,8 @@ export const cryptoNewsApi = createApi({
   reducerPath: "cryptoNewsApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoNewsApi: builder.query<INewsApiResponse, {newsCategory: string; count: number}>({
-      query: ( {newsCategory, count} ) =>
+    getCryptoNewsApi: builder.query<INewsApiResponse, { newsCategory: string, count: number}>({
+      query: ({newsCategory, count}) =>
         createRequest(
           `?q=${
             newsCategory === "Cryptocurrency" ? "" : newsCategory

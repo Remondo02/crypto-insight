@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 import {
-  ICryptosApiResponse,
   ICryptoDetailsApiResponse,
   ICryptoHistoryApiResponse,
+  ICryptosFullApiResponse
 } from "@/apis"
 
 const cryptoHeaders = {
@@ -22,13 +22,10 @@ export const cryptoApi = createApi({
   reducerPath: "cryptoApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoApi: builder.query<ICryptosApiResponse, { count: number }>({
+    getCryptoApi: builder.query<ICryptosFullApiResponse, number>({
       query: (count) => createRequest(`/coins?limit=${count}`),
     }),
-    getCryptoDetailsApi: builder.query<
-      ICryptoDetailsApiResponse,
-      { coinId: string }
-    >({
+    getCryptoDetailsApi: builder.query<ICryptoDetailsApiResponse, string>({
       query: (coinId) => createRequest(`/coin/${coinId}`),
     }),
     getCryptoHistoryApi: builder.query<

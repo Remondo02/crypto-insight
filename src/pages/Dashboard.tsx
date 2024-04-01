@@ -16,16 +16,16 @@ import {
   SectionHeader,
 } from "../components/index.js"
 
+import { ICryptoGlobalStatsApiResponse } from "@/apis"
+
 export default function Dashboard() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const { data, error, isFetching } = useGetCryptoApiQuery(1)
+  const { data, isError, error, isLoading, isSuccess } = useGetCryptoApiQuery(1)
 
   const styles = { color: colors.grey[100], fontSize: 26 }
 
-  const globalStats = data?.data?.stats
-
-  function stats({ globalStats }) {
+  function stats(globalStats: ICryptoGlobalStatsApiResponse) {
     return [
       {
         title: "Total Cryptocurrencies",
@@ -63,15 +63,15 @@ export default function Dashboard() {
       />
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
-        {isFetching && <Loader />}
-        {error && <AlertMessage type="error" error={error} />}
-        {globalStats && (
+        {isError && <AlertMessage type="error" error={error} />}
+        {isLoading && <Loader />}
+        {isSuccess && (
           <Box
             display="grid"
             gridTemplateColumns="repeat(auto-fit, minmax(330px, 1fr));"
             gap={3}
           >
-            {stats({ globalStats }).map(({ title, value, icon }) => (
+            {stats(data?.data?.stats).map(({ title, value, icon }) => (
               <GlobalStatCard
                 key={title}
                 title={title}
