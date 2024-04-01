@@ -3,13 +3,13 @@ import { Box, Grid } from "@mui/material"
 import { useGetCryptoApiQuery } from "@/services/cryptoApi"
 import { AlertMessage, Header, Loader, CryptoCard, Search } from "@/components"
 
-export default function CryptoCurrencies({ simplified }) {
+export default function CryptoCurrencies(simplified: boolean) {
   const count = simplified ? 12 : 100
-  const { data: cryptosList, error, isLoading } = useGetCryptoApiQuery(count)
+  const { data, isError, error, isLoading } = useGetCryptoApiQuery(count)
 
   const [search, setSearch] = useState("")
 
-  const cryptos = cryptosList?.data?.coins || []
+  const cryptos = data?.data?.coins || []
 
   const visibleItems = cryptos.filter((coin) => {
     if (search && !coin.name.toLowerCase().includes(search.toLowerCase())) {
@@ -28,8 +28,8 @@ export default function CryptoCurrencies({ simplified }) {
           />
         </Box>
       )}
+      {isError && <AlertMessage type="error" error={error} />}
       {isLoading && <Loader />}
-      {error && <AlertMessage type="error" error={error} />}
       {visibleItems && (
         <>
           {!simplified && cryptos.length > 0 && (
