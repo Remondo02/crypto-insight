@@ -3,7 +3,11 @@ import { Box, Grid } from "@mui/material"
 import { useGetCryptoApiQuery } from "@/services/cryptoApi"
 import { AlertMessage, Header, Loader, CryptoCard, Search } from "@/components"
 
-export default function CryptoCurrencies(simplified: boolean) {
+export default function CryptoCurrencies({
+  simplified,
+}: {
+  simplified: boolean
+}) {
   const count = simplified ? 12 : 100
   const { data, isError, error, isLoading } = useGetCryptoApiQuery(count)
 

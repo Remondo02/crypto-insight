@@ -18,11 +18,12 @@ export const cryptoEventsApi = createApi({
   reducerPath: "cryptoEventsApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoEventsApi: builder.query<IEventsApiResponse, {coinId: string}>({
-      query: ({ coinId }) => createRequest(`/${coinId}/events`),
+    getCryptoEventsApi: builder.query<IEventsApiResponse, string>
+    ({
+      query: (coinId) => createRequest(`/${coinId}/events`),
     }),
-    getCryptoEventsCoinsApi: builder.query<IEventCoinsApiResponse, string>({
-      query: () => createRequest(baseUrl),
+    getCryptoEventsCoinsApi: builder.query<IEventCoinsApiResponse, void>({
+      query: () => createRequest(baseUrl)
     }),
   }),
 })

@@ -10,39 +10,42 @@ import {
   SearchSelect,
 } from "@/components"
 
-export default function CryptoNews({ simplified }) {
+export default function CryptoNews({ simplified }: { simplified: boolean }) {
   const count = simplified ? 8 : 100
   const {
     data: cryptos,
-    error: errorCrypto,
-    isLoading: isLoadingCrypto,
+    // isError: isErrorCrypto,
+    // error: errorCrypto,
+    // isLoading: isLoadingCrypto,
+    // isSuccess: isSuccessCrypto,
   } = useGetCryptoApiQuery(100)
 
   const [search, setSearch] = useState("Cryptocurrency")
 
   const {
     data: cryptoNews,
-    error: errorNews,
+    // isError: isErrorNews,
+    // error: errorNews,
     isLoading: isLoadingNews,
     isFetching: isFetchingNews,
+    isSuccess: isSuccessNews,
   } = useGetCryptoNewsApiQuery({
     newsCategory: search,
     count: count,
   })
 
-  let errors = []
+  // let errors = []
 
-  if (errorCrypto) {
-    errors = [...errors, errorCrypto]
-  }
-  if (errorNews) {
-    errors = [...errors, errorNews]
-  }
+  // if (errorCrypto) {
+  //   errors = [...errors, errorCrypto]
+  // }
+  // if (errorNews) {
+  //   errors = [...errors, errorNews]
+  // }
 
   const coins = cryptos?.data?.coins || []
 
-
-  // console.log(cryptoNews);
+  console.log("cryptoNews : ", cryptoNews, "coins : ", coins)
 
   const coinsWithInitialValue = JSON.parse(JSON.stringify(coins))
   coinsWithInitialValue.unshift({
@@ -61,71 +64,61 @@ export default function CryptoNews({ simplified }) {
           />
         </Box>
       )}
-      <Box display="flex" flexDirection="column" gap={2}>
-        {errors.length > 0 &&
-          errors.map((error, i) => (
-            <AlertMessage key={i} type="error" error={error} />
-          ))}
-      </Box>
-      {isLoadingCrypto || isLoadingNews ? (
-        <Loader />
-      ) : (
-        cryptoNews && (
-          <Box height={isFetchingNews ? "inherit" : ""}>
-            {!simplified && (
-              <Box mb={3}>
-                <SearchSelect
-                  inputLabel="Select a Crypto"
-                  search={search}
-                  optionValue={coinsWithInitialValue}
-                  onSearchChange={setSearch}
-                />
-              </Box>
-            )}
-            {isFetchingNews ? (
-              <Loader />
-            ) : (
-              <>
-                {cryptoNews.value.length > 0 ? (
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Grid
-                      container
-                      spacing={{ xs: 2, md: 3 }}
-                      columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
-                    >
-                      {cryptoNews.value.map(
-                        ({
-                          name,
-                          url,
-                          image,
-                          description,
-                          provider,
-                          datePublished,
-                        }) => (
-                          <NewsCard
-                            simplified={simplified}
-                            key={name}
-                            title={name}
-                            url={url}
-                            image={image}
-                            description={description}
-                            provider={provider}
-                            datePublished={datePublished}
-                          />
-                        )
-                      )}
-                    </Grid>
-                  </Box>
-                ) : (
-                  <AlertMessage
-                    type="info"
-                    errors={`No news available for ${cryptoNews.queryContext.originalQuery}.`}
-                  />
-                )}
-              </>
-            )}
+      {/* {isErrorCrypto ||
+        (isErrorNews && (
+          <Box display="flex" flexDirection="column" gap={2}>
+            {errors.map((error, i) => (
+              <AlertMessage key={i} type="error" error={error} />
+            ))}
           </Box>
-        )
+        ))} */}
+      {isLoadingNews && <Loader />}
+      {isSuccessNews && (
+        <Box height={isFetchingNews ? "inherit" : ""}>
+          {!simplified && (
+            <Box mb={3}>
+              <SearchSelect
+                inputLabel="Select a Crypto"
+                search={search}
+                optionValue={coinsWithInitialValue}
+                onSearchChange={setSearch}
+              />
+            </Box>
+          )}
+          {isFetchingNews ? (
+            <Loader />
+          ) : (
+            <>
+              {cryptoNews.value.length > 0 ? (
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
+                  >
+                    {cryptoNews.value.map((news) => (
+                      <NewsCard
+                        simplified={simplified}
+                        key={news.value.name}
+                        title={news.value.name}
+                        url={news.value.url}
+                        image={news.value.image}
+                        description={news.value.description}
+                        provider={news.value.provider}
+                        datePublished={news.value.datePublished}
+                      />
+                    ))}
+                  </Grid>
+                </Box>
+              ) : (
+                <AlertMessage
+                  type="info"
+                  error={`No news available for ${cryptoNews.queryContext.originalQuery}.`}
+                />
+              )}
+            </>
+          )}
+        </Box>
       )}
     </Box>
   )

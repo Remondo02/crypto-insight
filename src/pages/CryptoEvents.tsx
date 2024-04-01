@@ -19,29 +19,27 @@ export default function CryptoEvents() {
 
   const {
     data: cryptoCoins,
-    error: cryptoCoinsError,
+    // isError: isErrorCoins,
+    // error: cryptoCoinsError,
     isLoading: isLoadingCoins,
   } = useGetCryptoEventsCoinsApiQuery()
 
   const {
     data: cryptoEvents,
-    error: cryptoEventsError,
+    // isError: isErrorEvents,
+    // error: cryptoEventsError,
     isLoading: isLoadingEvents,
     isFetching: isFetchingEvents,
-  } = useGetCryptoEventsApiQuery({
-    coinId: search,
-  })
+  } = useGetCryptoEventsApiQuery(search)
 
-  console.log(cryptoEvents, cryptoCoins)
+  // let errors = []
 
-  let errors = []
-
-  if (cryptoCoinsError) {
-    errors = [...errors, cryptoCoinsError]
-  }
-  if (cryptoEventsError) {
-    errors = [...errors, cryptoEventsError]
-  }
+  // if (cryptoCoinsError) {
+  //   errors = [...errors, cryptoCoinsError]
+  // }
+  // if (cryptoEventsError) {
+  //   errors = [...errors, cryptoEventsError]
+  // }
 
   return (
     <Box height="inherit">
@@ -51,13 +49,16 @@ export default function CryptoEvents() {
           subtitle="List of events related to a specific cryptocurrency"
         />
       </Box>
+      {/* {isErrorCoins ||
+        (isErrorEvents && (
+          <Box display="flex" flexDirection="column" gap={2}>
+            {errors.map((error, i) => (
+              <AlertMessage key={i} type="error" error={error} />
+            ))}
+          </Box>
+        ))} */}
       {(isLoadingCoins || isLoadingEvents) && <Loader />}
-      <Box display="flex" flexDirection="column" gap={2}>
-        {errors.length > 0 &&
-          errors.map((error, i) => (
-            <AlertMessage key={i} type="error" error={error} />
-          ))}
-      </Box>
+      <Box display="flex" flexDirection="column" gap={2}></Box>
       {cryptoCoins && cryptoEvents && (
         <Box height={isFetchingEvents ? "inherit" : ""}>
           <Box mb={3}>
