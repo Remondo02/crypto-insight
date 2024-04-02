@@ -99,13 +99,13 @@ export default function CryptoNews({ simplified }: { simplified: boolean }) {
                     {cryptoNews.value.map((news) => (
                       <NewsCard
                         simplified={simplified}
-                        key={news.value.name}
-                        title={news.value.name}
-                        url={news.value.url}
-                        image={news.value.image}
-                        description={news.value.description}
-                        provider={news.value.provider}
-                        datePublished={news.value.datePublished}
+                        key={news.name}
+                        title={news.name}
+                        url={news.url}
+                        image={news.image}
+                        description={news.description}
+                        provider={news.provider}
+                        datePublished={news.datePublished}
                       />
                     ))}
                   </Grid>

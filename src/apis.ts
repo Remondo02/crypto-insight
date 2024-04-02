@@ -1,11 +1,11 @@
 // declare module "*.jpg"
 
 export type NewsValueReponse = {
-  about: {
+  about?: {
     name: string
     readLink: string
   }[]
-  category: "Business"
+  category?: "Business"
   datePublished: Date
   description: string
   image?: {
@@ -16,7 +16,7 @@ export type NewsValueReponse = {
       height: number
     }
   }
-  name: string
+  name?: string
   provider: {
     _type: string
     name: string

@@ -20,7 +20,7 @@ import { PropsWithChildren, ReactNode } from "react"
 import { type NewsValueReponse } from "@/apis"
 
 interface NewsCardProps extends NewsValueReponse {
-  title: string
+  title?: string
   simplified: boolean
 }
 
