@@ -1,12 +1,22 @@
-import { useId } from "react"
+import { Dispatch, SetStateAction, useId } from "react"
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+
+type SearchSelectProps = {
+  inputLabel: string
+  search: string
+  optionValue: {
+    id: string
+    name: string
+  }[]
+  onSearchChange: Dispatch<SetStateAction<string>>
+}
 
 export default function SearchSelect({
   inputLabel,
   search,
   optionValue,
   onSearchChange,
-}) {
+}: SearchSelectProps) {
   const id = useId()
 
   return (
@@ -21,25 +31,29 @@ export default function SearchSelect({
         >
           {optionValue.map((option) => {
             if (typeof option === "string") {
-              return MenuItemType(option, option)
+              return (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              )
             }
             if (option.hasOwnProperty("id")) {
-              return MenuItemType(option.id, option.name)
+              return (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.name}
+                </MenuItem>
+              )
             }
             if (option.hasOwnProperty("uuid")) {
-              return MenuItemType(option.name, option.name)
+              return (
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              )
             }
           })}
         </Select>
       </FormControl>
     </Box>
-  )
-}
-
-function MenuItemType(optionKeyValue, optionName) {
-  return (
-    <MenuItem key={optionKeyValue} value={optionKeyValue}>
-      {optionName}
-    </MenuItem>
   )
 }

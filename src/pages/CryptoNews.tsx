@@ -10,7 +10,7 @@ import {
   SearchSelect,
 } from "@/components"
 
-export default function CryptoNews({ simplified }: { simplified: boolean }) {
+export default function CryptoNews({ simplified }: { simplified?: boolean }) {
   const count = simplified ? 8 : 100
   const {
     data: cryptos,
@@ -44,8 +44,6 @@ export default function CryptoNews({ simplified }: { simplified: boolean }) {
   // }
 
   const coins = cryptos?.data?.coins || []
-
-  console.log("cryptoNews : ", cryptoNews, "coins : ", coins)
 
   const coinsWithInitialValue = JSON.parse(JSON.stringify(coins))
   coinsWithInitialValue.unshift({

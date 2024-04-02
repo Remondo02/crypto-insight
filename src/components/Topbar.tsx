@@ -1,4 +1,4 @@
-import { MouseEvent, MouseEventHandler, useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Box, Button, Menu, MenuItem, useTheme } from "@mui/material"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
@@ -11,13 +11,13 @@ export default function Topbar() {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
+    // let target = event.currentTarget as HTMLButtonElement
+    console.log(event.currentTarget)
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
     setAnchorEl(null)
   }
-
-  console.log(typeof anchorEl)
 
   const buttonColor =
     theme.palette.mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.54)"

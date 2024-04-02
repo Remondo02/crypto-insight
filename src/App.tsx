@@ -12,6 +12,7 @@ import {
   Exchanges,
 } from "./pages"
 import { ThemeButton, Topbar, Sidebar } from "./components"
+import { PropsWithChildren } from "react"
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
 ])
 
-function Root({ children }) {
+function Root({ children }: PropsWithChildren) {
   const [theme, colorMode] = useMode()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 

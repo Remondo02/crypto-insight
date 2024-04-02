@@ -6,7 +6,7 @@ import { AlertMessage, Header, Loader, CryptoCard, Search } from "@/components"
 export default function CryptoCurrencies({
   simplified,
 }: {
-  simplified: boolean
+  simplified?: boolean
 }) {
   const count = simplified ? 12 : 100
   const { data, isError, error, isLoading } = useGetCryptoApiQuery(count)

@@ -21,7 +21,7 @@ import { type NewsValueReponse } from "@/apis"
 
 interface NewsCardProps extends NewsValueReponse {
   title?: string
-  simplified: boolean
+  simplified?: boolean
 }
 
 type NewsCardWrapperProps = PropsWithChildren<{
