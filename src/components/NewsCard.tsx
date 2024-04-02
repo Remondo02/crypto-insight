@@ -17,9 +17,9 @@ import { tokens } from "../theme.js"
 import placeholderImage from "./../assets/images/cryptonews.jpg"
 import { PropsWithChildren, ReactNode } from "react"
 
-import { type NewsValue } from "@/apis"
+import { type NewsValueReponse } from "@/apis"
 
-interface NewsCardProps extends NewsValue {
+interface NewsCardProps extends NewsValueReponse {
   title: string
   simplified: boolean
 }
@@ -33,15 +33,17 @@ function NewsCardWrapper({ url, children }: NewsCardWrapperProps) {
   return (
     <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
       {url ? (
-      <Link
-        to={url}
-        target="_blank"
-        rel="noreferrer"
-        style={{ textDecoration: "none" }}
-      >
-        {children}
-      </Link>
-      ) : ({children})}
+        <Link
+          to={url}
+          target="_blank"
+          rel="noreferrer"
+          style={{ textDecoration: "none" }}
+        >
+          {children}
+        </Link>
+      ) : (
+        children
+      )}
     </Grid>
   )
 }

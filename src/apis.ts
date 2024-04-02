@@ -1,6 +1,6 @@
 // declare module "*.jpg"
 
-export type NewsValue = {
+export type NewsValueReponse = {
   about: {
     name: string
     readLink: string
@@ -43,7 +43,7 @@ export type NewsApiResponse = {
     url: string
   }[]
   totalEstimatedMatches: number
-  value: NewsValue[]
+  value: NewsValueReponse[]
   author: string
 }
 
