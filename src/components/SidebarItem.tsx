@@ -2,16 +2,15 @@ import { NavLink } from "react-router-dom"
 import { MenuItem } from "react-pro-sidebar"
 import { Typography, useTheme } from "@mui/material"
 import { tokens } from "@/theme"
+import { ReactNode } from "react"
 
-export default function SideBarItem({
-  title,
-  to,
-  icon,
-}: {
+type SideBarItemProps = {
   title: string
   to: string
-  icon: React.ReactNode
-}) {
+  icon: ReactNode
+}
+
+export default function SideBarItem({ title, to, icon }: SideBarItemProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

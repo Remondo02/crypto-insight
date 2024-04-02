@@ -1,37 +1,35 @@
 // declare module "*.jpg"
 
-interface INewsValue {
-  value: {
-    about: {
-      name: string
-      readLink: string
-    }[]
-    category: "Business"
-    datePublished: Date
-    description: string
-    image?: {
+export type NewsValue = {
+  about: {
+    name: string
+    readLink: string
+  }[]
+  category: "Business"
+  datePublished: Date
+  description: string
+  image?: {
+    contentUrl: string
+    thumbnail: {
       contentUrl: string
+      width: number
+      height: number
+    }
+  }
+  name: string
+  provider: {
+    _type: string
+    name: string
+    image?: {
       thumbnail: {
         contentUrl: string
-        width: number
-        height: number
       }
     }
-    name: string
-    provider: {
-      _type: string
-      name: string
-      image?: {
-        thumbnail: {
-          contentUrl: string
-        }
-      }
-    }[]
-    url: string
-  }
+  }[]
+  url: string
 }
 
-export interface INewsApiResponse {
+export type NewsApiResponse = {
   _type: string
   queryContext: {
     originalQuery: string
@@ -45,11 +43,11 @@ export interface INewsApiResponse {
     url: string
   }[]
   totalEstimatedMatches: number
-  value: INewsValue[]
+  value: NewsValue[]
   author: string
 }
 
-export interface IExchangesApiResponse {
+export type ExchangesApiResponse = {
   country?: string
   description?: string
   has_trading_incentive: boolean
@@ -64,7 +62,7 @@ export interface IExchangesApiResponse {
   years_established?: number
 }
 
-export interface IEventsApiResponse {
+export type EventsApiResponse = {
   date: Date
   date_to?: Date
   description: string
@@ -75,7 +73,7 @@ export interface IEventsApiResponse {
   proof_image_link?: string
 }
 
-export interface IEventCoinsApiResponse {
+export type EventCoinsApiResponse = {
   id: string
   is_active: boolean
   is_new: boolean
@@ -85,7 +83,7 @@ export interface IEventCoinsApiResponse {
   type: string
 }
 
-export interface ICryptosApiResponse {
+export type CryptosApiResponse = {
   "24hVolume": string
   btcPrice: string
   change: string
@@ -105,7 +103,7 @@ export interface ICryptosApiResponse {
   uuid: string
 }
 
-export interface ICryptoDetailsApiResponse {
+export type CryptoDetailsApiResponse = {
   "24hVolume": string
   allTimeHight: {
     price: string
@@ -150,7 +148,7 @@ export interface ICryptoDetailsApiResponse {
   websiteUrl: string
 }
 
-export interface ICryptoHistoryApiResponse {
+export type CryptoHistoryApiResponse = {
   status: string
   data: {
     change: string
@@ -161,7 +159,7 @@ export interface ICryptoHistoryApiResponse {
   }
 }
 
-export interface ICryptoGlobalStatsApiResponse {
+export type CryptoGlobalStatsApiResponse = {
   total: number
   total24hVolume: number
   totalCoins: number
@@ -170,10 +168,10 @@ export interface ICryptoGlobalStatsApiResponse {
   totalMarkets: number
 }
 
-export interface ICryptosFullApiResponse {
+export type CryptosFullApiResponse = {
   status: string
   data: {
-    coins: ICryptosApiResponse[]
-    stats: ICryptoGlobalStatsApiResponse
+    coins: CryptosApiResponse[]
+    stats: CryptoGlobalStatsApiResponse
   }
 }

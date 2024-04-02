@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Sidebar as ProSideBar, Menu, MenuItem } from "react-pro-sidebar"
+import { Sidebar as ProSideBar, Menu } from "react-pro-sidebar"
 import { Box, IconButton, Typography, useTheme } from "@mui/material"
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
 import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined"
@@ -58,7 +58,6 @@ export default function Sidebar() {
       </Box>
 
       <Menu
-        iconShape="square"
         menuItemStyles={{
           button: () => {
             const baseStyle = {

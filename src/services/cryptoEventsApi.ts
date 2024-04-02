@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-import { IEventsApiResponse, IEventCoinsApiResponse } from "@/apis";
+import { type EventsApiResponse, type EventCoinsApiResponse } from "@/apis"
 
 const cryptoHeaders = {
   "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
@@ -18,14 +18,14 @@ export const cryptoEventsApi = createApi({
   reducerPath: "cryptoEventsApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoEventsApi: builder.query<IEventsApiResponse, string>
-    ({
+    getCryptoEventsApi: builder.query<EventsApiResponse, string>({
       query: (coinId) => createRequest(`/${coinId}/events`),
     }),
-    getCryptoEventsCoinsApi: builder.query<IEventCoinsApiResponse, void>({
-      query: () => createRequest(baseUrl)
+    getCryptoEventsCoinsApi: builder.query<EventCoinsApiResponse, void>({
+      query: () => createRequest(baseUrl),
     }),
   }),
 })
 
-export const { useGetCryptoEventsApiQuery, useGetCryptoEventsCoinsApiQuery } = cryptoEventsApi
+export const { useGetCryptoEventsApiQuery, useGetCryptoEventsCoinsApiQuery } =
+  cryptoEventsApi

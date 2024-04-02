@@ -8,7 +8,12 @@ export default function EventsList({ events }) {
   const colors = tokens(theme.palette.mode)
   return (
     <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-      <Box backgroundColor={colors.primary[400]} p={2}>
+      <Box
+        sx={{
+          backgroundColor: colors.primary[400],
+          p: 2,
+        }}
+      >
         <Typography variant="h5" component="h3">
           Events
         </Typography>

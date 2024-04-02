@@ -15,22 +15,33 @@ import {
 import { tokens } from "../theme.js"
 
 import placeholderImage from "./../assets/images/cryptonews.jpg"
+import { PropsWithChildren, ReactNode } from "react"
 
-function NewsCardWrapper({ url, children }) {
+import { type NewsValue } from "@/apis"
+
+interface NewsCardProps extends NewsValue {
+  title: string
+  simplified: boolean
+}
+
+type NewsCardWrapperProps = PropsWithChildren<{
+  url: string
+  children: ReactNode
+}>
+
+function NewsCardWrapper({ url, children }: NewsCardWrapperProps) {
   return (
     <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
       {url ? (
-        <Link
-          to={url}
-          target="_blank"
-          rel="noreferrer"
-          style={{ textDecoration: "none" }}
-        >
-          {children}
-        </Link>
-      ) : (
-        { children }
-      )}
+      <Link
+        to={url}
+        target="_blank"
+        rel="noreferrer"
+        style={{ textDecoration: "none" }}
+      >
+        {children}
+      </Link>
+      ) : ({children})}
     </Grid>
   )
 }
@@ -43,7 +54,7 @@ export default function NewsCard({
   provider,
   datePublished,
   simplified,
-}) {
+}: NewsCardProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
@@ -102,7 +113,7 @@ export default function NewsCard({
               </Box>
               {datePublished && (
                 <Typography variant="body2" color={colors.grey[100]}>
-                  {moment(datePublished).startOf("ss").fromNow()}
+                  {moment(datePublished).startOf("s").fromNow()}
                 </Typography>
               )}
             </Box>

@@ -16,7 +16,7 @@ import {
   SectionHeader,
 } from "../components/index.js"
 
-import { ICryptoGlobalStatsApiResponse } from "@/apis"
+import { type CryptoGlobalStatsApiResponse } from "@/apis"
 
 export default function Dashboard() {
   const theme = useTheme()
@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   const styles = { color: colors.grey[100], fontSize: 26 }
 
-  function stats(globalStats: ICryptoGlobalStatsApiResponse) {
+  function stats(globalStats: CryptoGlobalStatsApiResponse) {
     return [
       {
         title: "Total Cryptocurrencies",

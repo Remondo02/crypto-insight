@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react"
+import { MouseEvent, MouseEventHandler, useState } from "react"
 import { Link } from "react-router-dom"
 import { Box, Button, Menu, MenuItem, useTheme } from "@mui/material"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
@@ -73,3 +73,14 @@ export default function Topbar() {
     </Box>
   )
 }
+
+// const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+//   const open = Boolean(anchorEl)
+//   const handleClick = (
+//     event: MouseEvent<HTMLButtonElement, MouseEvent>
+//   ): void => {
+//     setAnchorEl(event.currentTarget)
+//   }
+//   const handleClose = () => {
+//     setAnchorEl(null)
+//   }

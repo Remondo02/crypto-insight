@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-import { IExchangesApiResponse } from "@/apis";
+import { type ExchangesApiResponse } from "@/apis";
 
 const cryptoHeaders = {
   "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
@@ -18,7 +18,7 @@ export const cryptoExchangesApi = createApi({
   reducerPath: "cryptoExchangesApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoExchangesApi: builder.query<IExchangesApiResponse[], void>({
+    getCryptoExchangesApi: builder.query<ExchangesApiResponse[], void>({
       query: () => createRequest(baseUrl),
     }),
   }),

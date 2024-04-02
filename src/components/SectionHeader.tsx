@@ -2,15 +2,17 @@ import { Link } from "react-router-dom"
 import { Typography, Box, Button, useTheme } from "@mui/material"
 import { tokens } from "@/theme"
 
+type SecontHeaderProps = {
+  title: string
+  to?: string
+  buttonLabel?: string
+}
+
 export default function SectionHeader({
   title,
   to,
   buttonLabel,
-}: {
-  title: string
-  to?: string
-  buttonLabel?: string
-}) {
+}: SecontHeaderProps) {
   const showButton = !!(to && buttonLabel)
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)

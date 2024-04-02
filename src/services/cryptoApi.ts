@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 import {
-  ICryptoDetailsApiResponse,
-  ICryptoHistoryApiResponse,
-  ICryptosFullApiResponse
+  type CryptoDetailsApiResponse,
+  type CryptoHistoryApiResponse,
+  type CryptosFullApiResponse,
 } from "@/apis"
 
 const cryptoHeaders = {
@@ -22,18 +22,14 @@ export const cryptoApi = createApi({
   reducerPath: "cryptoApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getCryptoApi: builder.query<ICryptosFullApiResponse, number>({
+    getCryptoApi: builder.query<CryptosFullApiResponse, number>({
       query: (count) => createRequest(`/coins?limit=${count}`),
     }),
-    getCryptoDetailsApi: builder.query<ICryptoDetailsApiResponse, string>({
+    getCryptoDetailsApi: builder.query<CryptoDetailsApiResponse, string>({
       query: (coinId) => createRequest(`/coin/${coinId}`),
     }),
-    getCryptoHistoryApi: builder.query<
-      ICryptoHistoryApiResponse,
-      { coinId: string; timePeriod: number }
-    >({
-      query: ({ coinId, timePeriod }) =>
-        createRequest(`/coin/${coinId}/history/?timePeriod=${timePeriod}`),
+    getCryptoHistoryApi: builder.query<CryptoHistoryApiResponse, { coinId: string; timePeriod: number }>({
+      query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history/?timePeriod=${timePeriod}`),
     }),
   }),
 })
