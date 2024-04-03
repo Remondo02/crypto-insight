@@ -1,14 +1,16 @@
 import { type EventsApiResponse } from "@/apis"
 
-export interface EventsDataProps extends EventsApiResponse {
+export type EventsDataProps = {
   data: {
+    id: string
     title: string
     start: Date
     formatTime: number
     end: Date
+    link: string
     allDay: boolean
   }[]
-  latestEvent: Date
+  latestEvent: number | undefined
 }
 
 export default function eventsData(cryptoEvents: EventsApiResponse[]) {

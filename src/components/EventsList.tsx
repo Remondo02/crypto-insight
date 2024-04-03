@@ -2,8 +2,9 @@ import { Link } from "react-router-dom"
 import { Box, Grid, List, Typography, useTheme } from "@mui/material"
 import { tokens } from "@/theme"
 import EventsListItem from "./EventsListItem"
+import { type EventsDataProps } from "@/utils/eventsData"
 
-export default function EventsList({ events }) {
+export default function EventsList({ events }: { events: EventsDataProps }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (
