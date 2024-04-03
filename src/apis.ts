@@ -154,7 +154,7 @@ export type CryptoHistoryApiResponse = {
     change: string
     history: {
       price: string
-      timestamps: number
+      timestamp: number
     }[]
   }
 }

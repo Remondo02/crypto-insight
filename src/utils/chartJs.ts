@@ -1,7 +1,10 @@
 import { useTheme } from "@mui/material"
 import { tokens } from "@/theme"
+import { Chart } from "chart.js"
 
-export function useChartJsData(coinHistory) {
+import { type CryptoHistoryApiResponse } from "@/apis"
+
+export function useChartJsData(coinHistory: CryptoHistoryApiResponse) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const coinPrice = []
@@ -39,7 +42,7 @@ export function useChartJsSettings() {
 
   const plugin = {
     id: "custom_canvas_background_color",
-    beforeDraw: (chartJS, args, options) => {
+    beforeDraw: (chartJS: Chart, options?: any) => {
       const { ctx } = chartJS
       ctx.save()
       ctx.globalCompositeOperation = "destination-over"
