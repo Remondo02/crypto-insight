@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { BaseSyntheticEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { Box, Button, Menu, MenuItem, useTheme } from "@mui/material"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
@@ -10,9 +10,7 @@ export default function Topbar() {
   const colors = tokens(theme.palette.mode)
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
-  const handleClick = (event) => {
-    // let target = event.currentTarget as HTMLButtonElement
-    console.log(event.currentTarget)
+  const handleClick = (event: BaseSyntheticEvent) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
