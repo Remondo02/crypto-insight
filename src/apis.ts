@@ -59,7 +59,7 @@ export type ExchangesApiResponse = {
   trust_score: number
   trust_score_rank: number
   url: string
-  years_established?: number
+  year_established?: number
 }
 
 export type EventsApiResponse = {
@@ -173,5 +173,12 @@ export type CryptosFullApiResponse = {
   data: {
     coins: CryptosApiResponse[]
     stats: CryptoGlobalStatsApiResponse
+  }
+}
+
+export type CryptoDetailsTestApiResponse = {
+  status: string
+  data: {
+    coin: CryptoDetailsApiResponse
   }
 }

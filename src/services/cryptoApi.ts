@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 import {
-  type CryptoDetailsApiResponse,
+  type CryptoDetailsTestApiResponse,
   type CryptoHistoryApiResponse,
   type CryptosFullApiResponse,
 } from "@/apis"
@@ -25,10 +25,10 @@ export const cryptoApi = createApi({
     getCryptoApi: builder.query<CryptosFullApiResponse, number>({
       query: (count) => createRequest(`/coins?limit=${count}`),
     }),
-    getCryptoDetailsApi: builder.query<CryptoDetailsApiResponse, string>({
+    getCryptoDetailsApi: builder.query<CryptoDetailsTestApiResponse, string>({
       query: (coinId) => createRequest(`/coin/${coinId}`),
     }),
-    getCryptoHistoryApi: builder.query<CryptoHistoryApiResponse, { coinId: string; timePeriod: number }>({
+    getCryptoHistoryApi: builder.query<CryptoHistoryApiResponse, { coinId: string; timePeriod: string }>({
       query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history/?timePeriod=${timePeriod}`),
     }),
   }),

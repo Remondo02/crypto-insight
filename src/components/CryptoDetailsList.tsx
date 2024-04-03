@@ -34,8 +34,8 @@ function getIcon(type: string) {
 type CryptoDetailsListItemProps = {
   title: string
   subtitle: string
-  links?: string
-  stats?: {title: string, value: ReactNode, icon: ReactNode}[]
+  links?: { name: string; url: string; type: string }[]
+  stats?: { title: string; value: ReactNode; icon: ReactNode }[]
   name?: string
 }
 

@@ -14,11 +14,23 @@ import {
 import { tokens } from "@/theme"
 import { useChartJsData, useChartJsSettings } from "@/utils"
 
-export default function LineChart({ coinHistory, currentPrice, coinName }) {
+import { type CryptoHistoryApiResponse } from "@/apis"
+
+type LineChartProps = {
+  coinHistory: CryptoHistoryApiResponse
+  currentPrice: string
+  coinName: string
+}
+
+export default function LineChart({
+  coinHistory,
+  currentPrice,
+  coinName,
+}: LineChartProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const { options, plugins } = useChartJsSettings()
-  const data = useChartJsData({ coinHistory })
+  const data = useChartJsData(coinHistory)
 
   ChartJS.register(
     CategoryScale,

@@ -1,7 +1,7 @@
 import { useTheme } from "@mui/material"
 import { tokens } from "@/theme"
 
-export function useChartJsData({ coinHistory }) {
+export function useChartJsData(coinHistory) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const coinPrice = []

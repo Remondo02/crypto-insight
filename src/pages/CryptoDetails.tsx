@@ -18,7 +18,7 @@ import {
   useGetCryptoHistoryApiQuery,
 } from "@/services/cryptoApi"
 import {
-  AlertMessage,
+  // AlertMessage,
   Header,
   LineChart,
   Loader,
@@ -106,6 +106,10 @@ function getGenericStats(cryptoDetails: CryptoDetailsApiResponse) {
 export default function CryptoDetails() {
   const { coinId } = useParams()
 
+  if(!coinId) {
+    throw new Error('No coin ID found.')
+  } 
+
   const [timePeriod, setTimePeriod] = useState("7d")
   const { data, error, isLoading } = useGetCryptoDetailsApiQuery(coinId)
   const {
@@ -123,8 +127,8 @@ export default function CryptoDetails() {
   // if (errorHistory) {
   //   errors = [...errors, errorHistory]
   // }
-
   const cryptoDetails = data?.data?.coin
+  console.log(cryptoDetails?.links)
 
   const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"]
 
@@ -156,7 +160,7 @@ export default function CryptoDetails() {
           {isFetchingHistory ? (
             <Loader />
           ) : (
-            <LineChart
+            cryptoDetails && <LineChart
               coinHistory={coinHistory}
               currentPrice={millify(cryptoDetails?.price)}
               coinName={cryptoDetails?.name}

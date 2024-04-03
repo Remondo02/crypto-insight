@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import millify from "millify"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import FlagCircleOutlinedIcon from "@mui/icons-material/FlagCircleOutlined"
@@ -16,14 +16,15 @@ import {
 } from "@mui/material"
 import { tokens } from "@/theme"
 import { AlertMessage } from "./index"
+import { type ExchangesApiResponse } from "@/apis"
 
-export default function ExchangesAccordion({ exchange }) {
+export default function ExchangesAccordion({exchange}: {exchange: ExchangesApiResponse}) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const [expanded, setExpanded] = useState(false)
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false)
+  const [expanded, setExpanded] = useState("")
+  const handleChange = (panel: string) => (event, expanded) => {
+    setExpanded(expanded ? panel : "")
   }
   return (
     <Accordion
@@ -56,7 +57,6 @@ export default function ExchangesAccordion({ exchange }) {
                   sx={{ width: 24, height: 24 }}
                   src={exchange.image}
                   alt=""
-                  loading="lazy"
                 />
               </Box>
             )}
@@ -117,7 +117,7 @@ export default function ExchangesAccordion({ exchange }) {
                 underline="hover"
                 sx={{ color: colors.grey[100] }}
                 target="_blank"
-                el="noreferrer"
+                rel="noreferrer"
               >
                 {exchange.url}
               </Link>
