@@ -31,22 +31,24 @@ function getIcon(type: string) {
   return <LanguageOutlinedIcon />
 }
 
-type CryptoDetailsListItemProps = {
+interface ICryptoDetailsListItemProps extends StatsLinksProps {
   title: string
   subtitle: string
-  links?: { name: string; url: string; type: string }[]
-  stats?: { title: string; value: ReactNode; icon: ReactNode }[]
   name?: string
 }
 
-function CryptoDetailsListItem({ data }) {
+type StatsLinksProps = {
+  links?: { name: string; url: string; type: string }[]
+  stats?: { title: string; value: ReactNode; icon: ReactNode }[]
+}
+
+function CryptoDetailsListItem({ stats, links }: StatsLinksProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (
     <List disablePadding sx={{ backgroundColor: colors.primary[400] }}>
-      {data.map((obj, i) => {
-        const hasUrl = obj.hasOwnProperty("url")
-        return hasUrl ? (
+      {links?.map((obj, i) => {
+        return (
           <ListItem key={i} disablePadding divider={true}>
             <ListItemButton
               component={Link}
@@ -69,7 +71,10 @@ function CryptoDetailsListItem({ data }) {
               />
             </ListItemButton>
           </ListItem>
-        ) : (
+        )
+      })}
+      {stats?.map((obj, i) => {
+        return (
           <ListItem key={i} divider={true}>
             <ListItemAvatar>
               <Avatar sx={{ backgroundColor: colors.greenAccent[500] }}>
@@ -101,7 +106,7 @@ export default function CryptoDetailsList({
   subtitle,
   stats,
   links,
-}: CryptoDetailsListItemProps) {
+}: ICryptoDetailsListItemProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
@@ -120,8 +125,8 @@ export default function CryptoDetailsList({
           {subtitle}
         </Typography>
       </Box>
-      {stats && <CryptoDetailsListItem data={stats} />}
-      {links && <CryptoDetailsListItem data={links} />}
+      {stats && <CryptoDetailsListItem stats={stats} />}
+      {links && <CryptoDetailsListItem links={links} />}
     </Grid>
   )
 }
