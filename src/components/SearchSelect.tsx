@@ -7,7 +7,7 @@ type SearchSelectProps = {
   optionValue: {
     id: string
     name: string
-  }[]
+  }[] | string[]
   onSearchChange: Dispatch<SetStateAction<string>>
 }
 

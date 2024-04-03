@@ -25,8 +25,9 @@ import {
   SearchSelect,
   CryptoDetailsList,
 } from "@/components"
+import { type CryptoDetailsApiResponse } from "@/apis"
 
-function getStats(cryptoDetails) {
+function getStats(cryptoDetails: CryptoDetailsApiResponse) {
   return [
     {
       title: "Price to USD",
@@ -63,7 +64,7 @@ function getStats(cryptoDetails) {
   ]
 }
 
-function getGenericStats(cryptoDetails) {
+function getGenericStats(cryptoDetails: CryptoDetailsApiResponse) {
   return [
     {
       title: "Number Of Markets",
@@ -109,19 +110,19 @@ export default function CryptoDetails() {
   const { data, error, isLoading } = useGetCryptoDetailsApiQuery(coinId)
   const {
     data: coinHistory,
-    error: errorHistory,
+    // error: errorHistory,
     isLoading: isLoadingHistory,
     isFetching: isFetchingHistory,
   } = useGetCryptoHistoryApiQuery({ coinId, timePeriod })
 
-  let errors = []
+  // let errors = []
 
-  if (error) {
-    errors = [...errors, error]
-  }
-  if (errorHistory) {
-    errors = [...errors, errorHistory]
-  }
+  // if (error) {
+  //   errors = [...errors, error]
+  // }
+  // if (errorHistory) {
+  //   errors = [...errors, errorHistory]
+  // }
 
   const cryptoDetails = data?.data?.coin
 
@@ -130,12 +131,12 @@ export default function CryptoDetails() {
   return (
     <Box height={isLoading ? "inherit" : ""}>
       {isLoading && isLoadingHistory && <Loader />}
-      <Box display="flex" flexDirection="column" gap={2}>
+      {/* <Box display="flex" flexDirection="column" gap={2}>
         {errors.length > 0 &&
           errors.map((error, i) => (
             <AlertMessage key={i} type="error" error={error} />
           ))}
-      </Box>
+      </Box> */}
       {cryptoDetails && (
         <Header
           title={`${cryptoDetails?.name}  (${cryptoDetails?.symbol})`}

@@ -19,8 +19,9 @@ import TwitterIcon from "@mui/icons-material/Twitter"
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined"
 import YouTubeIcon from "@mui/icons-material/YouTube"
 import { tokens } from "@/theme"
+import { ReactNode } from "react"
 
-function getIcon(type) {
+function getIcon(type: string) {
   if (type === "github") return <GitHubIcon />
   if (type === "reddit") return <RedditIcon />
   if (type === "telegram") return <TelegramIcon />
@@ -30,7 +31,17 @@ function getIcon(type) {
   return <LanguageOutlinedIcon />
 }
 
-function CryptoDetailsListItem({ data, colors }) {
+type CryptoDetailsListItemProps = {
+  title: string
+  subtitle: string
+  links?: string
+  stats?: {title: string, value: ReactNode, icon: ReactNode}[]
+  name?: string
+}
+
+function CryptoDetailsListItem({ data }) {
+  const theme = useTheme()
+  const colors = tokens(theme.palette.mode)
   return (
     <List disablePadding sx={{ backgroundColor: colors.primary[400] }}>
       {data.map((obj, i) => {
@@ -85,7 +96,12 @@ function CryptoDetailsListItem({ data, colors }) {
   )
 }
 
-export default function CryptoDetailsList({ title, subtitle, stats, links }) {
+export default function CryptoDetailsList({
+  title,
+  subtitle,
+  stats,
+  links,
+}: CryptoDetailsListItemProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
@@ -104,8 +120,8 @@ export default function CryptoDetailsList({ title, subtitle, stats, links }) {
           {subtitle}
         </Typography>
       </Box>
-      {stats && <CryptoDetailsListItem data={stats} colors={colors} />}
-      {links && <CryptoDetailsListItem data={links} colors={colors} />}
+      {stats && <CryptoDetailsListItem data={stats} />}
+      {links && <CryptoDetailsListItem data={links} />}
     </Grid>
   )
 }

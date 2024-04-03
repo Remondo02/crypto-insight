@@ -84,7 +84,7 @@ export type EventCoinsApiResponse = {
 }
 
 export type CryptosApiResponse = {
-  "24hVolume": string
+  "24hVolume": number
   btcPrice: string
   change: string
   coinrankingUrl: string
@@ -93,9 +93,9 @@ export type CryptosApiResponse = {
   iconUrl: string
   listedAt: number
   lowVolume: boolean
-  marketCap: string
+  marketCap: number
   name: string
-  price: string
+  price: number
   rank: number
   sparkline: string[]
   symbol: string
@@ -104,9 +104,9 @@ export type CryptosApiResponse = {
 }
 
 export type CryptoDetailsApiResponse = {
-  "24hVolume": string
-  allTimeHight: {
-    price: string
+  "24hVolume": number
+  allTimeHigh: {
+    price: number
     timestamp: number
   }
   btcPrice: string
@@ -125,21 +125,21 @@ export type CryptoDetailsApiResponse = {
   }[]
   listedAt: number
   lowVolume: boolean
-  marketCap: string
+  marketCap: number
   name: string
   notices: null
   numberOfExchanges: number
   numberOfMarkets: number
-  price: string
+  price: number
   priceAt: number
   rank: number
   sparkline: string[]
   supply: {
-    circulating: string
+    circulating: number
     confirmed: boolean
     max: string
     supplyAt: number
-    total: string
+    total: number
   }
   symbol: string
   tags: string[]

@@ -1,8 +1,9 @@
 import { ListItem, ListItemText, Typography, useTheme } from "@mui/material"
 import { formatDate } from "@fullcalendar/core"
 import { tokens } from "@/theme"
+import { type EventDataProps } from "@/utils/eventsData"
 
-export default function EventsListItem({ event }) {
+export default function EventsListItem({ event }: { event: EventDataProps }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (

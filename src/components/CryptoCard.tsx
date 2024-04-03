@@ -12,8 +12,13 @@ import {
   useTheme,
 } from "@mui/material"
 import { tokens } from "@/theme"
+import { type CryptosApiResponse } from "@/apis"
 
-export default function CryptoCard({ currency }) {
+export default function CryptoCard({
+  currency,
+}: {
+  currency: CryptosApiResponse
+}) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const styles = { backgroundColor: colors.primary[400] }
@@ -35,7 +40,7 @@ export default function CryptoCard({ currency }) {
   )
 }
 
-function CryptoCardContent({ currency }) {
+function CryptoCardContent({ currency }: { currency: CryptosApiResponse }) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   return (

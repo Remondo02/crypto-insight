@@ -1,9 +1,10 @@
 import { Box, Typography, Divider, useTheme } from "@mui/material"
 import { tokens } from "@/theme"
+import { ReactNode } from "react"
 
 type HeaderProps = {
   title: string
-  subtitle: string
+  subtitle: ReactNode
 }
 
 export default function Header({ title, subtitle }: HeaderProps) {
