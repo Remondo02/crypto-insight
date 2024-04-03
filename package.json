@@ -39,6 +39,7 @@
     "@types/node": "^20.12.2",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@vitejs/plugin-react": "^4.2.0",
     "eslint": "^8.53.0",
     "eslint-plugin-react": "^7.33.2",
