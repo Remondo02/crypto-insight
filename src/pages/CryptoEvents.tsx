@@ -65,21 +65,21 @@ export default function CryptoEvents() {
             <SearchSelect
               inputLabel="Select a Crypto"
               search={search}
-              optionValue={getCoins({ cryptoCoins })}
+              optionValue={getCoins(cryptoCoins)}
               onSearchChange={setSearch}
             />
           </Box>
           {isFetchingEvents ? (
             <Loader />
-          ) : eventsData({ cryptoEvents }).data.length > 0 ? (
+          ) : eventsData(cryptoEvents).data.length > 0 ? (
             <Box sx={{ flexGrow: 1 }}>
               <Grid
                 container
                 spacing={{ xs: 7, md: 3 }}
                 columns={{ xs: 4, sm: 4, md: 8, lg: 12, xl: 16 }}
               >
-                <EventsList events={eventsData({ cryptoEvents })} />
-                <Calendar events={eventsData({ cryptoEvents })} />
+                <EventsList events={eventsData(cryptoEvents)} />
+                <Calendar events={eventsData(cryptoEvents)} />
               </Grid>
             </Box>
           ) : (

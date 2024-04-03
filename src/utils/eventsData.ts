@@ -1,10 +1,12 @@
-export default function eventsData({ cryptoEvents }) {
+import { type EventsApiResponse } from "@/apis"
+
+export default function eventsData(cryptoEvents: EventsApiResponse[]) {
   const convertedData = []
   let latestEvent
   let endDate
 
   for (const event of cryptoEvents) {
-    if (event.date_to < event.date) {
+    if (event.date_to && event.date_to < event.date) {
       endDate = event.date
     }
     convertedData.push({
@@ -19,7 +21,7 @@ export default function eventsData({ cryptoEvents }) {
 
     latestEvent = convertedData.reduce(
       (acc, val) =>
-        acc.formatTime > val.formatTime ? acc.formatTime : val.formatTime,
+        acc > val.formatTime ? acc : val.formatTime,
       0
     )
   }
