@@ -1,5 +1,16 @@
 import { type EventsApiResponse } from "@/apis"
 
+export interface EventsDataProps extends EventsApiResponse {
+  data: {
+    title: string
+    start: Date
+    formatTime: number
+    end: Date
+    allDay: boolean
+  }[]
+  latestEvent: Date
+}
+
 export default function eventsData(cryptoEvents: EventsApiResponse[]) {
   const convertedData = []
   let latestEvent
@@ -20,8 +31,7 @@ export default function eventsData(cryptoEvents: EventsApiResponse[]) {
     })
 
     latestEvent = convertedData.reduce(
-      (acc, val) =>
-        acc > val.formatTime ? acc : val.formatTime,
+      (acc, val) => (acc > val.formatTime ? acc : val.formatTime),
       0
     )
   }

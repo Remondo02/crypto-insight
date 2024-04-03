@@ -4,8 +4,9 @@ import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import { tokens } from "@/theme"
+import {type EventsDataProps } from "@/utils/eventsData"
 
-export default function Calendar({ events }) {
+export default function Calendar(events: EventsDataProps) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
