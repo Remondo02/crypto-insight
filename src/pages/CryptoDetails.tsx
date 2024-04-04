@@ -18,7 +18,7 @@ import {
   useGetCryptoHistoryApiQuery,
 } from "@/services/cryptoApi"
 import {
-  // AlertMessage,
+  AlertMessage,
   Header,
   LineChart,
   Loader,
@@ -26,6 +26,8 @@ import {
   CryptoDetailsList,
 } from "@/components"
 import { type CryptoDetailsApiResponse } from "@/apis"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
+import { SerializedError } from "@reduxjs/toolkit"
 
 function getStats(cryptoDetails: CryptoDetailsApiResponse) {
   return [
@@ -106,27 +108,29 @@ function getGenericStats(cryptoDetails: CryptoDetailsApiResponse) {
 export default function CryptoDetails() {
   const { coinId } = useParams()
 
-  if(!coinId) {
-    throw new Error('No coin ID found.')
-  } 
+  if (!coinId) {
+    throw new Error("No coin ID found.")
+  }
 
   const [timePeriod, setTimePeriod] = useState("7d")
-  const { data, error, isLoading } = useGetCryptoDetailsApiQuery(coinId)
+  const { data, isError, error, isLoading } =
+    useGetCryptoDetailsApiQuery(coinId)
   const {
     data: coinHistory,
-    // error: errorHistory,
+    isError: isErrorHistory,
+    error: errorHistory,
     isLoading: isLoadingHistory,
     isFetching: isFetchingHistory,
   } = useGetCryptoHistoryApiQuery({ coinId, timePeriod })
 
-  // let errors = []
+  let errors: Array<string | FetchBaseQueryError | SerializedError> = []
 
-  // if (error) {
-  //   errors = [...errors, error]
-  // }
-  // if (errorHistory) {
-  //   errors = [...errors, errorHistory]
-  // }
+  if (isError && error) {
+    errors = [...errors, error]
+  }
+  if (isErrorHistory && errorHistory) {
+    errors = [...errors, errorHistory]
+  }
   const cryptoDetails = data?.data?.coin
 
   const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"]
@@ -134,16 +138,16 @@ export default function CryptoDetails() {
   return (
     <Box height={isLoading ? "inherit" : ""}>
       {isLoading && isLoadingHistory && <Loader />}
-      {/* <Box display="flex" flexDirection="column" gap={2}>
+      <Box display="flex" flexDirection="column" gap={2}>
         {errors.length > 0 &&
           errors.map((error, i) => (
             <AlertMessage key={i} type="error" error={error} />
           ))}
-      </Box> */}
+      </Box>
       {cryptoDetails && (
         <Header
           title={`${cryptoDetails?.name}  (${cryptoDetails?.symbol})`}
-          subtitle={HTMLReactParser(cryptoDetails?.description || '')}
+          subtitle={HTMLReactParser(cryptoDetails?.description || "")}
         />
       )}
       {coinHistory && (
@@ -159,11 +163,13 @@ export default function CryptoDetails() {
           {isFetchingHistory ? (
             <Loader />
           ) : (
-            cryptoDetails && <LineChart
-              coinHistory={coinHistory}
-              currentPrice={millify(cryptoDetails?.price)}
-              coinName={cryptoDetails?.name}
-            />
+            cryptoDetails && (
+              <LineChart
+                coinHistory={coinHistory}
+                currentPrice={millify(cryptoDetails?.price)}
+                coinName={cryptoDetails?.name}
+              />
+            )
           )}
         </>
       )}

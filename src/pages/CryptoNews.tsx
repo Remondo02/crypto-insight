@@ -9,23 +9,23 @@ import {
   NewsCard,
   SearchSelect,
 } from "@/components"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
+import { SerializedError } from "@reduxjs/toolkit"
 
 export default function CryptoNews({ simplified }: { simplified?: boolean }) {
   const count = simplified ? 8 : 100
   const {
     data: cryptos,
-    // isError: isErrorCrypto,
-    // error: errorCrypto,
-    // isLoading: isLoadingCrypto,
-    // isSuccess: isSuccessCrypto,
+    isError: isErrorCrypto,
+    error: errorCrypto,
   } = useGetCryptoApiQuery(100)
 
   const [search, setSearch] = useState("Cryptocurrency")
 
   const {
     data: cryptoNews,
-    // isError: isErrorNews,
-    // error: errorNews,
+    isError: isErrorNews,
+    error: errorNews,
     isLoading: isLoadingNews,
     isFetching: isFetchingNews,
     isSuccess: isSuccessNews,
@@ -34,14 +34,14 @@ export default function CryptoNews({ simplified }: { simplified?: boolean }) {
     count: count,
   })
 
-  // let errors = []
+  let errors: Array<string | FetchBaseQueryError | SerializedError> = []
 
-  // if (errorCrypto) {
-  //   errors = [...errors, errorCrypto]
-  // }
-  // if (errorNews) {
-  //   errors = [...errors, errorNews]
-  // }
+  if (isErrorCrypto && errorCrypto) {
+    errors = [...errors, errorCrypto]
+  }
+  if (isErrorNews && errorNews) {
+    errors = [...errors, errorNews]
+  }
 
   const coins = cryptos?.data?.coins || []
 
@@ -62,14 +62,14 @@ export default function CryptoNews({ simplified }: { simplified?: boolean }) {
           />
         </Box>
       )}
-      {/* {isErrorCrypto ||
+      {isErrorCrypto ||
         (isErrorNews && (
           <Box display="flex" flexDirection="column" gap={2}>
             {errors.map((error, i) => (
               <AlertMessage key={i} type="error" error={error} />
             ))}
           </Box>
-        ))} */}
+        ))}
       {isLoadingNews && <Loader />}
       {isSuccessNews && (
         <Box height={isFetchingNews ? "inherit" : ""}>

@@ -13,33 +13,35 @@ import {
   SearchSelect,
 } from "@/components"
 import { eventsData, getCoins } from "@/utils"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
+import { SerializedError } from "@reduxjs/toolkit"
 
 export default function CryptoEvents() {
   const [search, setSearch] = useState("btc-bitcoin")
 
   const {
     data: cryptoCoins,
-    // isError: isErrorCoins,
-    // error: cryptoCoinsError,
+    isError: isErrorCoins,
+    error: cryptoCoinsError,
     isLoading: isLoadingCoins,
   } = useGetCryptoEventsCoinsApiQuery()
 
   const {
     data: cryptoEvents,
-    // isError: isErrorEvents,
-    // error: cryptoEventsError,
+    isError: isErrorEvents,
+    error: cryptoEventsError,
     isLoading: isLoadingEvents,
     isFetching: isFetchingEvents,
   } = useGetCryptoEventsApiQuery(search)
 
-  // let errors = []
+  let errors: Array<string | FetchBaseQueryError | SerializedError> = []
 
-  // if (cryptoCoinsError) {
-  //   errors = [...errors, cryptoCoinsError]
-  // }
-  // if (cryptoEventsError) {
-  //   errors = [...errors, cryptoEventsError]
-  // }
+  if (isErrorCoins && cryptoCoinsError) {
+    errors = [...errors, cryptoCoinsError]
+  }
+  if (isErrorEvents && cryptoEventsError) {
+    errors = [...errors, cryptoEventsError]
+  }
 
   return (
     <Box height="inherit">
@@ -49,14 +51,14 @@ export default function CryptoEvents() {
           subtitle="List of events related to a specific cryptocurrency"
         />
       </Box>
-      {/* {isErrorCoins ||
+      {isErrorCoins ||
         (isErrorEvents && (
           <Box display="flex" flexDirection="column" gap={2}>
             {errors.map((error, i) => (
               <AlertMessage key={i} type="error" error={error} />
             ))}
           </Box>
-        ))} */}
+        ))}
       {(isLoadingCoins || isLoadingEvents) && <Loader />}
       <Box display="flex" flexDirection="column" gap={2}></Box>
       {cryptoCoins && cryptoEvents && (

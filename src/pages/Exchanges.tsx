@@ -7,7 +7,7 @@ export default function Exchanges() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const { data, isError, error, isLoading, isSuccess } =
+  const { data, error, isLoading, isSuccess } =
     useGetCryptoExchangesApiQuery()
 
   return (
@@ -19,7 +19,7 @@ export default function Exchanges() {
         />
       </Box>
       <Box display="flex" flexDirection="column" gap={2}>
-        {/* {isError && <AlertMessage type="error" error={error} />} */}
+        {error && <AlertMessage type="error" error={error} />}
       </Box>
       {isLoading && <Loader />}
       {isSuccess && (
