@@ -62,14 +62,13 @@ export default function CryptoNews({ simplified }: { simplified?: boolean }) {
           />
         </Box>
       )}
-      {isErrorCrypto ||
-        (isErrorNews && (
-          <Box display="flex" flexDirection="column" gap={2}>
-            {errors.map((error, i) => (
-              <AlertMessage key={i} type="error" error={error} />
-            ))}
-          </Box>
-        ))}
+      {errors.length > 0 && (
+        <Box display="flex" flexDirection="column" gap={2}>
+          {errors.map((error, i) => (
+            <AlertMessage key={i} type="error" error={error} />
+          ))}
+        </Box>
+      )}
       {isLoadingNews && <Loader />}
       {isSuccessNews && (
         <Box height={isFetchingNews ? "inherit" : ""}>

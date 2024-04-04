@@ -138,12 +138,14 @@ export default function CryptoDetails() {
   return (
     <Box height={isLoading ? "inherit" : ""}>
       {isLoading && isLoadingHistory && <Loader />}
-      <Box display="flex" flexDirection="column" gap={2}>
-        {errors.length > 0 &&
-          errors.map((error, i) => (
-            <AlertMessage key={i} type="error" error={error} />
-          ))}
-      </Box>
+      {errors.length > 0 && (
+        <Box display="flex" flexDirection="column" gap={2}>
+          {errors.length > 0 &&
+            errors.map((error, i) => (
+              <AlertMessage key={i} type="error" error={error} />
+            ))}
+        </Box>
+      )}
       {cryptoDetails && (
         <Header
           title={`${cryptoDetails?.name}  (${cryptoDetails?.symbol})`}

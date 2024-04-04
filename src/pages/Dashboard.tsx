@@ -21,7 +21,7 @@ import { type CryptoGlobalStatsApiResponse } from "@/apis"
 export default function Dashboard() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
-  const { data, isError, error, isLoading, isSuccess } = useGetCryptoApiQuery(1)
+  const { data, error, isLoading, isSuccess } = useGetCryptoApiQuery(1)
 
   const styles = { color: colors.grey[100], fontSize: 26 }
 
@@ -63,7 +63,7 @@ export default function Dashboard() {
       />
       <Box mb={7}>
         <SectionHeader title="Global Crypto Stats" />
-        {isError && <AlertMessage type="error" error={error} />}
+        {error && <AlertMessage type="error" error={error} />}
         {isLoading && <Loader />}
         {isSuccess && (
           <Box

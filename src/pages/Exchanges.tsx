@@ -7,8 +7,7 @@ export default function Exchanges() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const { data, error, isLoading, isSuccess } =
-    useGetCryptoExchangesApiQuery()
+  const { data, error, isLoading, isSuccess } = useGetCryptoExchangesApiQuery()
 
   return (
     <Box height="inherit">
@@ -18,9 +17,11 @@ export default function Exchanges() {
           subtitle="List of top 100 exchanges plateformes"
         />
       </Box>
-      <Box display="flex" flexDirection="column" gap={2}>
-        {error && <AlertMessage type="error" error={error} />}
-      </Box>
+      {error && (
+        <Box display="flex" flexDirection="column" gap={2}>
+          <AlertMessage type="error" error={error} />
+        </Box>
+      )}
       {isLoading && <Loader />}
       {isSuccess && (
         <>

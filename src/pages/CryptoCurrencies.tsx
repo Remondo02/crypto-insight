@@ -9,7 +9,7 @@ export default function CryptoCurrencies({
   simplified?: boolean
 }) {
   const count = simplified ? 12 : 100
-  const { data, isError, error, isLoading } = useGetCryptoApiQuery(count)
+  const { data, error, isLoading } = useGetCryptoApiQuery(count)
 
   const [search, setSearch] = useState("")
 
@@ -32,7 +32,7 @@ export default function CryptoCurrencies({
           />
         </Box>
       )}
-      {isError && <AlertMessage type="error" error={error} />}
+      {error && <AlertMessage type="error" error={error} />}
       {isLoading && <Loader />}
       {visibleItems && (
         <>

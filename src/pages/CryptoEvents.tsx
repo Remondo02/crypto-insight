@@ -51,14 +51,13 @@ export default function CryptoEvents() {
           subtitle="List of events related to a specific cryptocurrency"
         />
       </Box>
-      {isErrorCoins ||
-        (isErrorEvents && (
-          <Box display="flex" flexDirection="column" gap={2}>
-            {errors.map((error, i) => (
-              <AlertMessage key={i} type="error" error={error} />
-            ))}
-          </Box>
-        ))}
+      {errors.length > 0 && (
+        <Box display="flex" flexDirection="column" gap={2}>
+          {errors.map((error, i) => (
+            <AlertMessage key={i} type="error" error={error} />
+          ))}
+        </Box>
+      )}
       {(isLoadingCoins || isLoadingEvents) && <Loader />}
       <Box display="flex" flexDirection="column" gap={2}></Box>
       {cryptoCoins && cryptoEvents && (
