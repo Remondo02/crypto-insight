@@ -1,4 +1,10 @@
-import { useState } from "react"
+import {
+  BaseSyntheticEvent,
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+  useState,
+} from "react"
 import millify from "millify"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import FlagCircleOutlinedIcon from "@mui/icons-material/FlagCircleOutlined"
@@ -18,13 +24,19 @@ import { tokens } from "@/theme"
 import { AlertMessage } from "./index"
 import { type ExchangesApiResponse } from "@/apis"
 
-export default function ExchangesAccordion({exchange}: {exchange: ExchangesApiResponse}) {
+export default function ExchangesAccordion({
+  exchange,
+}: {
+  exchange: ExchangesApiResponse
+}) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
   const [expanded, setExpanded] = useState("")
-  const handleChange = (panel: string) => (event, expanded) => {
-    setExpanded(expanded ? panel : "")
+  const handleChange = () => {
+    setExpanded((val) =>
+      val.includes(`panel${exchange.id}`) ? "" : `panel${exchange.id}`
+    )
   }
   return (
     <Accordion
@@ -34,7 +46,7 @@ export default function ExchangesAccordion({exchange}: {exchange: ExchangesApiRe
       }}
       key={exchange.id}
       expanded={expanded === `panel${exchange.id}`}
-      onChange={handleChange(`panel${exchange.id}`)}
+      onChange={handleChange}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
