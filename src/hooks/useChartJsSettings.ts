@@ -1,13 +1,13 @@
 import { useTheme } from "@mui/material"
 import { tokens } from "@/theme"
-import { Chart } from "chart.js"
+import { Chart, Plugin } from "chart.js"
 
 export function useChartJsSettings() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const plugin = {
-    id: "custom_canvas_background_color",
+const customCanvasBGColorLine: Plugin = {
+    id: "customCanvasBGColorLine",
     beforeDraw: (chartJS: Chart, args: { cancelable: true }, options?: any) => {
       const { ctx } = chartJS
       ctx.save()
@@ -25,13 +25,13 @@ export function useChartJsSettings() {
       padding: 24,
     },
     plugins: {
-      custom_canvas_background_color: {
+        customCanvasBGColorLine: {
         color: colors.primary[400],
       },
     },
   }
 
-  const plugins = [plugin]
+  const plugins = [customCanvasBGColorLine]
 
   return { options, plugins }
 }
