@@ -44,6 +44,7 @@
   },
   "include": [
     "./**/index.d.ts",
+    "./**/customTheme.d.ts",
     "src"
   ],
   // "exclude": ["dist"],

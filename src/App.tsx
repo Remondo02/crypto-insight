@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
-import { CssBaseline, ThemeProvider } from "@mui/material"
+import { CssBaseline, Theme, ThemeProvider } from "@mui/material"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { ColorModeContext, useMode } from "./theme"
 import {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
 
 function Root({ children }: PropsWithChildren) {
   const [theme, colorMode] = useMode()
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"))
 
   const contentStyles = children !== undefined ? "content-error" : "content"
 
