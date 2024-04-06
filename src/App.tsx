@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
-import { CssBaseline, Theme, ThemeProvider } from "@mui/material"
-import useMediaQuery from "@mui/material/useMediaQuery"
+import { CssBaseline, ThemeProvider } from "@mui/material"
 import { ColorModeContext, useMode } from "./theme"
 import {
   CryptoCurrencies,
@@ -11,14 +10,18 @@ import {
   ErrorPage,
   Exchanges,
 } from "./pages"
-import { ThemeButton, Topbar, Sidebar } from "./components"
+import { MainContent } from "./components"
 import { PropsWithChildren } from "react"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <Root><ErrorPage /></Root>,
+    errorElement: (
+      <Root>
+        <ErrorPage />
+      </Root>
+    ),
     children: [
       { path: "", element: <Dashboard /> },
       { path: "/cryptocurrencies", element: <CryptoCurrencies /> },
@@ -32,24 +35,16 @@ const router = createBrowserRouter([
 
 function Root({ children }: PropsWithChildren) {
   const [theme, colorMode] = useMode()
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"))
-
   const contentStyles = children !== undefined ? "content-error" : "content"
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          {isMobile ? <Topbar /> : <Sidebar />}
-          <main>
-            {!isMobile && <ThemeButton />}
-            <div className={contentStyles}>
-              <Outlet />
-              {children}
-            </div>
-          </main>
-        </div>
+        <MainContent wrapper={contentStyles}>
+          <Outlet />
+          {children}
+        </MainContent>
       </ThemeProvider>
     </ColorModeContext.Provider>
   )
