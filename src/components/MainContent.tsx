@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom"
 import { Theme } from "@mui/material"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { ThemeButton, Topbar, Sidebar } from "@/components"
@@ -16,7 +15,9 @@ export default function MainContent({ children, wrapper }: MainContentProps) {
       {isMobile ? <Topbar /> : <Sidebar />}
       <main>
         {!isMobile && <ThemeButton />}
-        <div className={wrapper}>{children}</div>
+        <div className={wrapper}>
+          {children}
+        </div>
       </main>
     </div>
   )
