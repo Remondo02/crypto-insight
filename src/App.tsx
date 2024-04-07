@@ -43,7 +43,7 @@ function Root({ children }: PropsWithChildren) {
         <CssBaseline />
         <div className="app">
           <Sidebar />
-          <div>
+          <div className="main-content">
             <Topbar />
             <main>
               <div className={contentStyles}>
