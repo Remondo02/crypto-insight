@@ -12,8 +12,7 @@ import {
   Colors,
 } from "chart.js"
 import { tokens } from "@/theme"
-import { useChartJsData } from "@/hooks/useChartJsData"
-import { useChartJsSettings } from "@/hooks/useChartJsSettings.ts"
+import { useChartJsData, useChartJsSettings } from "@/hooks"
 
 import { type CryptoHistoryApiResponse } from "@/apis"
 

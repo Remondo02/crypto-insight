@@ -2,7 +2,7 @@ import { useTheme } from "@mui/material"
 import { tokens } from "@/theme"
 import { Chart, Plugin } from "chart.js"
 
-export function useChartJsSettings() {
+export default function useChartJsSettings() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 

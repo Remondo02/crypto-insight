@@ -2,7 +2,7 @@ import { useTheme } from "@mui/material"
 import { tokens } from "@/theme"
 import { type CryptoHistoryApiResponse } from "@/apis"
 
-export function useChartJsData(coinHistory: CryptoHistoryApiResponse) {
+export default function useChartJsData(coinHistory: CryptoHistoryApiResponse) {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const coinPrice = []
