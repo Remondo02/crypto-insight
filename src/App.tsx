@@ -10,7 +10,7 @@ import {
   ErrorPage,
   Exchanges,
 } from "./pages"
-import { MainContent } from "./components"
+import { Sidebar, Topbar } from "./components"
 import { PropsWithChildren } from "react"
 
 const router = createBrowserRouter([
@@ -41,10 +41,18 @@ function Root({ children }: PropsWithChildren) {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <MainContent wrapper={contentStyles}>
-          <Outlet />
-          {children}
-        </MainContent>
+        <div className="app">
+          <Sidebar />
+          <div>
+            <Topbar />
+            <main>
+              <div className={contentStyles}>
+                <Outlet />
+                {children}
+              </div>
+            </main>
+          </div>
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   )

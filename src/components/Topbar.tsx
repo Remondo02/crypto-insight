@@ -1,6 +1,7 @@
 import { BaseSyntheticEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { Box, Button, Menu, MenuItem, useTheme } from "@mui/material"
+import useMediaQuery from "@mui/material/useMediaQuery"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import { tokens } from "@/theme"
 import ThemeButton from "./ThemeButton"
@@ -8,6 +9,7 @@ import ThemeButton from "./ThemeButton"
 export default function Topbar() {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: BaseSyntheticEvent) => {
@@ -24,19 +26,22 @@ export default function Topbar() {
 
   return (
     <Box>
+      {!isMobile && <ThemeButton />}
       <Box display="flex" justifyContent="flex-end">
-        <ThemeButton />
-        <Button
-          sx={{ color: buttonColor }}
-          id="menu"
-          aria-label="Mobile Navigation Button"
-          aria-controls={open ? "menu-open" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        >
-          <MenuOutlinedIcon />
-        </Button>
+        {isMobile && <ThemeButton />}
+        {isMobile && (
+          <Button
+            sx={{ color: buttonColor }}
+            id="menu"
+            aria-label="Mobile Navigation Button"
+            aria-controls={open ? "menu-open" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <MenuOutlinedIcon />
+          </Button>
+        )}
       </Box>
       <Menu
         sx={{
