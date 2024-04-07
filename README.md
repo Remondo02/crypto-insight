@@ -15,6 +15,7 @@ The app features a Dashboard page that shows global statistics, the top 12 curre
 ## Stack
 
 - [React.js](https://react.dev/) - The library for web and native user interfaces. Build user interfaces out of individual pieces called components written in JavaScript. React is designed to let you seamlessly combine components written by independent people, teams, and organizations.
+- [TypeScript](https://www.typescriptlang.org) - TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale. Learn how to use TypeScript with editor checks, auto-complete, interfaces, JSX, const, and more.
 - [Vite](https://vitejs.dev/) - A fast and flexible frontend tooling that supports TypeScript, JSX, CSS and more. It offers instant server start, hot module replacement, rich features, optimized build, universal plugins and fully typed APIs.
 - [Redux](https://redux.js.org/) - A library that helps you write applications that are consistent, run in different environments, and are easy to test. It centralizes your application's state and logic, and lets you debug and trace your changes with the Redux DevTools.
 - [Redux Toolkit](https://redux-toolkit.js.org) - A batteries-included toolset that simplifies common use cases like store setup, reducer creation, and immutable update logic. It also offers powerful features like mutable slices of state and the most commonly used Redux addons built-in.
