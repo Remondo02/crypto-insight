@@ -1,5 +1,3 @@
-// declare module "*.jpg"
-
 export type NewsValueReponse = {
   about?: {
     name: string
@@ -176,7 +174,7 @@ export type CryptosFullApiResponse = {
   }
 }
 
-export type CryptoDetailsTestApiResponse = {
+export type CryptoFullDetailsApiResponse = {
   status: string
   data: {
     coin: CryptoDetailsApiResponse
